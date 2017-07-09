@@ -11,7 +11,8 @@ namespace DryStream.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Artist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace DryStream.Models
         {
             this.Albums = new HashSet<Album>();
         }
-    
+        [ScaffoldColumn(false)]
         public int ArtistID { get; set; }
         public string Name { get; set; }
         public string CoverLink { get; set; }

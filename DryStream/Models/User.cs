@@ -11,7 +11,8 @@ namespace DryStream.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,7 @@ namespace DryStream.Models
         {
             this.Playlists = new HashSet<Playlist>();
         }
-    
+        [ScaffoldColumn(false)]
         public int UserID { get; set; }
         public string Email { get; set; }
         public string Login { get; set; }

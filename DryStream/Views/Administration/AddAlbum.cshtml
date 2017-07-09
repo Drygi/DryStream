@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DryStream.Models.Album>
+@{
+    ViewBag.Title = "Albumy";
+}
+
+<h1>Albumy muzyczne</h1>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Dodaj album:</h3>
+        <form action="AddAlbum" class="form-horizontal" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <h4><label class="col-xs-3 control-label">Artysta:</label></h4>
+                <div class="col-xs-5 selectContainer">
+                    <select class="form-control" name="artistName">
+                        <option value="">Wybierz...</option>
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.Artist.ArtistID">@item.Artist.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <h4><label for="Title" class="col-xs-3 control-label">Tytuł:</label></h4>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" name="Title" />
+                </div>
+            </div>
+            <div class="col-xs-5 col-md-11">
+                <h4><label for="Year" class="col-xs-3 control-label">Rok:</label></h4>
+                <div class="col-xs-6">
+                    <input type="number" max="2030" class="form-control" name="Year" />
+                </div>
+            </div>
+            <div class="form-group">
+                <h4><label class="col-xs-3 control-label">Okładka: </label></h4>
+                <input multiple="multiple" class="btn btn-file" type="file" name="file" id="file" />
+            </div>
+            <div class="col-xs-3 control-label">
+                <input type="submit" runat="server" class="btn btn-primary" value="Dodaj Album" />
+            </div>
+    </form>
+</div>
+    <div class="col-md-6">
+        <h3>Obecne albumy: </h3>
+        <ul>
+            @foreach (var album in Model)
+            {
+                <li>
+                    <h4>
+                    @album.Artist.Name - @album.Title</h4><br />
+                </li>
+                }
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Administracja";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div>
+    <ul>
+
+        <li>
+            <h3>
+            @Html.ActionLink("Dodaj utwór", "AddSong", "Administration")
+            </h3>
+        </li>
+        <li>
+            <h3>
+                @Html.ActionLink("Dodaj Album", "AddAlbum", "Administration")
+            </h3>
+        </li>
+        <li>
+            <h3>
+                @Html.ActionLink("Dodaj gatunek", "AddGenre", "Administration")
+            </h3>
+        </li>
+        <li>
+            <h3>
+                @Html.ActionLink("Dodaj Artystę","AddArtist","Administration")
+            </h3>
+        </li>
+    </ul>
+</div>
+
+
+
