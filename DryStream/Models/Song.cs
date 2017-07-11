@@ -11,8 +11,7 @@ namespace DryStream.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Song
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,17 +19,16 @@ namespace DryStream.Models
         {
             this.PlaylistsSongs = new HashSet<PlaylistsSong>();
         }
-        [ScaffoldColumn(false)]
+    
         public int SongID { get; set; }
         public int AlbumID { get; set; }
         public int GenreID { get; set; }
         public string Name { get; set; }
         public string Link { get; set; }
         public System.TimeSpan Duration { get; set; }
+        public int AlbumPosition { get; set; }
     
-        [ScaffoldColumn(false)]
         public virtual Album Album { get; set; }
-        [ScaffoldColumn(false)]
         public virtual Genre Genre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlaylistsSong> PlaylistsSongs { get; set; }

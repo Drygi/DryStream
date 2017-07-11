@@ -11,11 +11,9 @@ namespace DryStream.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PlaylistsSong
     {
-        [ScaffoldColumn(false)]
         public int PlaylistsSongsID { get; set; }
         public int SongID { get; set; }
         public int PlaylistID { get; set; }

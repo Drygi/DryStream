@@ -120,3 +120,9 @@ C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\M
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\obj\Debug\DryStream.csprojResolveAssemblyReference.cache
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\obj\Debug\DryStream.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\obj\Debug\DryStream.pdb
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\NAudio.dll
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\NAudio.xml
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.dll
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.Mvc.dll
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.xml
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.Mvc.xml

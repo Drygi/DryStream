@@ -50,6 +50,7 @@
     <EntitySetMapping Name="Songs">
       <EntityTypeMapping TypeName="Model.Song">
         <MappingFragment StoreEntitySet="Songs">
+          <ScalarProperty Name="AlbumPosition" ColumnName="AlbumPosition" />
           <ScalarProperty Name="SongID" ColumnName="SongID" />
           <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
           <ScalarProperty Name="GenreID" ColumnName="GenreID" />

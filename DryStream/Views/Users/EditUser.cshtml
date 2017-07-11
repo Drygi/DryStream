@@ -1,0 +1,63 @@
+﻿@model DryStream.Models.User
+
+@{
+    ViewBag.Title = "Edycja";
+    
+}
+
+<h1>Edytuj użytkownika: @Model.Login</h1>
+<br/>
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="EditUser"  class="form-horizontal" enctype="multipart/form-data" method="post">
+           <input type="hidden" name="UserID" value="@Model.UserID" runat="server"/>
+
+            <div class="form-group">
+                <h5><label class="col-xs-3 control-label">Email: </label></h5>
+                <div class="col-xs-5">
+                    <output type="text" class="form-control-static" name="Email"> @Model.Email</output>
+                </div>
+            </div>
+            <div class="form-group">
+                <h5><label class="col-xs-3 control-label">Dostęp: </label></h5>
+                <div class="col-xs-5">
+
+                    @if (@Model.Access)
+                    {
+                        <output type="text" name="Access" class="form-control-static"> Dostęp przyznany </output>
+                    }
+                    else
+                    {
+                        <output type="text" name="Access" class="form-control-static"> Brak dostepu </output>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <h5><label class="col-xs-3 control-label">Ważny do: </label></h5>
+                <div class="col-xs-5">
+                    <output type="text" class="form-control-static">
+                        @Model.Validity.Day.@Model.Validity.Month.@Model.Validity.Year
+                    </output>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h5><label class="col-xs-3 control-label">Przedłuż ważność: </label></h5>
+                <div class="col-xs-5">
+
+                    @Html.TextBox("Validity", Model.Validity, new { @class = "form-control", @type = "date" })
+                </div>
+            </div>
+            <div class="col-xs-3 control-label">
+                <input type="submit" class="btn btn-primary" value="Zapisz zmiany" />
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-6">
+            <img src="@Model.CoverLink" width="400" height="400" class="img-responsive" alt="Cinque Terre" />  
+    </div>
+ </div>

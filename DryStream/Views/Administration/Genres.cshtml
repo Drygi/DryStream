@@ -1,0 +1,65 @@
+﻿@model PagedList.IPagedList<DryStream.Models.Genre>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Gatunki";
+}
+
+<h1 >Gatunki muzyczne</h1>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Dodaj gatunek:</h3>
+
+<form action="Genres" method="post">
+    <h4>
+     
+        <label for="NAME">Wpisz nowy gatunek: </label>
+        <br />
+        <input type="text" name="NAME" id="NAME" class="form-control"/>
+        <br/>
+        <input type="submit" class="btn btn-primary" value="Dodaj nowy Gatunek" />
+    </h4>
+</form>
+
+</div>
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>
+                    <h4>Gatunek @Html.ActionLink("(sortuj)", "Genres", new { sorting = ViewBag.SortByGenre })</h4>  
+                </th>
+                <th>
+                   <h4>Akcja</h4>
+                </th>
+
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <h4>@Html.DisplayFor(m => item.NAME)</h4>    
+                    </td>
+  
+                    <td>
+                        <h4>@Html.ActionLink("Usuń", "DeleteGenre", new { id = item.GenreID }) </h4>  
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+        <div>
+            <h4>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h4>
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Genres", new { page, sorting = ViewBag.SortedBy }))
+    </div>
+</div>
+
+
+
+
+
+
+

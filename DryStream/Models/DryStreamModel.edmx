@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Albums">
           <Key>
             <PropertyRef Name="AlbumID" />
@@ -53,9 +53,10 @@
           <Property Name="SongID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AlbumID" Type="int" Nullable="false" />
           <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="AlbumPosition" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Link" Type="text" Nullable="false" />
-          <Property Name="Duration" Type="time" Precision="2" Nullable="false" />
+          <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -174,8 +175,7 @@
             <End Role="Songs" EntitySet="Songs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -237,10 +237,11 @@
           <Property Name="GenreID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Duration" Type="Time" Nullable="false" Precision="2" />
+          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="Album" Relationship="Self.FK_Songs_Albums" FromRole="Songs" ToRole="Albums" />
           <NavigationProperty Name="Genre" Relationship="Self.FK_Songs_Genres" FromRole="Songs" ToRole="Genres" />
           <NavigationProperty Name="PlaylistsSongs" Relationship="Self.FK_PlaylistsSongs_Songs" FromRole="Songs" ToRole="PlaylistsSongs" />
+          <Property Name="AlbumPosition" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -415,6 +416,7 @@
           <EntitySetMapping Name="Songs">
             <EntityTypeMapping TypeName="Model.Song">
               <MappingFragment StoreEntitySet="Songs">
+                <ScalarProperty Name="AlbumPosition" ColumnName="AlbumPosition" />
                 <ScalarProperty Name="SongID" ColumnName="SongID" />
                 <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
                 <ScalarProperty Name="GenreID" ColumnName="GenreID" />

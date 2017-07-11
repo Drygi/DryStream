@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<DryStream.Models.User>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Users";
+}
+
+<h1>Użytkownicy</h1>
+
+
+        <div>
+            <h4>Wpisz login: </h4>
+             <input type="text" class="form-control" name="findUser" />
+            </div> <br />
+            
+        <input class="btn btn-primary" type="submit" value="Znajdź Użytkownika" />
+
+<br/>
+    <table class="table">
+        <tr>
+            <th>
+                <h4>
+                    Login @Html.ActionLink("(sortuj)", "Index", new { sorting = ViewBag.SortByLogin })
+                </h4>
+            </th>
+            <th>
+               <h4>  
+                   Ważność @Html.ActionLink("(sortuj)", "Index", new { sorting = ViewBag.SortByValidity })
+               </h4>
+            </th>
+            <th>
+                <h4>
+                    @Html.DisplayNameFor(model => model.First().Email)
+                </h4>
+            </th>
+            <th>
+                <h4>
+                    @Html.DisplayName("Dostęp")
+                </h4>
+            </th>
+
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <h4>
+                        @Html.DisplayFor(m => item.Login)
+                    </h4>
+                </td>
+                <td>
+                    <h4>
+                        @Html.DisplayFor(m => item.Validity.Date)
+                    </h4>
+                </td>
+                <td>
+                    <h4>
+                    @Html.DisplayFor(m => item.Email)
+                    </h4>
+                </td>
+                <td>
+                    <h4>
+                        @if (item.Access == true)
+                        {
+                            @Html.DisplayName("TAK")
+                        }
+                        else
+                        {
+                            @Html.DisplayName("BRAK")
+                        }
+                    </h4>
+                </td>
+                <td>
+                    <h4>
+                        @Html.ActionLink("Edytuj", "EditUser", new { id = item.UserID }) |
+                        @Html.ActionLink("Wiadomość", "SendEmail", new { id = item.UserID })
+                    </h4>
+                </td>
+            </tr>
+        }
+    </table>
+<div>
+    <h4>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h4> 
+</div>
+    @Html.PagedListPager(Model, page=> Url.Action("Index",new {page, sorting=ViewBag.SortedBy, findUser = ViewBag.findLogin }))

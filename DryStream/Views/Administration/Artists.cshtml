@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<DryStream.Models.Artist>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Artyści";
+}
+
+<h1>Artyści</h1>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Dodaj Artystę:</h3>
+        
+        <form action="Artists"  enctype="multipart/form-data" method="post" >
+            <h4>
+                <label for="name">Wpisz nazwę artysty: </label>
+               
+                <input type="text" name="Name" id="Name" class="form-control"/>
+                <br />
+                <label for="file">Dodaj okładkę: </label>
+                <br /> 
+                <input multiple="multiple" type="file" name="file" id="file"  />
+                <br />
+                <input type="submit" runat="server" class="btn btn-primary" value="Dodaj" />
+            </h4>
+            </form>    
+</div>
+    <div class="col-md-6">
+        <table class="table">
+            <tr>
+                <th>
+                    <h4>Artysta @Html.ActionLink(" (sortuj)", "Artists", new { sorting = ViewBag.SortByArtist })</h4>
+                </th>
+                <th>
+                    <h4>Wybierz</h4>
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <h4>@Html.DisplayFor(m=> item.Name)</h4>
+                    </td>
+
+                    <td>
+                        <h4>@Html.ActionLink("Albumy", "Albums", new { id = item.ArtistID }) </h4>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+        <div>
+            <h4>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h4>
+        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Artists", new { page, sorting = ViewBag.SortedBy }))
+
+      
+      </div>
+</div>
+

@@ -58,10 +58,11 @@
     <Property Name="GenreID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Duration" Type="Time" Nullable="false" Precision="2" />
+    <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
     <NavigationProperty Name="Album" Relationship="Self.FK_Songs_Albums" FromRole="Songs" ToRole="Albums" />
     <NavigationProperty Name="Genre" Relationship="Self.FK_Songs_Genres" FromRole="Songs" ToRole="Genres" />
     <NavigationProperty Name="PlaylistsSongs" Relationship="Self.FK_PlaylistsSongs_Songs" FromRole="Songs" ToRole="PlaylistsSongs" />
+    <Property Name="AlbumPosition" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>

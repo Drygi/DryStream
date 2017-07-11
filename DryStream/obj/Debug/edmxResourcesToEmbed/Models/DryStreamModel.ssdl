@@ -48,9 +48,10 @@
     <Property Name="SongID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="AlbumID" Type="int" Nullable="false" />
     <Property Name="GenreID" Type="int" Nullable="false" />
+    <Property Name="AlbumPosition" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Link" Type="text" Nullable="false" />
-    <Property Name="Duration" Type="time" Precision="2" Nullable="false" />
+    <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
