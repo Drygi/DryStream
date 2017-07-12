@@ -4,56 +4,43 @@
     ViewBag.Title = "Artyści";
 }
 
-<h1>Artyści</h1>
-<div class="row">
-    <div class="col-md-6">
-        <h3>Dodaj Artystę:</h3>
+        <h1>Artyści @Html.ActionLink(" (Nowy)", "AddArtist")</h1>
+
+    <form action="Artists">
         
-        <form action="Artists"  enctype="multipart/form-data" method="post" >
-            <h4>
-                <label for="name">Wpisz nazwę artysty: </label>
-               
-                <input type="text" name="Name" id="Name" class="form-control"/>
-                <br />
-                <label for="file">Dodaj okładkę: </label>
-                <br /> 
-                <input multiple="multiple" type="file" name="file" id="file"  />
-                <br />
-                <input type="submit" runat="server" class="btn btn-primary" value="Dodaj" />
-            </h4>
-            </form>    
-</div>
-    <div class="col-md-6">
-        <table class="table">
-            <tr>
-                <th>
-                    <h4>Artysta @Html.ActionLink(" (sortuj)", "Artists", new { sorting = ViewBag.SortByArtist })</h4>
-                </th>
-                <th>
-                    <h4>Wybierz</h4>
-                </th>
-            </tr>
-            @foreach (var item in Model)
+        <input type="text" class="form-control" placeholder="Szukaj..." name="Name" />
+        <input type="submit" class="btn btn-primary" value="Wyszukaj Artystę" />
+    </form>
+
+<hr />
+    <table class="table">
+        <tr>
+            <td>
+                @Html.ActionLink("(Sortuj)  ", "Artists", new { sorting = ViewBag.SortByArtist })
+            </td>
+        </tr>
+        @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        <h4>@Html.DisplayFor(m=> item.Name)</h4>
-                    </td>
+            <tr>
 
-                    <td>
-                        <h4>@Html.ActionLink("Albumy", "Albums", new { id = item.ArtistID }) </h4>
-                    </td>
+                <td>
+                    <img src="@item.CoverLink" width="100" height="100" class="img-responsive" alt="Cinque Terre" />
+                </td>
+                <td>
+                    <h3>@Html.DisplayFor(m => item.Name)</h3>
+                </td>
+                <td>
+                    <h3>@Html.ActionLink("Albumy", "Albums", new { id = item.ArtistID }) </h3>
+                </td>
+                <td>
+                    <h3>@Html.ActionLink("Nowy album", "AddAlbum", new { id = item.ArtistID }) </h3>
+                </td>
 
-                </tr>
-            }
+            </tr>
+        }
 
-        </table>
-        <div>
-            <h4>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h4>
-        </div>
-        @Html.PagedListPager(Model, page => Url.Action("Artists", new { page, sorting = ViewBag.SortedBy }))
-
-      
-      </div>
-</div>
-
+    </table>
+    <div>
+        <h4>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h4>
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("Artists", new { page, sorting = ViewBag.SortedBy }))

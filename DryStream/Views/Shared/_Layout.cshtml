@@ -24,12 +24,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                   
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Artyści", "Artists", "Administration")</li>
+                        <li>@Html.ActionLink("Gatunki", "Genres", "Administration")</li>
+                        <li>@Html.ActionLink("Użytkownicy", "Index", "Users")</li>
+                    }
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                @if (Request.IsAuthenticated)
-                {
-                    <li>@Html.ActionLink("Administracja", "Index", "Administration")</li>
-                    <li>@Html.ActionLink("Użytkownicy", "Index", "Users")</li>
-                }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

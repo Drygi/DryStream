@@ -11,8 +11,7 @@ namespace DryStream.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +26,6 @@ namespace DryStream.Models
         public string Password { get; set; }
         public string CoverLink { get; set; }
         public bool Access { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public System.DateTime Validity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

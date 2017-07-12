@@ -2,3 +2,5 @@
 1.1 - dodawanie gatunku, artysty, albumu, utworu(TO DO: pobranie duration z wstawianego utworu)
 1.2 - dodanie biblioteki NAUDIO, wyświetlanie piosenek po albumie, albumów po artyście oraz usuwanie
 obsługa użytkownika (zawtwierdzanie płatności TO DO: dodać obsługę wysyłania emaili)
+1.3 - walidacja wszystkich formlarzy w sumie wszystko chyba jest... 
+TO DO: API do łączenia z aplikacją mobilna + aplikacja mobilna

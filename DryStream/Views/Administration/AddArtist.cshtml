@@ -1,0 +1,51 @@
+﻿@model DryStream.Models.Artist
+
+@{
+    ViewBag.Title = "Nowy Artysta";
+}
+<h1>Dodaj Artystę:</h1>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>UWAGA!</strong>@ViewBag.Error
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success">
+        <strong>SUKCES!</strong>@ViewBag.Success
+    </div>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form action="AddArtist" enctype="multipart/form-data" method="post">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                   
+                    <h4><label for="Title" class="col-xs-3 control-label">Nazwa:</label></h4>
+                    <input type="text" placeholder="Wpisz nazwę..." maxlength="30" name="Name" id="Name" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    <br/>
+                    <h4><label for="file" class="col-xs-3 control-label">Okładka: </label></h4>  
+                     <input class="btn btn-info" multiple="multiple" type="file" name="file" id="file"hidden />
+                    <br/>
+                    <h4>
+                     <input type="submit" runat="server" accept="image/*" class="btn btn-primary" value="Dodaj Artystę"  />
+                    </h4>  
+                </div>
+            }
+        </form>
+    </div>
+    <div class="col-md-6">
+        <img src="http://freevector.co/wp-content/uploads/2012/09/78416-inclined-microphone.png" width="300" height="300" class="img-responsive" alt="Cinque Terre" />
+
+    </div>
+</div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

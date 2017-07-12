@@ -253,7 +253,7 @@
     <Compile Include="Models\Song.cs">
       <DependentUpon>DryStreamModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SongsAlbumsArtistsModel.cs" />
+    <Compile Include="Models\AlbumSongGenresModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>DryStreamModel.tt</DependentUpon>
     </Compile>
@@ -270,6 +270,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\Drygi.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -432,12 +433,13 @@
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\Genres.cshtml" />
     <Content Include="Views\Administration\Artists.cshtml" />
-    <Content Include="Views\Administration\AddAlbum.cshtml" />
-    <Content Include="Views\Administration\AddSong.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\EditUser.cshtml" />
     <Content Include="Views\Administration\Albums.cshtml" />
     <Content Include="Views\Administration\AlbumSongs.cshtml" />
+    <Content Include="Views\Administration\AddArtist.cshtml" />
+    <Content Include="Views\Administration\AddAlbum.cshtml" />
+    <Content Include="Views\Administration\AddSong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

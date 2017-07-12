@@ -1,62 +1,74 @@
-﻿@model IEnumerable<DryStream.Models.Album>
-@{
-    ViewBag.Title = "Albumy";
-}
+﻿@model DryStream.Models.Album
 
-<h1>Albumy muzyczne</h1>
+@{
+    ViewBag.Title = "Nowy Album";
+}
+ 
+<h1>@Model.Artist.Name - nowy album</h1>
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <strong>UWAGA!</strong>@ViewBag.Error
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success">
+        <strong>SUKCES!</strong>@ViewBag.Success
+    </div>
+}
+<hr/>
+
 <div class="row">
     <div class="col-md-6">
-        <h3>Dodaj album:</h3>
-        <form action="AddAlbum" class="form-horizontal" enctype="multipart/form-data" method="post">
-            <div class="form-group">
-                <h4><label class="col-xs-3 control-label">Artysta:</label></h4>
-                <div class="col-xs-5 selectContainer">
-                    <select class="form-control" name="artistName">
-                        <option value="">Wybierz...</option>
-                        @foreach (var item in Model)
-                        {
-                            <option value="@item.Artist.ArtistID">@item.Artist.Name</option>
-                        }
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <h4><label for="Title" class="col-xs-3 control-label">Tytuł:</label></h4>
-                <div class="col-xs-5">
-                    <input type="text" class="form-control" name="Title" />
-                </div>
-            </div>
-            <div class="col-xs-5 col-md-11">
-                <h4><label for="Year" class="col-xs-3 control-label">Rok:</label></h4>
-                <div class="col-xs-6">
-                    <input type="number" max="2030" class="form-control" name="Year" />
-                </div>
-            </div>
-            <div class="form-group">
-                <h4><label class="col-xs-3 control-label">Okładka: </label></h4>
-                <input multiple="multiple" accept="image/*" class="btn btn-file" type="file" name="file" id="file" />
-            </div>
-            <div class="col-xs-3 control-label">
-                <input type="submit" runat="server" class="btn btn-primary" value="Dodaj Album" />
-            </div>
-    </form>
-</div>
-    <div class="col-md-6">
-        <h3>Obecne albumy: </h3>
-        <ul>
-            @foreach (var album in Model)
+        <form action="AddAlbum" enctype="multipart/form-data" method="post">
+            @using (Html.BeginForm())
             {
-                <li>
-                    <h4>
-                    @album.Artist.Name - @album.Title</h4><br />
-                </li>
-                }
-        </ul>
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <input type="hidden" name="ArtistID" value="@Model.ArtistID" runat="server" />
+                    <div class="form-group">
+                        <h4><label class="col-xs-3 control-label">Artysta: </label></h4>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control"  name="ArtistName" readonly value="@Model.Artist.Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h4><label for="Title" class="col-xs-3 control-label">Tytuł:</label></h4>
+                        <div class="col-xs-5">
+                            <input type="text" maxlength="30" min="1" class="form-control" name="Title" />
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h4><label for="Year" class="col-xs-3 control-label">Rok:</label></h4>
+                        <div class="col-xs-5">
+                            <input type="number" min="1900" max="2030" class="form-control" name="Year" />
+                            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h4><label  class="col-xs-3 control-label">Okładka: </label></h4>
+                        <input multiple="multiple" accept="image/*" class="btn btn-info" type="file" name="file" id="file" />
+                    </div>
+
+                    <div class="col-xs-3 control-label">
+                        <input type="submit" runat="server" class="btn btn-primary" value="Dodaj Album" />
+                        
+                    </div>
+                </div>
+            }
+        </form>
+
     </div>
+
+<div class="col-md-6">
+    <img src="@Model.Artist.CoverLink" width="400" height="400" class="img-responsive" alt="Cinque Terre" />
+</div>
 </div>
 
-
-
-
-
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

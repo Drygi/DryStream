@@ -28,12 +28,10 @@ namespace DryStream.Controllers
                 if(user.Login !=null)
                 {
                     users = from i in db.Users
-                            where i.Login.Equals(user.Login)
+                            where i.Login.Contains(user.Login)
                             select i;
                 }
             }
-            ViewBag.findLogin = user.Login;
-
             switch (sorting)
             {
                 case "LoginDESC":

@@ -1,20 +1,17 @@
 ﻿@model PagedList.IPagedList<DryStream.Models.User>
 @using PagedList.Mvc
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Użytkownicy";
 }
 
 <h1>Użytkownicy</h1>
+           <form action="Index" method="get">
+    <input type="text" class="form-control" maxlength="20" placeholder="Szukaj..." name="Login" />
 
-
-        <div>
-            <h4>Wpisz login: </h4>
-             <input type="text" class="form-control" name="findUser" />
-            </div> <br />
-            
-        <input class="btn btn-primary" type="submit" value="Znajdź Użytkownika" />
-
-<br/>
+    <input class="btn btn-primary btn-default" type="submit" value="Wyszukaj Użytkownika" />
+</form>
+                
+<hr />
     <table class="table">
         <tr>
             <th>
@@ -82,4 +79,4 @@
 <div>
     <h4>Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</h4> 
 </div>
-    @Html.PagedListPager(Model, page=> Url.Action("Index",new {page, sorting=ViewBag.SortedBy, findUser = ViewBag.findLogin }))
+    @Html.PagedListPager(Model, page=> Url.Action("Index",new {page, sorting=ViewBag.SortedBy}))
