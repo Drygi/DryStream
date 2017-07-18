@@ -213,6 +213,13 @@
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MobileControllers\AlbumsController.cs" />
+    <Compile Include="Controllers\MobileControllers\ArtistsController.cs" />
+    <Compile Include="Controllers\MobileControllers\GenresController.cs" />
+    <Compile Include="Controllers\MobileControllers\MobileUsersController.cs" />
+    <Compile Include="Controllers\MobileControllers\PlaylistsSongsController.cs" />
+    <Compile Include="Controllers\MobileControllers\SongsController.cs" />
+    <Compile Include="Controllers\MobileControllers\PlaylistsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -474,6 +481,8 @@
           <DevelopmentServerPort>51754</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:51754/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://192.168.1.8:51754/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

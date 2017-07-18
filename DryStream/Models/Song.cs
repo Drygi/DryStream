@@ -9,6 +9,7 @@
 
 namespace DryStream.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -27,9 +28,11 @@ namespace DryStream.Models
         public string Link { get; set; }
         public System.TimeSpan Duration { get; set; }
         public int AlbumPosition { get; set; }
-    
+        [JsonIgnore]
         public virtual Album Album { get; set; }
+        [JsonIgnore]
         public virtual Genre Genre { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlaylistsSong> PlaylistsSongs { get; set; }
     }

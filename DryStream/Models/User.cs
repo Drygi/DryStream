@@ -9,6 +9,7 @@
 
 namespace DryStream.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -27,7 +28,8 @@ namespace DryStream.Models
         public string CoverLink { get; set; }
         public bool Access { get; set; }
         public System.DateTime Validity { get; set; }
-    
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Playlist> Playlists { get; set; }
     }

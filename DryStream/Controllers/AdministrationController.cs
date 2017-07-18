@@ -94,7 +94,8 @@ namespace DryStream.Controllers
             db.Genres.Remove(genre);
             db.SaveChanges();
             var genres = from i in db.Genres select i;
-            return View("AddGenre", genres.ToPagedList(1, 3));
+            return RedirectToAction("Genres");
+           // return View("AddGenre", genres.ToPagedList(1, 3));
         }
        
         public ActionResult Artists(string sorting,Artist artist, int? page)

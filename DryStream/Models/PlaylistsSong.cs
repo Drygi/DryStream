@@ -9,6 +9,7 @@
 
 namespace DryStream.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -17,8 +18,9 @@ namespace DryStream.Models
         public int PlaylistsSongsID { get; set; }
         public int SongID { get; set; }
         public int PlaylistID { get; set; }
-    
+        [JsonIgnore]
         public virtual Playlist Playlist { get; set; }
+        [JsonIgnore]
         public virtual Song Song { get; set; }
     }
 }
