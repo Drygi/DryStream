@@ -5,3 +5,5 @@ obsługa użytkownika (zawtwierdzanie płatności TO DO: dodać obsługę wysył
 1.3 - walidacja wszystkich formlarzy w sumie wszystko chyba jest... 
 TO DO: API do łączenia z aplikacją mobilna + aplikacja mobilna
 1.4 - utworzenie API do komunikacji z aplikacją mobilna
+1.5 - konfiguracja API + aplikacja mobilna panel logowania, rejestracji,
+panel konta - nie działa PUT 

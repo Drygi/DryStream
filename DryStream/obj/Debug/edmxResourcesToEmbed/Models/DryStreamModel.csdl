@@ -71,10 +71,10 @@
     <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="64" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="CoverLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Access" Type="Boolean" Nullable="false" />
-    <Property Name="Validity" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Validity" Type="DateTime" Precision="0" Nullable="false" />
     <NavigationProperty Name="Playlists" Relationship="Self.FK_Playlists_Users" FromRole="Users" ToRole="Playlists" />
   </EntityType>
   <Association Name="FK_Albums_Artists">

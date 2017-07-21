@@ -104,7 +104,6 @@ C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\S
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\System.Web.WebPages.resources.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\System.Web.WebPages.Deployment.resources.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\System.Web.WebPages.Razor.resources.dll
-C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\System.Net.Http.Formatting.resources.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\System.Web.Http.resources.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\System.Web.Http.WebHost.resources.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\pl\Microsoft.AspNet.Identity.Core.resources.dll

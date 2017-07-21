@@ -60,7 +60,7 @@
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nchar" MaxLength="30" Nullable="false" />
     <Property Name="Login" Type="nchar" MaxLength="20" Nullable="false" />
-    <Property Name="Password" Type="nchar" MaxLength="64" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="128" Nullable="false" />
     <Property Name="CoverLink" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Access" Type="bit" Nullable="false" />
     <Property Name="Validity" Type="date" Nullable="false" />
