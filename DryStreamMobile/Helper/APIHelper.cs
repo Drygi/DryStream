@@ -43,7 +43,7 @@ namespace DryStreamMobile.Helper
                     return returnUser.CoverLink;
                 }
                 else
-                    return null;
+                    return "";
             }
         
         }
@@ -67,9 +67,7 @@ namespace DryStreamMobile.Helper
 
             }
         }
-        //nie wiem dlaczego API nie pozwala na PUT coś nie tak jest sprawdzic to 
-        // ewentualnie wszystkie PUT'y POST'ami zrobic
-        public async static Task<bool> PutUser(User user)
+        public async static Task<bool> UpdateUser(User user)
         {
             using (var client = new HttpClient())
             {
@@ -77,9 +75,8 @@ namespace DryStreamMobile.Helper
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-                //HTTP PUT
-                HttpResponseMessage response = await client.PutAsync("api/MobileUsers/"+user.UserID, content);
-                //await client.PosAsync("api/MobileUsers/", content);
+                //HTTP POST
+                HttpResponseMessage response = await client.PostAsync("api/UpdateUser", content);
 
                 if (response.IsSuccessStatusCode)
                     return true;
@@ -143,6 +140,24 @@ namespace DryStreamMobile.Helper
 
                 // HTTP GET
                 HttpResponseMessage response = await client.GetAsync("api/findEmail/" + email);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        //nie dziala usuwanie 
+        public static async Task<bool> deletePhoto(string link)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP DELETE
+                HttpResponseMessage response = await client.DeleteAsync("api/DeletePhoto/" + link);
                 if (response.IsSuccessStatusCode)
                     return true;
                 else

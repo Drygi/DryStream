@@ -26,6 +26,7 @@ namespace DryStreamMobile
         Button imgButton, updateButton, password, updateValidity;
         TextView validity, login;
         EditText email;
+        User user;
         ImageView img;
         MediaFile mediaFile;
         ScrollView scrollView;
@@ -41,9 +42,10 @@ namespace DryStreamMobile
         }
         void initControls()
         {
+            user = new User();
             img = FindViewById<ImageView>(Resource.Id.accountCover);
 
-            img.SetImageBitmap(GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory._user.CoverLink));
+            img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory._user.CoverLink));
 
             imgButton = FindViewById<Button>(Resource.Id.accountCoverButton);
             imgButton.Click += ImgButton_Click;
@@ -55,6 +57,7 @@ namespace DryStreamMobile
             updateValidity.Click += UpdateValidity_Click;
 
             password = FindViewById<Button>(Resource.Id.accountPassword);
+            password.Click += Password_Click;
             login = FindViewById<TextView>(Resource.Id.loginTextView);
             login.Text += GlobalMemory._user.Login;
 
@@ -77,9 +80,25 @@ namespace DryStreamMobile
 
         }
 
+        private void Password_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(PasswordChangeActivity));
+
+        }
+
         private void UpdateValidity_Click(object sender, EventArgs e)
         {
             setAlert("Dać tu albo hyperlink na serwer albo jakies info");
+
+            //pomocniczo usuwanie z savedUser i wylogoywanie
+
+            ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
+            ISharedPreferencesEditor edit = pref.Edit();
+            edit.Clear();
+            edit.Apply();
+            GlobalMemory._user = null;
+            this.Finish();
+
         }
 
         private async void UpdateButton_Click(object sender, EventArgs e)
@@ -90,7 +109,13 @@ namespace DryStreamMobile
                 if (await validateUpdate())
                 {
                     if (await updateUser())
+                    {
                         setAlert("Zmiany zapisano pomyślnie!");
+                        if(GlobalHelper.isSavedUser())
+                            GlobalHelper.switchSavedUser(user);
+
+                        GlobalMemory._user = user;
+                    }
                     else
                         setAlert("Coś poszło nie tak!");
                 }
@@ -101,21 +126,7 @@ namespace DryStreamMobile
             progressBar.Visibility = ViewStates.Invisible;
 
         }
-        private Bitmap GetImageBitmapFromUrl(string url)
-        {
-            Bitmap imageBitmap = null;
 
-            using (var client = new WebClient())
-            {
-                var imageBytes = client.DownloadData(url);
-                if (imageBytes != null && imageBytes.Length > 0)
-                {
-                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
-                }
-            }
-
-            return imageBitmap;
-        }
         private void LL_Touch(object sender, View.TouchEventArgs e)
         {
             InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
@@ -139,7 +150,7 @@ namespace DryStreamMobile
             if (mediaFile == null)
                 return;
 
-            img.SetImageBitmap(GetImageBitmapFromUrl(mediaFile.Path));
+            img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(mediaFile.Path));
         }
         private void setAlert(string message)
         {
@@ -180,16 +191,23 @@ namespace DryStreamMobile
         }
         public async Task<bool> updateUser()
         {
-            User user = new User();
             user = GlobalMemory._user;
-            user.Login = login.Text;
+            string oldLink;
             if(user.Email.Trim() != email.Text.Trim())
                 user.Email = email.Text;
 
             if(mediaFile!= null)
+            {
+                oldLink = user.CoverLink;
                 user.CoverLink = await APIHelper.UploadCoverGetLink(mediaFile);
-
-            if (await APIHelper.PutUser(user))
+                if (user.CoverLink == "")
+                    return false;
+                else
+                {
+                    await APIHelper.deletePhoto(oldLink);
+                }
+            }
+            if (await APIHelper.UpdateUser(user))
                 return true;
             else
                 return false;

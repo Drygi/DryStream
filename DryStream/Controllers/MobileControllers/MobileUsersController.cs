@@ -87,20 +87,14 @@ namespace DryStream.Controllers
           
         }
 
-        // PUT: api/MobileUsers/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
+        // POST: api/UpdateUser
+        [Route("api/UpdateUser")]
+        public IHttpActionResult UpdateUser( User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != user.UserID)
-            {
-                return BadRequest();
-            }
-
             db.Entry(user).State = EntityState.Modified;
 
             try
@@ -108,16 +102,19 @@ namespace DryStream.Controllers
                 db.SaveChanges();
                 return Ok();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbEntityValidationException e)
             {
-                if (!UserExists(id))
+                foreach (var eve in e.EntityValidationErrors)
                 {
-                    return NotFound();
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
         }
@@ -155,6 +152,35 @@ namespace DryStream.Controllers
                 throw raise;
             }
             return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
+        }
+
+        //DELETE: api/DeletePhoto
+        [Route("api/DeletePhoto/{link}")]
+        public IHttpActionResult DeletePhoto(string link)
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo("~" + link);
+
+
+                foreach (FileInfo item in di.GetFiles())
+                {
+                    item.Delete();
+                }
+                foreach (DirectoryInfo item in di.GetDirectories())
+                {
+                    item.Delete();
+                }
+
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+
+                return NotFound();
+            }
+            
+
         }
 
         //POST: api/Files/Upload

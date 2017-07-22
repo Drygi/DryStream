@@ -88,6 +88,7 @@
     <Compile Include="Activity\AccountActivity.cs" />
     <Compile Include="Activity\LoginActivity.cs" />
     <Compile Include="Activity\MainActivity.cs" />
+    <Compile Include="Activity\PasswordChangeActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
     <Compile Include="Helper\APIHelper.cs" />
     <Compile Include="Helper\GlobalHelper.cs" />
@@ -116,6 +117,9 @@
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\editTextBorder.axml" />
     <AndroidResource Include="Resources\layout\Account.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PasswordChange.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

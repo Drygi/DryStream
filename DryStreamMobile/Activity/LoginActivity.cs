@@ -129,6 +129,14 @@ namespace DryStreamMobile
                     passwordEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                     return;
                 }
+                if (rememberMe.Checked)
+                {
+                    if (rememberMe.Checked)
+                    {
+                        GlobalHelper.switchSavedUser(user);
+                    }
+                }
+
                 GlobalMemory._user = user;
                 StartActivity(typeof(AccountActivity));
                 this.Finish();
