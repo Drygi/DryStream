@@ -73,23 +73,18 @@ namespace DryStream.Controllers
             try
             {
                 User _user = (from u in db.Users where u.Login == user.Login && user.Password == u.Password select u).Single();
-                return Json(_user); 
+                return Json(_user);
             }
             catch (Exception)
             {
 
                 return NotFound();
             }
-          
-            
-       
-
-          
         }
 
         // POST: api/UpdateUser
         [Route("api/UpdateUser")]
-        public IHttpActionResult UpdateUser( User user)
+        public IHttpActionResult UpdateUser(User user)
         {
             if (!ModelState.IsValid)
             {
@@ -127,7 +122,7 @@ namespace DryStream.Controllers
             {
                 return BadRequest(ModelState);
             }
-           
+
             db.Users.Add(user);
 
             try
@@ -155,37 +150,30 @@ namespace DryStream.Controllers
         }
 
         //DELETE: api/DeletePhoto
-        [Route("api/DeletePhoto/{link}")]
-        public IHttpActionResult DeletePhoto(string link)
+        [Route("api/DeletePhoto/{CoverName}")]
+        public IHttpActionResult DeletePhoto(string CoverName)
         {
             try
             {
-                DirectoryInfo di = new DirectoryInfo("~" + link);
+                var cover = new FileInfo(HttpContext.Current.Server.MapPath("~/Files/Covers/" + CoverName + ".jpg"));
+                if (!cover.Exists)
+                    return NotFound();
 
-
-                foreach (FileInfo item in di.GetFiles())
-                {
-                    item.Delete();
-                }
-                foreach (DirectoryInfo item in di.GetDirectories())
-                {
-                    item.Delete();
-                }
-
+                cover.Delete();
                 return Ok();
             }
             catch (Exception exception)
             {
 
-                return NotFound();
+                return BadRequest();
             }
-            
+
 
         }
 
         //POST: api/Files/Upload
         [Route("api/Files/Upload")]
-        public async Task<IHttpActionResult>PostPhoto()
+        public async Task<IHttpActionResult> PostPhoto()
         {
             User user = new User();
             try
@@ -194,13 +182,13 @@ namespace DryStream.Controllers
 
                 if (httpRequest.Files.Count > 0)
                 {
-                    foreach (string item in  httpRequest.Files)
+                    foreach (string item in httpRequest.Files)
                     {
                         var postedFile = httpRequest.Files[item];
                         var fileName = postedFile.FileName.Split('\\').LastOrDefault().Split('/').LastOrDefault();
-                       
+
                         var filePath = HttpContext.Current.Server.MapPath("~/Files/Covers/" + fileName);
-                       
+
                         postedFile.SaveAs(filePath);
                         user.CoverLink = "/Files/Covers/" + fileName;
                         return Json(user);
@@ -216,10 +204,11 @@ namespace DryStream.Controllers
 
         }
         // DELETE: api/MobileUsers/5
-        [ResponseType(typeof(User))]
+        [Route("api/DeleteUser/{id}")]
         public IHttpActionResult DeleteUser(int id)
         {
             User user = db.Users.Find(id);
+
             if (user == null)
             {
                 return NotFound();
@@ -227,8 +216,10 @@ namespace DryStream.Controllers
 
             db.Users.Remove(user);
             db.SaveChanges();
+            var cover = new FileInfo(HttpContext.Current.Server.MapPath("~" + user.CoverLink));
+            cover.Delete();
 
-            return Ok(user);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

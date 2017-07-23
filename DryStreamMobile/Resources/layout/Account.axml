@@ -4,16 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#222222"
-    android:id="@+id/AccountLayout">  
-  <ImageView
-      android:layout_height="110dp"
-      android:layout_marginTop="20dp"
-      android:layout_marginLeft="10dp"
-      android:layout_marginRight="10dp"
-      android:layout_marginBottom="10dp"
-      android:layout_width="fill_parent"
-      android:id="@+id/accountCover" />
-      <TextView
+    android:id="@+id/AccountLayout">
+    <ImageView
+        android:layout_height="110dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="fill_parent"
+        android:id="@+id/accountCover" />
+    <TextView
         android:text="Login: "
         android:textColor="#464545"
         android:textStyle="bold"
@@ -28,126 +28,136 @@
         android:paddingTop="20dp"
         android:id="@+id/loginTextView"
         android:editable="false" />
-      <TextView
-          android:text="Ważne do: "
-          android:textColor="#464545"
-          android:textStyle="bold"
-          android:singleLine="true"
-          android:textSize="25sp"
-          android:textAppearance="?android:attr/textAppearanceSmall"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="40dp"
-          android:layout_marginRight="40dp"
-          android:paddingBottom="10dp"
-          android:paddingTop="5dp"
-          android:id="@+id/validityText"
-          android:editable="false" />
-  <ScrollView
-  android:minWidth="25px"
-  android:minHeight="25px"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:id="@+id/AccountScrollView">
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#222222"
-        android:id="@+id/AccountLayout">
-      <TextView
-         android:text="Zmień adres Email:"
-         android:textColor="#FFFFFF"
-         android:singleLine="true"
-         android:textStyle="bold"
-         android:textAppearance="?android:attr/textAppearanceSmall"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="40dp"
-         android:layout_marginRight="40dp"
-         android:paddingBottom="0dp"
-         android:paddingTop="5dp"
-         android:textSize="25sp"
-         android:id="@+id/texViewEmail" />
-      <EditText
-          android:hint="Email"
-          android:background="#FFFFFF"
-          android:textAppearance="?android:attr/textAppearanceMedium"
-          android:layout_width="match_parent"
-          android:layout_weight="15"
-          android:layout_height="wrap_content"
-          android:textColor="#000000"
-          android:textSize="25sp"
-          android:layout_marginTop="5dp"
-          android:layout_marginLeft="40dp"
-          android:layout_marginRight="40dp"
-          android:layout_marginBottom="10dp"
-          android:paddingLeft="10dp"
-          android:ellipsize="end"
-          android:singleLine="true"
-          android:id="@+id/accountEmail" />
-
-      <Button
-        android:text="Zmień zdjęcie"
-        android:background="#0ce3ac"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:padding="10dp"
-        android:id="@+id/accountCoverButton" />
-      <Button
-          android:text="Zmień hasło"
-          android:background="#0ce3ac"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="40dp"
-          android:layout_marginRight="40dp"
-          android:layout_marginTop="5dp"
-          android:layout_marginBottom="5dp"
-          android:padding="10dp"
-          android:id="@+id/accountPassword" />
-
-      <Button
-        android:text="Przedłuż ważność konta"
-        android:background="#222222"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+    <TextView
+        android:text="Ważne do: "
+        android:textColor="#464545"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#0ce3ac"
-        android:padding="10dp"
-        android:id="@+id/extendValidityButton" />
-      <Button
-          android:text="Zapisz zmiany"
-          android:background="#375a7f"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="40dp"
-          android:layout_marginRight="40dp"
-          android:layout_marginTop="10dp"
-          android:layout_marginBottom="5dp"
-          android:textStyle="bold"
-          android:textSize="25sp"
-          android:padding="10dp"
-          android:id="@+id/accountUpdateButton" />
-      <ProgressBar
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:id="@+id/accountProgressBar"
-          android:layout_marginLeft="30dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:layout_marginBottom="5dp"
-          android:visibility="invisible" />
-          </LinearLayout>
-  </ScrollView>>
-  
- </LinearLayout>
+        android:singleLine="true"
+        android:textSize="25sp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="5dp"
+        android:id="@+id/validityText"
+        android:editable="false" />
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/AccountScrollView">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#222222"
+            android:id="@+id/AccountLayout">
+            <TextView
+                android:text="Zmień adres Email:"
+                android:textColor="#FFFFFF"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:paddingBottom="0dp"
+                android:paddingTop="5dp"
+                android:textSize="25sp"
+                android:id="@+id/texViewEmail" />
+            <EditText
+                android:hint="Email"
+                android:background="#FFFFFF"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_weight="15"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:id="@+id/accountEmail" />
+            <Button
+                android:text="Zmień zdjęcie"
+                android:background="#0ce3ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:id="@+id/accountCoverButton" />
+            <Button
+                android:text="Zmień hasło"
+                android:background="#0ce3ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:padding="10dp"
+                android:id="@+id/accountPassword" />
+            <Button
+                android:text="Przedłuż ważność konta"
+                android:background="#222222"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#0ce3ac"
+                android:padding="10dp"
+                android:id="@+id/extendValidityButton" />
+            <Button
+                android:text="Usuń konto"
+                android:background="#222222"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#0ce3ac"
+                android:padding="10dp"
+                android:id="@+id/deleteAccount" />
+            <Button
+                android:text="Zapisz zmiany"
+                android:background="#375a7f"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:padding="10dp"
+                android:id="@+id/accountUpdateButton" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/accountProgressBar"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

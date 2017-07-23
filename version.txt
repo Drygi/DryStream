@@ -7,4 +7,5 @@ TO DO: API do łączenia z aplikacją mobilna + aplikacja mobilna
 1.4 - utworzenie API do komunikacji z aplikacją mobilna
 1.5 - konfiguracja API + aplikacja mobilna panel logowania, rejestracji,
 panel konta - nie działa PUT 
-1.6 - zapamietanie konta, panel zmiany hasła, naprawienie update'u danych, problem z DELETE photo z serwera
+1.6 - zapamietanie konta, panel zmiany hasła, naprawienie update'u danych, 
+1.7 - DELETE user oraz usuwanie jego grafiki z bazy 

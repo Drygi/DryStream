@@ -23,7 +23,7 @@ namespace DryStreamMobile
     [Activity(Label = "AccountActivity", Theme = "@android:style/Theme.NoTitleBar", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class AccountActivity : Activity
     {
-        Button imgButton, updateButton, password, updateValidity;
+        Button imgButton, updateButton, password, updateValidity, deleteAccount;
         TextView validity, login;
         EditText email;
         User user;
@@ -38,7 +38,7 @@ namespace DryStreamMobile
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Account);
             initControls();
-            
+
         }
         void initControls()
         {
@@ -55,6 +55,9 @@ namespace DryStreamMobile
 
             updateValidity = FindViewById<Button>(Resource.Id.extendValidityButton);
             updateValidity.Click += UpdateValidity_Click;
+
+            deleteAccount = FindViewById<Button>(Resource.Id.deleteAccount);
+            deleteAccount.Click += DeleteAccount_Click;
 
             password = FindViewById<Button>(Resource.Id.accountPassword);
             password.Click += Password_Click;
@@ -80,10 +83,50 @@ namespace DryStreamMobile
 
         }
 
+        private void DeleteAccount_Click(object sender, EventArgs e)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("Czy na pewno chcesz usunąć konto?");
+
+            alert.SetPositiveButton("TAK", async (senderAlert, args) =>
+            {
+                scrollView.PageScroll(FocusSearchDirection.Down);
+                progressBar.Visibility = ViewStates.Visible;
+                if (await APIHelper.DeleteUser(GlobalMemory._user))
+                {
+                    if (GlobalHelper.isSavedUser())
+                    {
+                        ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
+                        ISharedPreferencesEditor edit = pref.Edit();
+                        edit.Clear();
+                        edit.Apply();
+                    }
+                    StartActivity(typeof(LoginActivity));
+                    GlobalMemory._user = null;
+                    this.Finish();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Coś poszło nie tak", ToastLength.Short).Show();
+                }
+                progressBar.Visibility = ViewStates.Invisible;
+            });
+            alert.SetNegativeButton("NIE", (senderAlert, args) => {
+                Toast.MakeText(this, "Dobry wybór", ToastLength.Short).Show();
+            });
+            RunOnUiThread(() => {
+                alert.Show();
+            });
+
+            // Debug.WriteLine("Answer: " + answer);
+
+
+        }
+
+
         private void Password_Click(object sender, EventArgs e)
         {
             StartActivity(typeof(PasswordChangeActivity));
-
         }
 
         private void UpdateValidity_Click(object sender, EventArgs e)
@@ -111,7 +154,7 @@ namespace DryStreamMobile
                     if (await updateUser())
                     {
                         setAlert("Zmiany zapisano pomyślnie!");
-                        if(GlobalHelper.isSavedUser())
+                        if (GlobalHelper.isSavedUser())
                             GlobalHelper.switchSavedUser(user);
 
                         GlobalMemory._user = user;
@@ -193,10 +236,10 @@ namespace DryStreamMobile
         {
             user = GlobalMemory._user;
             string oldLink;
-            if(user.Email.Trim() != email.Text.Trim())
+            if (user.Email.Trim() != email.Text.Trim())
                 user.Email = email.Text;
 
-            if(mediaFile!= null)
+            if (mediaFile != null)
             {
                 oldLink = user.CoverLink;
                 user.CoverLink = await APIHelper.UploadCoverGetLink(mediaFile);

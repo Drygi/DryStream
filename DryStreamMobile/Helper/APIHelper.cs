@@ -84,7 +84,22 @@ namespace DryStreamMobile.Helper
                     return false;
             }
         }
-
+        public static async Task<bool> DeleteUser(User user)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //StringContent content = new StringContent(Conver, Encoding.UTF8, "application/json");
+                // HTTP DELETE
+                HttpResponseMessage response = await client.DeleteAsync("api/DeleteUser/" + user.UserID);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
         public async static Task<User> getUser(User user)
         {
             using (var client = new HttpClient())
