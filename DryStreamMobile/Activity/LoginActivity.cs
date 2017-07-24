@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Views.InputMethods;
+using DryStreamMobile.Activity;
 using DryStreamMobile.Helper;
 using DryStreamMobile.Models;
 using Newtonsoft.Json;
@@ -95,13 +96,6 @@ namespace DryStreamMobile
                 loginButton.SetBackgroundColor(Android.Graphics.Color.ParseColor("#375a7f"));
             }
         }
-        private void setAlert(string message)
-        {
-            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-            Android.App.AlertDialog alertDialog = alert.Create();
-            alertDialog.SetTitle(message);
-            alertDialog.Show();
-        }
         private void RegisterButton_Click(object sender, EventArgs e)
         {
             StartActivity(typeof(RegisterActivity));
@@ -121,7 +115,7 @@ namespace DryStreamMobile
 
                 if (user == null)
                 {
-                    setAlert("Niepoprwany login lub hasło");
+                    Toast.MakeText(this, "Niepoprwany login lub hasło", ToastLength.Long).Show();
                     progressBar.Visibility = ViewStates.Invisible;
                     loginEditText.Text = "";
                     passwordEditText.Text = "";
@@ -138,13 +132,18 @@ namespace DryStreamMobile
                 }
 
                 GlobalMemory._user = user;
-                StartActivity(typeof(AccountActivity));
+                StartActivity(typeof(MainPageActivity));
                 this.Finish();
             }
             else
-                setAlert("Podany login lub hasło są za krótkie");
-
-           
+            {
+                Toast.MakeText(this, "Podany login lub hasło są za krótkie!", ToastLength.Long).Show();
+                loginEditText.Text = "";
+                passwordEditText.Text = "";
+                loginEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+                passwordEditText.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
+            }
+            progressBar.Visibility = ViewStates.Invisible;
             //hasło poddać działaniu funkcji skrótu;
 
         }

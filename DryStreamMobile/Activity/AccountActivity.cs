@@ -20,10 +20,10 @@ using Android.Graphics;
 
 namespace DryStreamMobile
 {
-    [Activity(Label = "AccountActivity", Theme = "@android:style/Theme.NoTitleBar", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Moje konto", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class AccountActivity : Android.App.Activity
     {
-        Button imgButton, updateButton, password, updateValidity, deleteAccount;
+        Button imgButton, updateButton, updateValidity, deleteAccount;
         TextView validity, login;
         EditText email;
         User user;
@@ -59,8 +59,6 @@ namespace DryStreamMobile
             deleteAccount = FindViewById<Button>(Resource.Id.deleteAccount);
             deleteAccount.Click += DeleteAccount_Click;
 
-            password = FindViewById<Button>(Resource.Id.accountPassword);
-            password.Click += Password_Click;
             login = FindViewById<TextView>(Resource.Id.loginTextView);
             login.Text += GlobalMemory._user.Login;
 
@@ -80,9 +78,22 @@ namespace DryStreamMobile
             LL = FindViewById<LinearLayout>(Resource.Id.AccountLayout);
             LL.Touch += LL_Touch;
 
+            ActionBar.SetHomeButtonEnabled(true);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
 
         }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    Finish();
+                    return true;
 
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
         private void DeleteAccount_Click(object sender, EventArgs e)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -107,12 +118,12 @@ namespace DryStreamMobile
                 }
                 else
                 {
-                    Toast.MakeText(this, "Coś poszło nie tak", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Coś poszło nie tak", ToastLength.Long).Show();
                 }
                 progressBar.Visibility = ViewStates.Invisible;
             });
             alert.SetNegativeButton("NIE", (senderAlert, args) => {
-                Toast.MakeText(this, "Dobry wybór", ToastLength.Short).Show();
+                Toast.MakeText(this, "Dobry wybór", ToastLength.Long).Show();
             });
             RunOnUiThread(() => {
                 alert.Show();
@@ -124,23 +135,9 @@ namespace DryStreamMobile
         }
 
 
-        private void Password_Click(object sender, EventArgs e)
-        {
-            StartActivity(typeof(PasswordChangeActivity));
-        }
-
         private void UpdateValidity_Click(object sender, EventArgs e)
         {
-            setAlert("Dać tu albo hyperlink na serwer albo jakies info");
-
-            //pomocniczo usuwanie z savedUser i wylogoywanie
-
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
-            ISharedPreferencesEditor edit = pref.Edit();
-            edit.Clear();
-            edit.Apply();
-            GlobalMemory._user = null;
-            this.Finish();
+           // setAlert("Dać tu albo hyperlink na serwer albo jakies info");
 
         }
 
@@ -153,18 +150,18 @@ namespace DryStreamMobile
                 {
                     if (await updateUser())
                     {
-                        setAlert("Zmiany zapisano pomyślnie!");
+                        Toast.MakeText(this, "Zapisano zmiany pomyślnie", ToastLength.Long).Show();
                         if (GlobalHelper.isSavedUser())
                             GlobalHelper.switchSavedUser(user);
 
                         GlobalMemory._user = user;
                     }
                     else
-                        setAlert("Coś poszło nie tak!");
+                        Toast.MakeText(this, "Coś poszło nie tak", ToastLength.Long).Show();
                 }
             }
             else
-                setAlert("Brak zmian");
+                Toast.MakeText(this, "Brak zmian", ToastLength.Long).Show();
 
             progressBar.Visibility = ViewStates.Invisible;
 
@@ -185,7 +182,7 @@ namespace DryStreamMobile
 
             if (!CrossMedia.Current.IsPickPhotoSupported)
             {
-                setAlert("Nie wybrano zdjęcia");
+                Toast.MakeText(this, "Nie wybrano zdjęcia", ToastLength.Long).Show();
                 return;
             }
             mediaFile = await CrossMedia.Current.PickPhotoAsync();
@@ -194,13 +191,6 @@ namespace DryStreamMobile
                 return;
 
             img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(mediaFile.Path));
-        }
-        private void setAlert(string message)
-        {
-            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-            Android.App.AlertDialog alertDialog = alert.Create();
-            alertDialog.SetTitle(message);
-            alertDialog.Show();
         }
 
         private async Task<bool> validateUpdate()
@@ -211,12 +201,12 @@ namespace DryStreamMobile
             {
                 email.Text = "";
                 email.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
-                setAlert("Adres email jest nieprawidłowy!");
+                Toast.MakeText(this, "Adres e-mail jest nieprawidłowy", ToastLength.Long).Show();
                 validate = false;
             }
             if (await APIHelper.findEmail(email.Text))
             {
-                setAlert("Email " + email.Text + " jest już zajęty");
+                Toast.MakeText(this, "Email " + email.Text + " jest już zajęty", ToastLength.Long).Show();
                 email.Text = "";
                 validate = false;
             }

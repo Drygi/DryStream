@@ -51,8 +51,6 @@ namespace DryStreamMobile.Helper
 
             return imageBitmap;
         }
-
-        //to na pozniej
         public static void switchSavedUser(User user)
         {
             ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
@@ -81,50 +79,47 @@ namespace DryStreamMobile.Helper
 
         }
 
-        public static List<string> menuList()
+        public static List<string> menuList(string name)
         {
             List<string> list = new List<string>()
             {
-              "Playlisty","Artyści","Gatunki","Utwory","","Moje konto","Zmiana hasła","Wyloguj"
+                "Witaj "+ name," ","Playlisty","Artyści","Gatunki","Utwory","","Moje konto","Zmiana hasła","Wyloguj"
             };
             return list;
         }
 
-        public static void switchByIdFromList(int id,Android.App.Activity activity)
+        public static bool switchByIdFromList(int id,Android.App.Activity activity)
         {
             switch (id)
             {
-                case 0:
-                    return;;
+                case 2:
+                    return false;;
                    // activity.StartActivity((typeof(PlaylistActivity)));
                    // break;
-                case 1:
-                    return;
+                case 3:
+                    return false;
                 // activity.StartActivity((typeof(ArtistActivity)));
                 // break;
-                case 2:
-                    return;
-                // activity.StartActivity((typeof(GenresActivity)));
-                // break;
-                case 3:
-                    return;
+                case 4:
+                    activity.StartActivity((typeof(GenresPageActivity)));
+                    return true;
+                case 5:
+                    return false ;
                 // activity.StartActivity((typeof(SongsActivity)));
                 // break;
-                case 4:
-                    return;
-                case 5:
-                    activity.StartActivity(typeof(AccountActivity));
-                    break;
-                case 6:
-                    activity.StartActivity(typeof(PasswordChangeActivity));
-                    break;
                 case 7:
+                    activity.StartActivity(typeof(AccountActivity));
+                    return true;
+                case 8:
+                    activity.StartActivity(typeof(PasswordChangeActivity));
+                    return true;
+                case 9:
                     switchSavedUser(null);
                     activity.StartActivity(typeof(LoginActivity));
                     activity.Finish();
-                    break;
+                    return true;
                 default:
-                    return;
+                    return false;
                     
             }
         }

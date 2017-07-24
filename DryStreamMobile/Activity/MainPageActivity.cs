@@ -39,7 +39,7 @@ namespace DryStreamMobile.Activity
             mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawer);
             mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
             mDrawerToggle = new MyActionBarDrawerToggle(this, mDrawerLayout, Resource.Drawable.drawerIcon, Resource.String.open_drawer, Resource.String.close_drawer);
-            mleftAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, GlobalHelper.menuList());
+            mleftAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, GlobalHelper.menuList(GlobalMemory._user.Login));
 
             mLeftDrawer.Adapter = mleftAdapter;
             mLeftDrawer.ItemClick += MLeftDrawer_ItemClick;
@@ -52,7 +52,8 @@ namespace DryStreamMobile.Activity
 
         private void MLeftDrawer_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            GlobalHelper.switchByIdFromList(Convert.ToInt16(e.Id),this);
+            GlobalHelper.switchByIdFromList(Convert.ToInt16(e.Id), this);
+
         }
 
 

@@ -52,32 +52,32 @@ namespace DryStreamMobile
                     if (await APIHelper.findLogin(loginTxt.Text.Trim()))
                     {
                         progressBar.Visibility = ViewStates.Invisible;
-                        setAlert("Login "+ loginTxt.Text+" jest już zajęty");
+                        Toast.MakeText(this, "Login "+ loginTxt.Text+" jest już zajęty", ToastLength.Long).Show();
                         loginTxt.Text = "";
                     }
                     else if(await APIHelper.findEmail(email.Text.Trim()))
                     {
                         progressBar.Visibility = ViewStates.Invisible;
-                        setAlert("Email " + email.Text + " jest już zajęty");
+                        Toast.MakeText(this, "Email " + email.Text + " jest już zajęty", ToastLength.Long).Show();
                         email.Text = "";
                     }
                     else
                     {
                         if (await addUser())
                         {
-                            setAlert("Dodano użytkownika pomyślnie");
+                            Toast.MakeText(this, "Pomyślnie zarejestrowano!", ToastLength.Long).Show();
                             StartActivity(typeof(LoginActivity));
                             this.Finish();
                         }
                         else
                         {
                             progressBar.Visibility = ViewStates.Invisible;
-                            setAlert("Coś poszło nie tak");
-
-
+                            Toast.MakeText(this, "Coś poszło nie tak!", ToastLength.Long).Show();
                         }
                     }
+                    progressBar.Visibility = ViewStates.Invisible;
                 }
+                progressBar.Visibility = ViewStates.Invisible;
             };
 
             loginTxt = FindViewById<EditText>(Resource.Id.registerLogin);
@@ -114,7 +114,7 @@ namespace DryStreamMobile
 
             if (!CrossMedia.Current.IsPickPhotoSupported)
             {
-                setAlert("Nie wybrano zdjęcia");
+                Toast.MakeText(this, "Nie wybrano zdjęcia", ToastLength.Long).Show();
                 return;
             }
              _mediaFile = await CrossMedia.Current.PickPhotoAsync();
@@ -128,13 +128,7 @@ namespace DryStreamMobile
             }
         }
 
-        private void setAlert(string message)
-        {
-            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-            Android.App.AlertDialog alertDialog = alert.Create();
-            alertDialog.SetTitle(message);
-            alertDialog.Show();
-        }
+   
 
         private bool validateRegister()
         {
@@ -143,7 +137,7 @@ namespace DryStreamMobile
             {
                 loginTxt.Text = "";
                 loginTxt.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
-                setAlert("Login jest za krótki");
+                Toast.MakeText(this, "Login jest za krótki!", ToastLength.Long).Show();
                 validate = false;
             }
             if ((password2Txt.Text != passwordTxt.Text))
@@ -154,7 +148,7 @@ namespace DryStreamMobile
                 passwordTxt.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 password2Txt.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 validate = false;
-                setAlert("Podane hasła są różne!");
+                Toast.MakeText(this, "Podane hasła są różne!", ToastLength.Long).Show();
             }
             if (passwordTxt.Text.Length<5)
             {
@@ -163,24 +157,25 @@ namespace DryStreamMobile
                 // registerBar.Visibility = ViewStates.Invisible;
                 passwordTxt.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                 password2Txt.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
-                setAlert("Hasło jest krótsze niż 5 znaków!");
+                Toast.MakeText(this, "Hasło jest krótsze niż 5 znaków!", ToastLength.Long).Show();
                 validate = false;
             }
             if (!Android.Util.Patterns.EmailAddress.Matcher(email.Text.Trim()).Matches())
             {
                 email.Text = "";
                 email.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
-                setAlert("Adres email jest nieprawidłowy!");
+                Toast.MakeText(this, "Adres email jest nieprawidłowy!", ToastLength.Long).Show();
                 validate = false;
             }
             if(_mediaFile==null)
             {
-                setAlert("Nie wybrano zdjęcia!");
+                Toast.MakeText(this, "Nie wybrano zdjęcia!", ToastLength.Long).Show();
                 validate = false;
             }
             if(!validate)
               scroll.SmoothScrollTo(0, 0);
 
+            progressBar.Visibility = ViewStates.Invisible;
             return validate;
         }
         private async Task<bool> addUser()

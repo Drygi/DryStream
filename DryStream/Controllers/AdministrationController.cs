@@ -59,10 +59,10 @@ namespace DryStream.Controllers
         {
             // walidacja nie do końca dzialala
             Entities db = new Entities();
-          //  var genres = from i in db.Genres select i;
+            //  var genres = from i in db.Genres select i;
             //int pageSize = 3;
-           // int pageNumber = 1;
-
+            // int pageNumber = 1;
+            genre.NAME = genre.NAME.Trim();
             if (genre.NAME == null)
             {
                 ViewBag.Error = "Nie podano nazwy";
@@ -140,6 +140,7 @@ namespace DryStream.Controllers
         [HttpPost]
         public ActionResult AddArtist(Artist artist, HttpPostedFileBase file)
         {
+            artist.Name=artist.Name.Trim();
             Entities db = new Entities();
             if (db.Artists.Any(a => a.Name.ToUpper() == artist.Name.ToUpper()))
             {

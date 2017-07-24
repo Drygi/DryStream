@@ -15,7 +15,7 @@ using DryStreamMobile.Models;
 
 namespace DryStreamMobile
 {
-    [Activity(Label = "PasswordChangeActivity", MainLauncher = false, Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "Zmień hasło", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PasswordChangeActivity : Android.App.Activity
     {
         Button saveChange;
@@ -40,8 +40,23 @@ namespace DryStreamMobile
             newPassword1 = FindViewById<EditText>(Resource.Id.newPassword1);
             newPassword2 = FindViewById<EditText>(Resource.Id.newPassword2);
             progressBar = FindViewById<ProgressBar>(Resource.Id.passwordChangeProgressBar);
-        }
 
+
+            ActionBar.SetHomeButtonEnabled(true);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
+        }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    Finish();
+                    return true;
+
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
         private void LL_Touch(object sender, View.TouchEventArgs e)
         {
             InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
@@ -62,8 +77,8 @@ namespace DryStreamMobile
                     if (GlobalHelper.isSavedUser())
                         GlobalHelper.switchSavedUser(user);
 
-                    setAlert("Hasło zostało zmienione!");
-                    //przejscie do MENU jakiegos
+                    Toast.MakeText(this, "Hasło zostało zmienione", ToastLength.Long).Show();
+                    //przejscie do MENU jakiego
                 }
             }
             progressBar.Visibility = ViewStates.Invisible;
@@ -80,7 +95,7 @@ namespace DryStreamMobile
                 {
                     actualPassword.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                     actualPassword.Text = "";
-                    setAlert("Podane hasło jest identyczne z aktualnym!");
+                    Toast.MakeText(this, "Podane hasło jest identyczne z aktualnym!", ToastLength.Long).Show();
                     valid = false;
                 }
                 else
@@ -91,7 +106,7 @@ namespace DryStreamMobile
                         newPassword2.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                         newPassword1.Text = "";
                         newPassword2.Text = "";
-                        setAlert("Podane hasła muszą być identyncze!");
+                        Toast.MakeText(this, "Podane hasła muszą być identyncze!", ToastLength.Long).Show();
                         valid = false;
                     }
                     if (newPassword1.Text.Length < 5)
@@ -100,22 +115,15 @@ namespace DryStreamMobile
                         newPassword2.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.editTextBorder));
                         newPassword1.Text = "";
                         newPassword2.Text = "";
-                        setAlert("Haslo musi mieć minimum 5 znaków!");
+                        Toast.MakeText(this, "Haslo musi mieć minimum 5 znaków!", ToastLength.Long).Show();
+            
                         valid = false;
                     }
                 }
 
             }
-           
+            progressBar.Visibility = ViewStates.Invisible;
             return valid;
-        }
-
-        private void setAlert(string message)
-        {
-            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-            Android.App.AlertDialog alertDialog = alert.Create();
-            alertDialog.SetTitle(message);
-            alertDialog.Show();
         }
     }
 }

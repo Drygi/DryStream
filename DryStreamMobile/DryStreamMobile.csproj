@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity\AccountActivity.cs" />
+    <Compile Include="Activity\GenresPageActivity.cs" />
     <Compile Include="Activity\LoginActivity.cs" />
     <Compile Include="Activity\MainActivity.cs" />
     <Compile Include="Activity\MainPageActivity.cs" />
@@ -137,6 +138,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MainPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\GenresPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

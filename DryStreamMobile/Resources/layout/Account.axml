@@ -88,7 +88,9 @@
                 android:id="@+id/accountEmail" />
             <Button
                 android:text="Zmień zdjęcie"
-                android:background="#0ce3ac"
+                android:background="#222222"
+                android:textColor="#0ce3ac"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -97,17 +99,7 @@
                 android:layout_marginBottom="5dp"
                 android:padding="10dp"
                 android:id="@+id/accountCoverButton" />
-            <Button
-                android:text="Zmień hasło"
-                android:background="#0ce3ac"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:padding="10dp"
-                android:id="@+id/accountPassword" />
+
             <Button
                 android:text="Przedłuż ważność konta"
                 android:background="#222222"

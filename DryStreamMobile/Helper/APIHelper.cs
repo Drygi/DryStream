@@ -20,6 +20,7 @@ namespace DryStreamMobile.Helper
 {
     public static class APIHelper
     {
+        #region UserApi 
         public async static Task<string> UploadCoverGetLink(MediaFile _mediaFile)
         {
 
@@ -179,6 +180,35 @@ namespace DryStreamMobile.Helper
                     return false;
             }
         }
+        #endregion
+
+        #region GenresApi
+        public static async Task<List<Genre>> getGenres()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Genres");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<List<Genre>>(responseBody);
+                }
+            }
+
+            return null;
+        }
+
+
+        #endregion
+
+
+
 
     }
 }

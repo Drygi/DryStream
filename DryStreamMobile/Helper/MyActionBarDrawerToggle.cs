@@ -33,7 +33,7 @@ namespace DryStreamMobile.Helper
         public override void OnDrawerClosed(View drawerView)
         {
             base.OnDrawerClosed(drawerView);
-            mActivity.ActionBar.Title = "";
+            mActivity.ActionBar.Title = "DryStream";
         }
 
         public override void OnDrawerSlide(View drawerView, float slideOffset)

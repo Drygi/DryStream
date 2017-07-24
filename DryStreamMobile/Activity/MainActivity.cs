@@ -16,29 +16,36 @@ namespace DryStreamMobile
     public class MainActivity : Android.App.Activity
     {
 
-        protected override void OnCreate(Bundle bundle)
+        protected async override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
-            this.StartActivity((typeof(MainPageActivity)));
+            var genres = await APIHelper.getGenres();
+            if (genres!=null)
+            {
+                GlobalMemory.Genres = genres;
+                this.Finish();
+                ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
+                string json = pref.GetString("userJson", "");
 
-            this.Finish();
-            //ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
-            //string json = pref.GetString("userJson", "");
-
-            //if(json=="")
-            //{
-            //    this.StartActivity(typeof(LoginActivity));
-            //    this.Finish();
-            //}
-            //else
-            //{
-            //    GlobalMemory._user = JsonConvert.DeserializeObject<User>(json);
-            //    this.StartActivity(typeof(AccountActivity));
-            //    this.Finish();
-            //}
+                if (json == "")
+                {
+                    this.StartActivity(typeof(LoginActivity));
+                    this.Finish();
+                }
+                else
+                {
+                    GlobalMemory._user = JsonConvert.DeserializeObject<User>(json);
+                    this.StartActivity(typeof(MainPageActivity));
+                    this.Finish();
+                }
+            }
+            else
+            {
+               
+            }
+        
         }
 
     }

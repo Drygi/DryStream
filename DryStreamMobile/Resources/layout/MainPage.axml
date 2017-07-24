@@ -22,17 +22,12 @@
         android:layout_width="180dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
+        android:padding="10dp"
+        android:textSize="25sp"
         android:choiceMode="singleChoice"
         android:divider="#0CE3AC"
-        android:dividerHeight="2dp"
+        android:dividerHeight="4dp"
         android:background="#222222" />
-<!-- right navigation drawer-->
-    <ImageButton
-        android:id="@+id/rightSearchBar"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:src="@drawable/searchIcon"
-        android:dividerHeight="2dp"
-        />
+
+  
 </android.support.v4.widget.DrawerLayout>
