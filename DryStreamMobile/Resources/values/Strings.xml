@@ -2,5 +2,6 @@
 <resources>
     <string name="Hello">Hello World, Click Me!</string>
     <string name="ApplicationName">DryStream</string>
-   
+    <string name="open_drawer">Otwórz</string>
+    <string name="close_drawer">Zamknij</string>
 </resources>

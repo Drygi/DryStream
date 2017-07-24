@@ -29,34 +29,34 @@ namespace DryStreamMobile
             UnregisterActivityLifecycleCallbacks(this);
         }
 
-        public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
+        public void OnActivityCreated(Android.App.Activity activity, Bundle savedInstanceState)
         {
             CrossCurrentActivity.Current.Activity = activity;
         }
 
-        public void OnActivityDestroyed(Activity activity)
+        public void OnActivityDestroyed(Android.App.Activity activity)
         {
         }
 
-        public void OnActivityPaused(Activity activity)
+        public void OnActivityPaused(Android.App.Activity activity)
         {
         }
 
-        public void OnActivityResumed(Activity activity)
-        {
-            CrossCurrentActivity.Current.Activity = activity;
-        }
-
-        public void OnActivitySaveInstanceState(Activity activity, Bundle outState)
-        {
-        }
-
-        public void OnActivityStarted(Activity activity)
+        public void OnActivityResumed(Android.App.Activity activity)
         {
             CrossCurrentActivity.Current.Activity = activity;
         }
 
-        public void OnActivityStopped(Activity activity)
+        public void OnActivitySaveInstanceState(Android.App.Activity activity, Bundle outState)
+        {
+        }
+
+        public void OnActivityStarted(Android.App.Activity activity)
+        {
+            CrossCurrentActivity.Current.Activity = activity;
+        }
+
+        public void OnActivityStopped(Android.App.Activity activity)
         {
         }
     }

@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 namespace DryStreamMobile
 {
     [Activity(Label = "LoginActivity", MainLauncher =false, Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class LoginActivity : Activity
+    public class LoginActivity : Android.App.Activity
     {
         Button loginButton, registerButton;
         EditText loginEditText, passwordEditText;

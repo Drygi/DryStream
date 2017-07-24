@@ -22,7 +22,7 @@ using Android.Views.InputMethods;
 namespace DryStreamMobile
 {
     [Activity(Label = "RegisterActivity", MainLauncher = false, Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class RegisterActivity : Activity
+    public class RegisterActivity : Android.App.Activity
     {
         Button imageButton, registerButton;
         EditText loginTxt, passwordTxt, password2Txt, email;

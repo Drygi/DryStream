@@ -21,7 +21,7 @@ using Android.Graphics;
 namespace DryStreamMobile
 {
     [Activity(Label = "AccountActivity", Theme = "@android:style/Theme.NoTitleBar", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class AccountActivity : Activity
+    public class AccountActivity : Android.App.Activity
     {
         Button imgButton, updateButton, password, updateValidity, deleteAccount;
         TextView validity, login;

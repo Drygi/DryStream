@@ -12,6 +12,7 @@ using Android.Widget;
 using System.Security.Cryptography;
 using Android.Graphics;
 using System.Net;
+using DryStreamMobile.Activity;
 using DryStreamMobile.Models;
 using Newtonsoft.Json;
 
@@ -56,10 +57,17 @@ namespace DryStreamMobile.Helper
         {
             ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
             ISharedPreferencesEditor edit = pref.Edit();
-            edit.Clear();  
-            edit.PutString("userJson", JsonConvert.SerializeObject(user));
-            edit.Apply();
-            GlobalMemory._user = user;
+            edit.Clear();
+            if (user ==null)
+            {
+               edit.Apply();
+            }
+            else
+            {
+                edit.PutString("userJson", JsonConvert.SerializeObject(user));
+                edit.Apply();
+                GlobalMemory._user = user;
+            }
         }
         public static bool isSavedUser()
         {
@@ -71,6 +79,54 @@ namespace DryStreamMobile.Helper
             else
                 return true;
 
+        }
+
+        public static List<string> menuList()
+        {
+            List<string> list = new List<string>()
+            {
+              "Playlisty","Artyści","Gatunki","Utwory","","Moje konto","Zmiana hasła","Wyloguj"
+            };
+            return list;
+        }
+
+        public static void switchByIdFromList(int id,Android.App.Activity activity)
+        {
+            switch (id)
+            {
+                case 0:
+                    return;;
+                   // activity.StartActivity((typeof(PlaylistActivity)));
+                   // break;
+                case 1:
+                    return;
+                // activity.StartActivity((typeof(ArtistActivity)));
+                // break;
+                case 2:
+                    return;
+                // activity.StartActivity((typeof(GenresActivity)));
+                // break;
+                case 3:
+                    return;
+                // activity.StartActivity((typeof(SongsActivity)));
+                // break;
+                case 4:
+                    return;
+                case 5:
+                    activity.StartActivity(typeof(AccountActivity));
+                    break;
+                case 6:
+                    activity.StartActivity(typeof(PasswordChangeActivity));
+                    break;
+                case 7:
+                    switchSavedUser(null);
+                    activity.StartActivity(typeof(LoginActivity));
+                    activity.Finish();
+                    break;
+                default:
+                    return;
+                    
+            }
         }
     }
 }

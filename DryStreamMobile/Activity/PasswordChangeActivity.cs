@@ -16,7 +16,7 @@ using DryStreamMobile.Models;
 namespace DryStreamMobile
 {
     [Activity(Label = "PasswordChangeActivity", MainLauncher = false, Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class PasswordChangeActivity : Activity
+    public class PasswordChangeActivity : Android.App.Activity
     {
         Button saveChange;
         EditText actualPassword, newPassword1, newPassword2;

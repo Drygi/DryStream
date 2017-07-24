@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using DryStreamMobile.Activity;
 using Newtonsoft.Json;
 using DryStreamMobile.Models;
 using DryStreamMobile.Helper;
@@ -12,7 +13,7 @@ using DryStreamMobile.Helper;
 namespace DryStreamMobile
 {
     [Activity(Label = "DryStream", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-    public class MainActivity : Activity
+    public class MainActivity : Android.App.Activity
     {
 
         protected override void OnCreate(Bundle bundle)
@@ -21,20 +22,23 @@ namespace DryStreamMobile
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
-            string json = pref.GetString("userJson", "");
+            this.StartActivity((typeof(MainPageActivity)));
 
-            if(json=="")
-            {
-                this.StartActivity(typeof(LoginActivity));
-                this.Finish();
-            }
-            else
-            {
-                GlobalMemory._user = JsonConvert.DeserializeObject<User>(json);
-                this.StartActivity(typeof(AccountActivity));
-                this.Finish();
-            }
+            this.Finish();
+            //ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
+            //string json = pref.GetString("userJson", "");
+
+            //if(json=="")
+            //{
+            //    this.StartActivity(typeof(LoginActivity));
+            //    this.Finish();
+            //}
+            //else
+            //{
+            //    GlobalMemory._user = JsonConvert.DeserializeObject<User>(json);
+            //    this.StartActivity(typeof(AccountActivity));
+            //    this.Finish();
+            //}
         }
 
     }

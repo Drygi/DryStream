@@ -9,3 +9,4 @@ TO DO: API do łączenia z aplikacją mobilna + aplikacja mobilna
 panel konta - nie działa PUT 
 1.6 - zapamietanie konta, panel zmiany hasła, naprawienie update'u danych, 
 1.7 - DELETE user oraz usuwanie jego grafiki z bazy 
+1.8 - dodanie lewego bocznego paska plus jego czesciowa obsługa
