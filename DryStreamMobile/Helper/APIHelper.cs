@@ -181,8 +181,6 @@ namespace DryStreamMobile.Helper
             }
         }
         #endregion
-
-        #region GenresApi
         public static async Task<List<Genre>> getGenres()
         {
             using (var client = new HttpClient())
@@ -203,10 +201,67 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+        public static async Task<List<Song>> getSongs()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Songs");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
 
-        #endregion
+                    return JsonConvert.DeserializeObject<List<Song>>(responseBody);
+                }
+            }
 
+            return null;
+        }
+
+        public static async Task<List<Album>> getAlbums()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Albums");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<List<Album>>(responseBody);
+                }
+            }
+
+            return null;
+        }
+        public static async Task<List<Artist>> getArtists()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Artists");
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<List<Artist>>(responseBody);
+                }
+            }
+
+            return null;
+        }
 
 
 

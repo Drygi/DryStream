@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="2dp"
+    android:background="#222222">
+<!-- zdjęcie po lewej stronie-->
+    <LinearLayout
+        android:id="@+id/modeLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp">
+        <ImageView
+            android:src="@drawable/Icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/modelImgID" />
+    </LinearLayout>
+<!--Tekst głowny-->
+    <TextView
+        android:id="@+id/modelNameID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/modeLinearLayout"
+        android:layout_toRightOf="@+id/modeLinearLayout"
+        android:text="Przykładowy"
+        android:textColor="#FFFFFF"
+        android:typeface="sans"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+<!--opis -->
+    <TextView
+        android:id="@+id/modelDescriptionID"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/modelNameID"
+        android:textColor="#e8e8e8"
+        android:textSize="16dp"
+        android:layout_marginTop="1dp"
+        android:layout_toRightOf="@+id/modeLinearLayout"
+        android:text="Przykładowy - poniżej" />
+
+<!-- Prawy bok -->
+    <TextView
+        android:id="@+id/modelRighttxtID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_alignTop="@id/modelNameID"
+        android:gravity="right"
+        android:text="5:45"
+        android:layout_marginRight="5dp"
+        android:textSize="16dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</RelativeLayout>

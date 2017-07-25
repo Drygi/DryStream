@@ -105,8 +105,10 @@
     <Compile Include="Activity\PasswordChangeActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
     <Compile Include="Helper\APIHelper.cs" />
+    <Compile Include="Helper\CustomAdapter.cs" />
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
+    <Compile Include="Helper\MyHolder.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -141,6 +143,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\GenresPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\model.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

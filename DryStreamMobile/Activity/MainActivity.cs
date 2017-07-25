@@ -15,11 +15,12 @@ namespace DryStreamMobile
     [Activity(Label = "DryStream", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Android.App.Activity
     {
-
+        private ProgressBar progressBar;
         protected async override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+            SetContentView(Resource.Layout.Main);
+            progressBar = FindViewById<ProgressBar>(Resource.Id.mainProgressBar);
             // Set our view from the "main" layout resource
             var genres = await APIHelper.getGenres();
             if (genres!=null)

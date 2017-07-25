@@ -9,12 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#222222">
-        <TextView
-            android:id="@+id/tvText"
-            android:text="GŁOWNA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+        <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:divider="#0CE3AC"
+            android:dividerHeight="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/LVmainPage" />
     </FrameLayout>
 <!-- left navigation drawer-->
     <ListView
@@ -28,6 +30,4 @@
         android:divider="#0CE3AC"
         android:dividerHeight="4dp"
         android:background="#222222" />
-
-  
 </android.support.v4.widget.DrawerLayout>

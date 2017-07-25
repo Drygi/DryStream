@@ -13,6 +13,7 @@ using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Widget;
 using DryStreamMobile.Helper;
+using DryStreamMobile.Models;
 
 namespace DryStreamMobile.Activity
 {
@@ -20,8 +21,13 @@ namespace DryStreamMobile.Activity
     public class MainPageActivity : Android.App.Activity
     {
 
-        private DrawerLayout mDrawerLayout;
+        private CustomAdapter customAdapter;
+        private ListView lv;
+        List<Song> songs;
+        List<Album> albums;
+        List<Artist> artists;
 
+        private DrawerLayout mDrawerLayout;
         private ArrayAdapter mleftAdapter;
         private ListView mLeftDrawer;
         private ActionBarDrawerToggle mDrawerToggle;
@@ -34,7 +40,7 @@ namespace DryStreamMobile.Activity
             // Create your application here
         }
 
-        private void initControls()
+        private async void initControls()
         {
             mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawer);
             mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
@@ -43,11 +49,33 @@ namespace DryStreamMobile.Activity
 
             mLeftDrawer.Adapter = mleftAdapter;
             mLeftDrawer.ItemClick += MLeftDrawer_ItemClick;
-
-
             mDrawerLayout.SetDrawerListener(mDrawerToggle);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetHomeButtonEnabled(true);
+
+            ///menu glowne
+            songs = await APIHelper.getSongs();
+            albums = await APIHelper.getAlbums();
+            artists = await APIHelper.getArtists();
+            foreach (var item in songs)
+            {
+                item.Album = (from a in albums where item.AlbumID == a.AlbumID select a).Single();   
+            }
+            foreach (var item in albums)
+            {
+                item.Artist = (from a in artists where item.ArtistID == a.ArtistID select a).Single();
+            }
+            ///
+            lv = FindViewById<ListView>(Resource.Id.LVmainPage);
+            customAdapter = new CustomAdapter(this, Resource.Layout.model, songs);
+            lv.Adapter = customAdapter;
+            lv.ItemClick += Lv_ItemClick;
+
+        }
+
+        private void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            Toast.MakeText(this, e.Id.ToString(), ToastLength.Long).Show();
         }
 
         private void MLeftDrawer_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

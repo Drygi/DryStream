@@ -11,3 +11,4 @@ panel konta - nie działa PUT
 1.7 - DELETE user oraz usuwanie jego grafiki z bazy 
 1.8 - dodanie lewego bocznego paska plus jego czesciowa obsługa
 1.9 - pobranie gatunków serwera edycja bocznego paska
+1.10 - progressBar przy starcie, ListView utworów wraz z ich ikonami opisem i czasem trwania

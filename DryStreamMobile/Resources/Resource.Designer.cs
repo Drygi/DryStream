@@ -84,11 +84,11 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f050004
 			public const int AccountScrollView = 2131034116;
 			
-			// aapt resource value: 0x7f050022
-			public const int LiID = 2131034146;
+			// aapt resource value: 0x7f050018
+			public const int LVmainPage = 2131034136;
 			
-			// aapt resource value: 0x7f050015
-			public const int MyButton = 2131034133;
+			// aapt resource value: 0x7f050027
+			public const int LiID = 2131034151;
 			
 			// aapt resource value: 0x7f050001
 			public const int accountCover = 2131034113;
@@ -105,8 +105,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f05000a
 			public const int accountUpdateButton = 2131034122;
 			
-			// aapt resource value: 0x7f05001c
-			public const int actualPassword = 2131034140;
+			// aapt resource value: 0x7f050021
+			public const int actualPassword = 2131034145;
 			
 			// aapt resource value: 0x7f050017
 			public const int content_frame = 2131034135;
@@ -120,8 +120,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f05000c
 			public const int genresListView = 2131034124;
 			
-			// aapt resource value: 0x7f050028
-			public const int imgButton = 2131034152;
+			// aapt resource value: 0x7f05002d
+			public const int imgButton = 2131034157;
 			
 			// aapt resource value: 0x7f050019
 			public const int leftListView = 2131034137;
@@ -141,20 +141,38 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f050002
 			public const int loginTextView = 2131034114;
 			
+			// aapt resource value: 0x7f050015
+			public const int mainProgressBar = 2131034133;
+			
+			// aapt resource value: 0x7f05001a
+			public const int modeLinearLayout = 2131034138;
+			
+			// aapt resource value: 0x7f05001d
+			public const int modelDescriptionID = 2131034141;
+			
+			// aapt resource value: 0x7f05001b
+			public const int modelImgID = 2131034139;
+			
+			// aapt resource value: 0x7f05001c
+			public const int modelNameID = 2131034140;
+			
+			// aapt resource value: 0x7f05001e
+			public const int modelRighttxtID = 2131034142;
+			
 			// aapt resource value: 0x7f050016
 			public const int myDrawer = 2131034134;
 			
-			// aapt resource value: 0x7f05001e
-			public const int newPassword1 = 2131034142;
+			// aapt resource value: 0x7f050023
+			public const int newPassword1 = 2131034147;
+			
+			// aapt resource value: 0x7f050024
+			public const int newPassword2 = 2131034148;
 			
 			// aapt resource value: 0x7f05001f
-			public const int newPassword2 = 2131034143;
+			public const int passwordChangeLayout = 2131034143;
 			
-			// aapt resource value: 0x7f05001a
-			public const int passwordChangeLayout = 2131034138;
-			
-			// aapt resource value: 0x7f050021
-			public const int passwordChangeProgressBar = 2131034145;
+			// aapt resource value: 0x7f050026
+			public const int passwordChangeProgressBar = 2131034150;
 			
 			// aapt resource value: 0x7f050010
 			public const int passwordText = 2131034128;
@@ -162,44 +180,41 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f050014
 			public const int registerButton = 2131034132;
 			
-			// aapt resource value: 0x7f050029
-			public const int registerClick = 2131034153;
-			
-			// aapt resource value: 0x7f050025
-			public const int registerEmail = 2131034149;
-			
-			// aapt resource value: 0x7f050024
-			public const int registerLogin = 2131034148;
-			
-			// aapt resource value: 0x7f050026
-			public const int registerPassword = 2131034150;
-			
-			// aapt resource value: 0x7f050027
-			public const int registerPassword2 = 2131034151;
+			// aapt resource value: 0x7f05002e
+			public const int registerClick = 2131034158;
 			
 			// aapt resource value: 0x7f05002a
-			public const int registerProgressBar = 2131034154;
+			public const int registerEmail = 2131034154;
+			
+			// aapt resource value: 0x7f050029
+			public const int registerLogin = 2131034153;
+			
+			// aapt resource value: 0x7f05002b
+			public const int registerPassword = 2131034155;
+			
+			// aapt resource value: 0x7f05002c
+			public const int registerPassword2 = 2131034156;
+			
+			// aapt resource value: 0x7f05002f
+			public const int registerProgressBar = 2131034159;
 			
 			// aapt resource value: 0x7f050012
 			public const int rememberMeBox = 2131034130;
 			
-			// aapt resource value: 0x7f050020
-			public const int saveChange = 2131034144;
+			// aapt resource value: 0x7f050025
+			public const int saveChange = 2131034149;
 			
-			// aapt resource value: 0x7f050023
-			public const int scrollViewRegister = 2131034147;
+			// aapt resource value: 0x7f050028
+			public const int scrollViewRegister = 2131034152;
 			
 			// aapt resource value: 0x7f050005
 			public const int texViewEmail = 2131034117;
 			
-			// aapt resource value: 0x7f05001d
-			public const int textView4 = 2131034141;
+			// aapt resource value: 0x7f050022
+			public const int textView4 = 2131034146;
 			
-			// aapt resource value: 0x7f05001b
-			public const int textViewActualPassword = 2131034139;
-			
-			// aapt resource value: 0x7f050018
-			public const int tvText = 2131034136;
+			// aapt resource value: 0x7f050020
+			public const int textViewActualPassword = 2131034144;
 			
 			// aapt resource value: 0x7f05000e
 			public const int userIconID = 2131034126;
@@ -236,10 +251,13 @@ namespace DryStreamMobile
 			public const int MainPage = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int PasswordChange = 2130903045;
+			public const int model = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int Register = 2130903046;
+			public const int PasswordChange = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int Register = 2130903047;
 			
 			static Layout()
 			{
