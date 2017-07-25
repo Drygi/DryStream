@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222222">
+    <TextView
+        android:id="@+id/PlayerTitleSong"
+        android:text="Tytuł"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="#375a7f"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/PlayerArtistName"
+        android:layout_below="@+id/PlayerTitleSong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Artysta"
+        android:layout_centerHorizontal="true"
+        android:textColor="#375a7f"
+        android:textSize="25dp" />
+    <ImageView
+        android:id="@+id/PlayerAlbumCover"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/PlayerArtistName"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon" />
+    <SeekBar
+        android:id="@+id/PlayerSeekBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/PlayerAlbumCover" />
+    <Button
+        android:id="@+id/PlayerPrevious"
+        android:layout_marginLeft="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/PlayerSeekBar"
+        android:paddingTop="40dp"
+        android:background="@drawable/previousIcon" />
+    <Button
+        android:id="@+id/PlayerPlay_Pause"
+        android:layout_toRightOf="@+id/PlayerPrevious"
+        android:layout_marginLeft="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/PlayerSeekBar"
+        android:paddingTop="40dp"
+        android:background="@drawable/PauseIcon" />
+    <Button
+        android:id="@+id/PlayerNext"
+        android:layout_toRightOf="@+id/PlayerPlay_Pause"
+        android:layout_marginLeft="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/PlayerSeekBar"
+        android:paddingTop="40dp"
+        android:background="@drawable/nextIcon" />
+</RelativeLayout>

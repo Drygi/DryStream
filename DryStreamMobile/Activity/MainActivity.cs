@@ -21,12 +21,11 @@ namespace DryStreamMobile
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             progressBar = FindViewById<ProgressBar>(Resource.Id.mainProgressBar);
-            // Set our view from the "main" layout resource
+
             var genres = await APIHelper.getGenres();
-            if (genres!=null)
+            if (genres != null)
             {
                 GlobalMemory.Genres = genres;
-                this.Finish();
                 ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
                 string json = pref.GetString("userJson", "");
 
@@ -44,9 +43,10 @@ namespace DryStreamMobile
             }
             else
             {
-               
+
             }
-        
+
+
         }
 
     }

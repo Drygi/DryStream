@@ -14,6 +14,7 @@ using Android.Views;
 using Android.Widget;
 using DryStreamMobile.Helper;
 using DryStreamMobile.Models;
+using Plugin.MediaManager;
 
 namespace DryStreamMobile.Activity
 {
@@ -73,9 +74,11 @@ namespace DryStreamMobile.Activity
 
         }
 
-        private void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private async void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            Toast.MakeText(this, e.Id.ToString(), ToastLength.Long).Show();
+            GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];
+            StartActivity(typeof(PlayerActivity));
+            //await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP+ songs[Convert.ToInt16(e.Id)].Link);
         }
 
         private void MLeftDrawer_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

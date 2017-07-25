@@ -16,7 +16,7 @@ namespace DryStreamMobile.Helper
 {
     class CustomAdapter : ArrayAdapter
     {
-        private Context c;
+        private Context c; 
         private List<Song> songs;
         private int resource;
         private LayoutInflater inflater;

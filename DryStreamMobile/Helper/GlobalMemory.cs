@@ -25,6 +25,8 @@ namespace DryStreamMobile.Helper
 
         public static User _user{ get; set; }
 
+        public static Song actualSong { get; set; }
+
         public static List<Genre> Genres { get; set; }
 
     }
