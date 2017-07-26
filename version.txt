@@ -13,3 +13,5 @@ panel konta - nie działa PUT
 1.9 - pobranie gatunków serwera edycja bocznego paska
 1.10 - progressBar przy starcie, ListView utworów wraz z ich ikonami opisem i czasem trwania
 1.11 - dodanie odtwarzacza muzyki oraz odtwarzania muzyki ze streamu
+1.12 - poprawienie layoutu odtwarzacza dodanie seekBar zsynchronizowanego z utworem wyswietlanie czasu
+pauza wznawianie utworu

@@ -11,26 +11,67 @@ using Android.Views;
 using Android.Widget;
 using DryStreamMobile.Helper;
 using Plugin.MediaManager;
+using Android.Media;
+using static Android.Views.View;
+using System.Threading.Tasks;
+using Android.Graphics;
+using Plugin.MediaManager.Abstractions;
+using Plugin.Media.Abstractions;
 
 namespace DryStreamMobile
 {
-    [Activity(Label = "Odtwarzanie", MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [ Activity(Label = "Odtwarzanie", LaunchMode =Android.Content.PM.LaunchMode.SingleTop, MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PlayerActivity : Android.App.Activity
     {
         private Button next, previous, startStop;
         ImageView img;
         SeekBar seekBar;
-        TextView title, artistName;
+        TextView title, actualTime, allTime;
+        Intent intent;
+        PendingIntent pendingIntent;
+        MediaPlayerService mps;
+        Task m;   
+       
         bool isPlayed;
+  
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Player);
             initControlos();
+            this.Title = GlobalMemory.actualSong.Album.Artist.Name;
+            this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
+            // Create your application herem
 
-            // Create your application here
         }
+
+        //private void myNotification()
+        //{
+        //    Intent intent = new Intent(this, typeof(PlayerActivity));
+
+        //    // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
+        //    const int pendingIntentId = 0;
+        //    PendingIntent pendingIntent =
+        //        PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.OneShot);
+
+
+        //    Notification.Builder builder = new Notification.Builder(this)
+        //        .SetContentTitle(GlobalMemory.actualSong.Name.Trim())
+        //        .SetContentText(GlobalMemory.actualSong.Album.Artist.Name.Trim())
+        //        .SetLargeIcon(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Album.CoverLink.Trim()));
+
+        //    // Build the notification:
+        //    Notification notification = builder.Build();
+
+        //    // Get the notification manager:
+        //    NotificationManager notificationManager =
+        //        GetSystemService(Context.NotificationService) as NotificationManager;
+
+        //    // Publish the notification:
+        //    const int notificationId = 0;
+        //    notificationManager.Notify(notificationId, notification);
+        //}
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -59,48 +100,76 @@ namespace DryStreamMobile
             startStop = FindViewById<Button>(Resource.Id.PlayerPlay_Pause);
             startStop.Click += StartStop_Click;
 
-            seekBar = FindViewById<SeekBar>(Resource.Id.PlayerSeekBar);
-            //seekBar.ProgressChanged +=(s,e)=> {
+            actualTime = FindViewById<TextView>(Resource.Id.PlayerActualTime);
+            allTime = FindViewById<TextView>(Resource.Id.PlayerAllTime);
+            allTime.Text = GlobalMemory.actualSong.Duration.Minutes + ":" + GlobalMemory.actualSong.Duration.Seconds;
 
-            //}
+            seekBar = FindViewById<SeekBar>(Resource.Id.PlayerSeekBar);
+            seekBar.ProgressChanged += (sender, args) =>
+            {
+                if (args.FromUser)
+                    CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(args.Progress));                
+            };
+
+            CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
+            CrossMediaManager.Current.BufferingChanged += Current_BufferingChanged;
+            
 
             title = FindViewById<TextView>(Resource.Id.PlayerTitleSong);
             title.Text = GlobalMemory.actualSong.Name;
-            artistName = FindViewById<TextView>(Resource.Id.PlayerArtistName);
-            artistName.Text = GlobalMemory.actualSong.Album.Title;
 
             img = FindViewById<ImageView>(Resource.Id.PlayerAlbumCover);
             img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Album.CoverLink));
             await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
+          
+            seekBar.Max = Convert.ToInt32(GlobalMemory.actualSong.Duration.TotalSeconds);
+           
+
         }
+
+        private void Current_BufferingChanged(object sender, Plugin.MediaManager.Abstractions.EventArguments.BufferingChangedEventArgs e)
+        {
+            seekBar.SecondaryProgress = Convert.ToInt32(e.BufferProgress);
+        }
+
+        private void Current_PlayingChanged(object sender, Plugin.MediaManager.Abstractions.EventArguments.PlayingChangedEventArgs e)
+        {
+            seekBar.Progress = Convert.ToInt32(e.Position.TotalSeconds);
+            actualTime.Text = $"{e.Position.Minutes:00}:{e.Position.Seconds:00}";
+        }
+
 
         private void StartStop_Click(object sender, EventArgs e)
         {
+            
             if (!isPlayed)
             {
-                //startStop.SetBackgroundColor(Android.Graphics.Color.ParseColor("@drawable/StopIcon"));
-                CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
-                //startStop.SetBackgroundDrawable(Android.Graphics.Drawables();
+                startStop.SetBackgroundResource(Resource.Drawable.PauseIcon);
+
+                var z = CrossMediaManager.Current.MediaNotificationManager;
+                        
+                CrossMediaManager.Current.Play();
+                CrossMediaManager.Current.MediaNotificationManager.StartNotification(m.);
                 isPlayed = true;
-                Toast.MakeText(this, "Start", ToastLength.Long).Show();
+                Toast.MakeText(this, "Start", ToastLength.Short).Show();
+               // myNotification();
+
             }
             else
             {
                 isPlayed = false;
-                Toast.MakeText(this, "Pauza", ToastLength.Long).Show();
-                //startStop.SetBackgroundColor(Android.Graphics.Color.ParseColor("@drawable/PlayIcon"));
-                 CrossMediaManager.Current.Pause();
+                startStop.SetBackgroundResource(Resource.Drawable.PlayIcon);
+                Toast.MakeText(this, "Pauza", ToastLength.Short).Show();
+                CrossMediaManager.Current.Pause();
             }
         }
-
         private void Previous_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void Next_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

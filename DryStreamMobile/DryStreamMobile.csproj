@@ -125,6 +125,7 @@
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
     <Compile Include="Helper\MyHolder.cs" />
+    <Compile Include="Helper\PlayerNotification.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />

@@ -1708,23 +1708,26 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f0a006e
 			public const int LVmainPage = 2131361902;
 			
-			// aapt resource value: 0x7f0a009b
-			public const int LiID = 2131361947;
+			// aapt resource value: 0x7f0a009c
+			public const int LiID = 2131361948;
 			
 			// aapt resource value: 0x7f0a0096
-			public const int PlayerAlbumCover = 2131361942;
+			public const int PlayerActualTime = 2131361942;
 			
 			// aapt resource value: 0x7f0a0095
-			public const int PlayerArtistName = 2131361941;
-			
-			// aapt resource value: 0x7f0a009a
-			public const int PlayerNext = 2131361946;
-			
-			// aapt resource value: 0x7f0a0099
-			public const int PlayerPlay_Pause = 2131361945;
+			public const int PlayerAlbumCover = 2131361941;
 			
 			// aapt resource value: 0x7f0a0098
-			public const int PlayerPrevious = 2131361944;
+			public const int PlayerAllTime = 2131361944;
+			
+			// aapt resource value: 0x7f0a009b
+			public const int PlayerNext = 2131361947;
+			
+			// aapt resource value: 0x7f0a009a
+			public const int PlayerPlay_Pause = 2131361946;
+			
+			// aapt resource value: 0x7f0a0099
+			public const int PlayerPrevious = 2131361945;
 			
 			// aapt resource value: 0x7f0a0097
 			public const int PlayerSeekBar = 2131361943;
@@ -1903,8 +1906,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f0a0029
 			public const int image = 2131361833;
 			
-			// aapt resource value: 0x7f0a00a1
-			public const int imgButton = 2131361953;
+			// aapt resource value: 0x7f0a00a2
+			public const int imgButton = 2131361954;
 			
 			// aapt resource value: 0x7f0a0082
 			public const int info = 2131361922;
@@ -2017,23 +2020,23 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f0a006a
 			public const int registerButton = 2131361898;
 			
-			// aapt resource value: 0x7f0a00a2
-			public const int registerClick = 2131361954;
-			
-			// aapt resource value: 0x7f0a009e
-			public const int registerEmail = 2131361950;
-			
-			// aapt resource value: 0x7f0a009d
-			public const int registerLogin = 2131361949;
+			// aapt resource value: 0x7f0a00a3
+			public const int registerClick = 2131361955;
 			
 			// aapt resource value: 0x7f0a009f
-			public const int registerPassword = 2131361951;
+			public const int registerEmail = 2131361951;
+			
+			// aapt resource value: 0x7f0a009e
+			public const int registerLogin = 2131361950;
 			
 			// aapt resource value: 0x7f0a00a0
-			public const int registerPassword2 = 2131361952;
+			public const int registerPassword = 2131361952;
 			
-			// aapt resource value: 0x7f0a00a3
-			public const int registerProgressBar = 2131361955;
+			// aapt resource value: 0x7f0a00a1
+			public const int registerPassword2 = 2131361953;
+			
+			// aapt resource value: 0x7f0a00a4
+			public const int registerProgressBar = 2131361956;
 			
 			// aapt resource value: 0x7f0a0068
 			public const int rememberMeBox = 2131361896;
@@ -2059,8 +2062,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f0a0033
 			public const int scrollView = 2131361843;
 			
-			// aapt resource value: 0x7f0a009c
-			public const int scrollViewRegister = 2131361948;
+			// aapt resource value: 0x7f0a009d
+			public const int scrollViewRegister = 2131361949;
 			
 			// aapt resource value: 0x7f0a004b
 			public const int search_badge = 2131361867;

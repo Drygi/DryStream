@@ -8,39 +8,57 @@
         android:text="Tytuł"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
         android:textSize="30dp"
         android:textColor="#375a7f"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-    <TextView
-        android:id="@+id/PlayerArtistName"
-        android:layout_below="@+id/PlayerTitleSong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Artysta"
-        android:layout_centerHorizontal="true"
-        android:textColor="#375a7f"
-        android:textSize="25dp" />
     <ImageView
         android:id="@+id/PlayerAlbumCover"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:paddingTop="20dp"
-        android:layout_below="@+id/PlayerArtistName"
+        android:paddingTop="30dp"
+        android:paddingBottom="20dp"
+        android:layout_below="@+id/PlayerTitleSong"
         android:layout_centerHorizontal="true"
         android:src="@drawable/icon" />
+    <TextView
+        android:id="@+id/PlayerActualTime"
+        android:text="00:00"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="#375a7f"
+        android:paddingBottom="20dp"
+        android:layout_below="@+id/PlayerAlbumCover" />
     <SeekBar
         android:id="@+id/PlayerSeekBar"
-        android:layout_width="300dp"
+        android:layout_toRightOf="@+id/PlayerActualTime"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:paddingBottom="20dp"
+        android:layout_below="@+id/PlayerAlbumCover" />
+    <TextView
+        android:id="@+id/PlayerAllTime"
+        android:text="00:00"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/PlayerSeekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="#375a7f"
+        android:paddingBottom="20dp"
         android:layout_below="@+id/PlayerAlbumCover" />
     <Button
         android:id="@+id/PlayerPrevious"
-        android:layout_marginLeft="80dp"
+        android:layout_marginLeft="75dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/PlayerSeekBar"
+        android:layout_below="@+id/PlayerActualTime"
         android:paddingTop="40dp"
         android:background="@drawable/previousIcon" />
     <Button
@@ -49,7 +67,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/PlayerSeekBar"
+        android:layout_below="@+id/PlayerActualTime"
         android:paddingTop="40dp"
         android:background="@drawable/PauseIcon" />
     <Button
@@ -58,7 +76,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/PlayerSeekBar"
+        android:layout_below="@+id/PlayerActualTime"
         android:paddingTop="40dp"
         android:background="@drawable/nextIcon" />
 </RelativeLayout>
