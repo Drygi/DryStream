@@ -78,7 +78,7 @@ namespace DryStreamMobile.Activity
         {
             GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];
             StartActivity(typeof(PlayerActivity));
-            //await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP+ songs[Convert.ToInt16(e.Id)].Link);
+           
         }
 
         private void MLeftDrawer_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -86,10 +86,6 @@ namespace DryStreamMobile.Activity
             GlobalHelper.switchByIdFromList(Convert.ToInt16(e.Id), this);
 
         }
-
-
-
-
 
         protected override void OnPostCreate(Bundle savedInstanceState)
         {

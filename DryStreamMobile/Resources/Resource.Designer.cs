@@ -26,6 +26,7 @@ namespace DryStreamMobile
 		
 		public static void UpdateIdValues()
 		{
+			global::Plugin.LocalNotifications.Resource.Drawable.plugin_lc_smallicon = global::DryStreamMobile.Resource.Drawable.plugin_lc_smallicon;
 		}
 		
 		public partial class Animation
@@ -1650,11 +1651,11 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f02005e
 			public const int notification_icon_background = 2130837598;
 			
-			// aapt resource value: 0x7f020069
-			public const int notification_template_icon_bg = 2130837609;
+			// aapt resource value: 0x7f02006b
+			public const int notification_template_icon_bg = 2130837611;
 			
-			// aapt resource value: 0x7f02006a
-			public const int notification_template_icon_low_bg = 2130837610;
+			// aapt resource value: 0x7f02006c
+			public const int notification_template_icon_low_bg = 2130837612;
 			
 			// aapt resource value: 0x7f02005f
 			public const int notification_tile_bg = 2130837599;
@@ -1669,22 +1670,28 @@ namespace DryStreamMobile
 			public const int PlayIcon = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int previousIcon = 2130837603;
+			public const int playNotification = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int registerIcon = 2130837604;
+			public const int plugin_lc_smallicon = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int searchIcon = 2130837605;
+			public const int previousIcon = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int StopIcon = 2130837606;
+			public const int registerIcon = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int userIcon = 2130837607;
+			public const int searchIcon = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int userIconMini = 2130837608;
+			public const int StopIcon = 2130837608;
+			
+			// aapt resource value: 0x7f020069
+			public const int userIcon = 2130837609;
+			
+			// aapt resource value: 0x7f02006a
+			public const int userIconMini = 2130837610;
 			
 			static Drawable()
 			{

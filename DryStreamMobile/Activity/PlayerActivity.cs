@@ -20,7 +20,7 @@ using Plugin.Media.Abstractions;
 
 namespace DryStreamMobile
 {
-    [ Activity(Label = "Odtwarzanie", LaunchMode =Android.Content.PM.LaunchMode.SingleTop, MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [  Activity(Label = "Odtwarzanie", LaunchMode =Android.Content.PM.LaunchMode.SingleTop, MainLauncher = false, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class PlayerActivity : Android.App.Activity
     {
         private Button next, previous, startStop;
@@ -33,7 +33,8 @@ namespace DryStreamMobile
         Task m;   
        
         bool isPlayed;
-  
+
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -42,36 +43,42 @@ namespace DryStreamMobile
             initControlos();
             this.Title = GlobalMemory.actualSong.Album.Artist.Name;
             this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
+            myNotification();
             // Create your application herem
 
         }
+        private void myNotification()
+        {
+            Intent intent = new Intent(this, typeof(PlayerActivity));
+            intent.AddFlags(ActivityFlags.FromBackground);
+            this.StartActivity(intent);
 
-        //private void myNotification()
-        //{
-        //    Intent intent = new Intent(this, typeof(PlayerActivity));
+         
+            // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
+            const int pendingIntentId = 0;
+            PendingIntent pendingIntent =
+                PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.Immutable);
+            // Instantiate the builder and set notification elements:
+            Notification.Builder builder = new Notification.Builder(this)
+                .SetSubText("Odtwarzanie")
+                .SetContentIntent(pendingIntent)
+                .SetContentTitle(GlobalMemory.actualSong.Name.Trim())
+                .SetContentText(GlobalMemory.actualSong.Album.Artist.Name.Trim())
+                .SetSmallIcon(Resource.Drawable.PlayIcon)
+              .SetLargeIcon(BitmapFactory.DecodeResource(Resources,Resource.Drawable.playNotification));
+               
 
-        //    // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
-        //    const int pendingIntentId = 0;
-        //    PendingIntent pendingIntent =
-        //        PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.OneShot);
+            // Build the notification:
+            Notification notification = builder.Build();
 
+            // Get the notification manager:
+            NotificationManager notificationManager =
+                GetSystemService(Context.NotificationService) as NotificationManager;
 
-        //    Notification.Builder builder = new Notification.Builder(this)
-        //        .SetContentTitle(GlobalMemory.actualSong.Name.Trim())
-        //        .SetContentText(GlobalMemory.actualSong.Album.Artist.Name.Trim())
-        //        .SetLargeIcon(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Album.CoverLink.Trim()));
-
-        //    // Build the notification:
-        //    Notification notification = builder.Build();
-
-        //    // Get the notification manager:
-        //    NotificationManager notificationManager =
-        //        GetSystemService(Context.NotificationService) as NotificationManager;
-
-        //    // Publish the notification:
-        //    const int notificationId = 0;
-        //    notificationManager.Notify(notificationId, notification);
-        //}
+            // Publish the notification:
+            const int notificationId = 0;
+            notificationManager.Notify(notificationId, notification);
+        }
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -113,18 +120,14 @@ namespace DryStreamMobile
 
             CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
             CrossMediaManager.Current.BufferingChanged += Current_BufferingChanged;
-            
-
             title = FindViewById<TextView>(Resource.Id.PlayerTitleSong);
             title.Text = GlobalMemory.actualSong.Name;
 
             img = FindViewById<ImageView>(Resource.Id.PlayerAlbumCover);
             img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Album.CoverLink));
+            
             await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
-          
             seekBar.Max = Convert.ToInt32(GlobalMemory.actualSong.Duration.TotalSeconds);
-           
-
         }
 
         private void Current_BufferingChanged(object sender, Plugin.MediaManager.Abstractions.EventArguments.BufferingChangedEventArgs e)
@@ -139,17 +142,18 @@ namespace DryStreamMobile
         }
 
 
-        private void StartStop_Click(object sender, EventArgs e)
+        private  void StartStop_Click(object sender, EventArgs e)
         {
             
             if (!isPlayed)
             {
+              //  await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
                 startStop.SetBackgroundResource(Resource.Drawable.PauseIcon);
 
                 var z = CrossMediaManager.Current.MediaNotificationManager;
-                        
+                myNotification();
                 CrossMediaManager.Current.Play();
-                CrossMediaManager.Current.MediaNotificationManager.StartNotification(m.);
+              //  CrossMediaManager.Current.MediaNotificationManager.StartNotification(m.);
                 isPlayed = true;
                 Toast.MakeText(this, "Start", ToastLength.Short).Show();
                // myNotification();
@@ -161,6 +165,7 @@ namespace DryStreamMobile
                 startStop.SetBackgroundResource(Resource.Drawable.PlayIcon);
                 Toast.MakeText(this, "Pauza", ToastLength.Short).Show();
                 CrossMediaManager.Current.Pause();
+                CrossMediaManager.Current.MediaNotificationManager.StopNotifications();
             }
         }
         private void Previous_Click(object sender, EventArgs e)

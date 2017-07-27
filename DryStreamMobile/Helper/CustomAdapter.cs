@@ -40,7 +40,7 @@ namespace DryStreamMobile.Helper
             holder.TitleTxt.Text = songs[position].Name.Trim();
             holder.Img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP+songs[position].Album.CoverLink));
             holder.ArtistTxt.Text = songs[position].Album.Artist.Name.Trim() + " - " + songs[position].Album.Title;
-            holder.durationTxt.Text = songs[position].Duration.Minutes.ToString()+":"+ songs[position].Duration.Seconds.ToString();
+            holder.durationTxt.Text = $"{ songs[position].Duration.Minutes:00}:{ songs[position].Duration.Seconds:00}";
 
 
             return convertView;

@@ -12,7 +12,7 @@ using DryStreamMobile.Helper;
 
 namespace DryStreamMobile
 {
-    [Activity(Label = "DryStream", MainLauncher = true, Icon = "@drawable/icon", Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "DryStream", MainLauncher = true, Icon = "@drawable/playNotification", Theme = "@android:style/Theme.NoTitleBar", ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Android.App.Activity
     {
         private ProgressBar progressBar;

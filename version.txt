@@ -15,3 +15,4 @@ panel konta - nie działa PUT
 1.11 - dodanie odtwarzacza muzyki oraz odtwarzania muzyki ze streamu
 1.12 - poprawienie layoutu odtwarzacza dodanie seekBar zsynchronizowanego z utworem wyswietlanie czasu
 pauza wznawianie utworu
+1.13 - dodanie Notifications 
