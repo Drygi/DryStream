@@ -27,7 +27,7 @@ namespace DryStreamMobile.Activity
      
         }
 
-        private async void initcontrolos()
+        private  void initcontrolos()
         {
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);

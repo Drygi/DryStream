@@ -22,11 +22,11 @@ namespace DryStreamMobile.Activity
     public class MainPageActivity : Android.App.Activity
     {
 
-        private CustomAdapter customAdapter;
+        private SongAdapter customAdapter;
         private ListView lv;
-        List<Song> songs;
-        List<Album> albums;
-        List<Artist> artists;
+        private List<Song> songs;
+        private List<Album> albums;
+        private List<Artist> artists;
 
         private DrawerLayout mDrawerLayout;
         private ArrayAdapter mleftAdapter;
@@ -54,30 +54,30 @@ namespace DryStreamMobile.Activity
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetHomeButtonEnabled(true);
 
-            ///menu glowne
-            songs = await APIHelper.getSongs();
-            albums = await APIHelper.getAlbums();
-            artists = await APIHelper.getArtists();
-            foreach (var item in songs)
-            {
-                item.Album = (from a in albums where item.AlbumID == a.AlbumID select a).Single();   
-            }
-            foreach (var item in albums)
-            {
-                item.Artist = (from a in artists where item.ArtistID == a.ArtistID select a).Single();
-            }
-            ///
-            lv = FindViewById<ListView>(Resource.Id.LVmainPage);
-            customAdapter = new CustomAdapter(this, Resource.Layout.model, songs);
-            lv.Adapter = customAdapter;
-            lv.ItemClick += Lv_ItemClick;
+            /////menu glowne
+            //songs = await APIHelper.getSongs();
+            //albums = await APIHelper.getAlbums();
+            //artists = await APIHelper.getArtists();
+            //foreach (var item in songs)
+            //{
+            //    item.Album = (from a in albums where item.AlbumID == a.AlbumID select a).Single();   
+            //}
+            //foreach (var item in albums)
+            //{
+            //    item.Artist = (from a in artists where item.ArtistID == a.ArtistID select a).Single();
+            //}
+            /////
+            //lv = FindViewById<ListView>(Resource.Id.LVmainPage);
+            //customAdapter = new SongAdapter(this, Resource.Layout.model, songs);
+            //lv.Adapter = customAdapter;
+            //lv.ItemClick += Lv_ItemClick;
 
         }
 
         private async void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];
-            StartActivity(typeof(PlayerActivity));
+            //GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];
+            //StartActivity(typeof(PlayerActivity));
            
         }
 

@@ -27,22 +27,24 @@
         android:layout_alignTop="@+id/modeLinearLayout"
         android:layout_toRightOf="@+id/modeLinearLayout"
         android:text="Przykładowy"
-        android:textColor="#FFFFFF"
+        android:paddingTop="5dp"
+        android:textColor="#0CE3AC"
         android:typeface="sans"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:ellipsize="end" />
 <!--opis -->
     <TextView
         android:id="@+id/modelDescriptionID"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/modelNameID"
-        android:textColor="#e8e8e8"
+        android:textColor="#375a7f"
         android:textSize="16dp"
         android:layout_marginTop="1dp"
         android:layout_toRightOf="@+id/modeLinearLayout"
         android:text="Przykładowy - poniżej" />
-
 <!-- Prawy bok -->
     <TextView
         android:id="@+id/modelRighttxtID"
@@ -52,9 +54,10 @@
         android:layout_centerVertical="true"
         android:layout_alignTop="@id/modelNameID"
         android:gravity="right"
+        android:paddingTop="15dp"
         android:text="5:45"
         android:layout_marginRight="5dp"
         android:textSize="16dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#375a7f"
         android:textStyle="bold" />
 </RelativeLayout>

@@ -27,6 +27,8 @@ namespace DryStreamMobile
             {
                 GlobalMemory.Genres = genres;
                 ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
+
+                this.Finish();
                 string json = pref.GetString("userJson", "");
 
                 if (json == "")
@@ -44,11 +46,9 @@ namespace DryStreamMobile
             else
             {
 
-            }
-
-
+            }       
         }
 
-    }
+        }
 }
 

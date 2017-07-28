@@ -51,6 +51,7 @@ namespace DryStreamMobile.Helper
 
             return imageBitmap;
         }
+ 
         public static void switchSavedUser(User user)
         {
             ISharedPreferences pref = Application.Context.GetSharedPreferences("savedUser", FileCreationMode.Private);
@@ -97,9 +98,8 @@ namespace DryStreamMobile.Helper
                    // activity.StartActivity((typeof(PlaylistActivity)));
                    // break;
                 case 3:
-                    return false;
-                // activity.StartActivity((typeof(ArtistActivity)));
-                // break;
+                    activity.StartActivity((typeof(ArtistsActivity)));
+                    return true;
                 case 4:
                     activity.StartActivity((typeof(GenresPageActivity)));
                     return true;

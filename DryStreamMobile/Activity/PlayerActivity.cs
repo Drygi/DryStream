@@ -27,13 +27,7 @@ namespace DryStreamMobile
         ImageView img;
         SeekBar seekBar;
         TextView title, actualTime, allTime;
-        Intent intent;
-        PendingIntent pendingIntent;
-        MediaPlayerService mps;
-        Task m;   
-       
         bool isPlayed;
-
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -41,20 +35,17 @@ namespace DryStreamMobile
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Player);
             initControlos();
-            this.Title = GlobalMemory.actualSong.Album.Artist.Name;
-            this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
-            myNotification();
+            startSong();
             // Create your application herem
 
         }
-        private void myNotification()
+        private void StartNotification()
         {
+
             Intent intent = new Intent(this, typeof(PlayerActivity));
             intent.AddFlags(ActivityFlags.FromBackground);
             this.StartActivity(intent);
 
-         
-            // Create a PendingIntent; we're only using one PendingIntent (ID = 0):
             const int pendingIntentId = 0;
             PendingIntent pendingIntent =
                 PendingIntent.GetActivity(this, pendingIntentId, intent, PendingIntentFlags.Immutable);
@@ -91,8 +82,12 @@ namespace DryStreamMobile
                     return base.OnOptionsItemSelected(item);
             }
         }
-        public async void initControlos()
+
+        private void initControlos()
         {
+            this.Title = GlobalMemory.actualSong.Album.Artist.Name;
+            this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
+
             isPlayed = true;
 
             ActionBar.SetHomeButtonEnabled(true);
@@ -109,8 +104,8 @@ namespace DryStreamMobile
 
             actualTime = FindViewById<TextView>(Resource.Id.PlayerActualTime);
             allTime = FindViewById<TextView>(Resource.Id.PlayerAllTime);
-            allTime.Text = GlobalMemory.actualSong.Duration.Minutes + ":" + GlobalMemory.actualSong.Duration.Seconds;
-
+            allTime.Text = $"{GlobalMemory.actualSong.Duration.Minutes:00}:{GlobalMemory.actualSong.Duration.Seconds:00}";
+            
             seekBar = FindViewById<SeekBar>(Resource.Id.PlayerSeekBar);
             seekBar.ProgressChanged += (sender, args) =>
             {
@@ -125,10 +120,22 @@ namespace DryStreamMobile
 
             img = FindViewById<ImageView>(Resource.Id.PlayerAlbumCover);
             img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Album.CoverLink));
-            
-            await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
+
             seekBar.Max = Convert.ToInt32(GlobalMemory.actualSong.Duration.TotalSeconds);
         }
+
+        private async void startSong()
+        {
+            if (CrossMediaManager.Current.MediaQueue.Current == null || (GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link) != CrossMediaManager.Current.MediaQueue.Current.Url)
+            {
+                await CrossMediaManager.Current.Stop();
+                await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
+                CrossMediaManager.Current.MediaNotificationManager.StopNotifications();
+                StartNotification();
+                return;
+            }
+        }
+
 
         private void Current_BufferingChanged(object sender, Plugin.MediaManager.Abstractions.EventArguments.BufferingChangedEventArgs e)
         {
@@ -144,20 +151,14 @@ namespace DryStreamMobile
 
         private  void StartStop_Click(object sender, EventArgs e)
         {
-            
             if (!isPlayed)
             {
-              //  await CrossMediaManager.Current.Play(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link.Trim());
                 startStop.SetBackgroundResource(Resource.Drawable.PauseIcon);
-
                 var z = CrossMediaManager.Current.MediaNotificationManager;
-                myNotification();
+                StartNotification();
                 CrossMediaManager.Current.Play();
-              //  CrossMediaManager.Current.MediaNotificationManager.StartNotification(m.);
                 isPlayed = true;
                 Toast.MakeText(this, "Start", ToastLength.Short).Show();
-               // myNotification();
-
             }
             else
             {
@@ -167,9 +168,18 @@ namespace DryStreamMobile
                 CrossMediaManager.Current.Pause();
                 CrossMediaManager.Current.MediaNotificationManager.StopNotifications();
             }
+            
         }
         private void Previous_Click(object sender, EventArgs e)
         {
+            CrossMediaManager.Current.Pause();
+            isPlayed = false;
+            CrossMediaManager.Current.MediaNotificationManager.StopNotifications();
+            startStop.SetBackgroundResource(Resource.Drawable.PlayIcon);
+            Toast.MakeText(this, "Stop", ToastLength.Short).Show();
+            seekBar.Progress = 0;
+            actualTime.Text = "00:00";
+            CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(0));
         }
 
         private void Next_Click(object sender, EventArgs e)

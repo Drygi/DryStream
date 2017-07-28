@@ -221,6 +221,26 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+        public static async Task<List<Song>> getSongs(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Songs/"+id);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<List<Song>>(responseBody);
+                }
+            }
+
+            return null;
+        }
 
         public static async Task<List<Album>> getAlbums()
         {
@@ -242,6 +262,27 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+        public static async Task<List<Album>> getAlbums(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Albums/"+id);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<List<Album>>(responseBody);
+                }
+            }
+
+            return null;
+        }
+
         public static async Task<List<Artist>> getArtists()
         {
             using (var client = new HttpClient())

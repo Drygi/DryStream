@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using DryStreamMobile.Models;
+using Plugin.MediaManager.Abstractions;
 
 namespace DryStreamMobile.Helper
 {
@@ -19,15 +20,19 @@ namespace DryStreamMobile.Helper
         {
             get
             {
-                return "http://192.168.1.4:51754";
+                return "http://192.168.100.2:51754";
             }
         }
 
         public static User _user{ get; set; }
+        
+        public static Artist Artist { get; set; }
+        public static Album Album { get; set; }
 
         public static Song actualSong { get; set; }
 
         public static List<Genre> Genres { get; set; }
+
 
     }
 }

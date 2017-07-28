@@ -29,14 +29,13 @@ namespace DryStream.Controllers.MobileControllers
         [ResponseType(typeof(Album))]
         public IHttpActionResult GetAlbum(int id)
         {
-            
-            Album album = db.Albums.Find(id);
-            if (album == null)
+            List<Album> albums = (from a in db.Albums where a.ArtistID == id select a).ToList();
+            if (albums == null)
             {
                 return NotFound();
             }
 
-            return Json(album);
+            return Json(albums);
         }
 
         /*

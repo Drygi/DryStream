@@ -26,13 +26,13 @@ namespace DryStream.Controllers.MobileControllers
         [ResponseType(typeof(Song))]
         public IHttpActionResult GetSong(int id)
         {
-            Song song = db.Songs.Find(id);
-            if (song == null)
+            List<Song> songs = (from a in db.Songs where a.AlbumID == id select a).ToList();
+            if (songs == null)
             {
                 return NotFound();
             }
 
-            return Json(song);
+            return Json(songs);
         }
 
         //// PUT: api/Songs/5

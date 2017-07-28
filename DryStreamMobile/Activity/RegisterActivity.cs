@@ -38,7 +38,7 @@ namespace DryStreamMobile
             initControls();
             // Create your application here
         }
-        void initControls()
+        private void initControls()
         {
    
             imageButton = FindViewById<Button>(Resource.Id.imgButton);
