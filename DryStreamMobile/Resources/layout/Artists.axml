@@ -4,6 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222222">
+    <TextView
+        android:text="Brak wyników..."
+        android:textColor="#dbdbdb"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:gravity="center"
+        android:id="@+id/infoTxtA"
+        android:editable="false" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

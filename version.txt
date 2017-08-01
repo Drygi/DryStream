@@ -17,3 +17,4 @@ panel konta - nie działa PUT
 pauza wznawianie utworu
 1.13 - dodanie Notifications 
 1.14 - dodanie Activity artystów, albumów oraz utworów optymalizacja playera 
+1.15 - dodanie SearchView do wyszukiwania Artystów, piosenek, albumów

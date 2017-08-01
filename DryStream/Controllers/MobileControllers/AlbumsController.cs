@@ -24,6 +24,21 @@ namespace DryStream.Controllers.MobileControllers
             else
                 return Json(db.Albums);
         }
+        // GET: api/FindAlbums/{name}
+        [Route("api/FindAlbums/{name}"), HttpGet]
+        public IHttpActionResult FindArtists(string name)
+        {
+            try
+            {
+                var albums = (from a in db.Albums where a.Title.ToUpper().Contains(name.ToUpper()) select a).ToList();
+                return Json(albums);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
 
         // GET: api/Albums/5
         [ResponseType(typeof(Album))]

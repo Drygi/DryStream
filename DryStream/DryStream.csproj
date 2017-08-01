@@ -261,6 +261,7 @@
       <DependentUpon>DryStreamModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AlbumSongGenresModel.cs" />
+    <Compile Include="Models\SongAlbumArtist.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>DryStreamModel.tt</DependentUpon>
     </Compile>
@@ -478,7 +479,7 @@
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:51754/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://192.168.100.2:51754/</IISAppRootUrl>
+          <IISAppRootUrl>http://192.168.100.7:51754/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

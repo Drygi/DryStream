@@ -47,7 +47,7 @@ namespace DryStream.Controllers
         }
 
         // GET: api/FindEmail/{email}
-        [Route("api/FindEmail/{login}")]
+        [Route("api/MobileEmail/{email}"),HttpGet]
         public IHttpActionResult FindEmail(string email)
         {
             try

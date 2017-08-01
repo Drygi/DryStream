@@ -22,17 +22,15 @@ namespace DryStreamMobile.Activity
     public class MainPageActivity : Android.App.Activity
     {
 
-        private SongAdapter customAdapter;
+        List<Song> songs = new List<Song>();
         private ListView lv;
-        private List<Song> songs;
-        private List<Album> albums;
-        private List<Artist> artists;
-
         private DrawerLayout mDrawerLayout;
         private ArrayAdapter mleftAdapter;
         private ListView mLeftDrawer;
         private ActionBarDrawerToggle mDrawerToggle;
-
+        private SearchView searchView;
+        private TextView textView;
+        private List<SongAlbumArtist> SAAs = new List<SongAlbumArtist>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -41,10 +39,13 @@ namespace DryStreamMobile.Activity
             // Create your application here
         }
 
-        private async void initControls()
+        private void initControls()
         {
             mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawer);
             mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
+            lv = FindViewById<ListView>(Resource.Id.LVmainPage);
+            textView = FindViewById<TextView>(Resource.Id.infoTxtMP);
+            
             mDrawerToggle = new MyActionBarDrawerToggle(this, mDrawerLayout, Resource.Drawable.drawerIcon, Resource.String.open_drawer, Resource.String.close_drawer);
             mleftAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, GlobalHelper.menuList(GlobalMemory._user.Login));
 
@@ -54,32 +55,58 @@ namespace DryStreamMobile.Activity
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             ActionBar.SetHomeButtonEnabled(true);
 
-            /////menu glowne
-            //songs = await APIHelper.getSongs();
-            //albums = await APIHelper.getAlbums();
-            //artists = await APIHelper.getArtists();
-            //foreach (var item in songs)
-            //{
-            //    item.Album = (from a in albums where item.AlbumID == a.AlbumID select a).Single();   
-            //}
-            //foreach (var item in albums)
-            //{
-            //    item.Artist = (from a in artists where item.ArtistID == a.ArtistID select a).Single();
-            //}
-            /////
-            //lv = FindViewById<ListView>(Resource.Id.LVmainPage);
-            //customAdapter = new SongAdapter(this, Resource.Layout.model, songs);
-            //lv.Adapter = customAdapter;
-            //lv.ItemClick += Lv_ItemClick;
+            lv.ItemClick += Lv_ItemClick;
 
         }
 
-        private async void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            //GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];
-            //StartActivity(typeof(PlayerActivity));
+            GlobalMemory.actualSong = SAAs[Convert.ToInt16(e.Id)].Song;
+            GlobalMemory.actualSong.Album = SAAs[Convert.ToInt16(e.Id)].Album;
+            GlobalMemory.actualSong.Album.Artist = SAAs[Convert.ToInt16(e.Id)].Album.Artist;
+            StartActivity(typeof(PlayerActivity));
            
         }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            this.MenuInflater.Inflate(Resource.Menu.searchMenu, menu);
+
+            var searchItem = menu.FindItem(Resource.Id.action_search);
+
+            searchView = searchItem.ActionView.JavaCast<Android.Widget.SearchView>();
+
+            searchView.QueryTextChange += async (sender, args) =>
+            {
+                if (args.NewText.Trim() != String.Empty)
+                {
+                    SAAs = await APIHelper.findSong(args.NewText.Trim());
+                    if (SAAs.Count<1)
+                    {
+                        lv.Adapter = null;
+                        textView.Visibility = Android.Views.ViewStates.Visible;
+                    }
+                    else
+                    {
+                        List<Song> _songs = new List<Song>();
+                        foreach (var item in SAAs)
+                        {
+                            item.Song.Album = item.Album;
+                            item.Song.Album.Artist = item.Artist;
+                            _songs.Add(item.Song);
+                        }
+                        lv.Adapter = new SongAdapter(this, Resource.Layout.model, _songs);
+                        textView.Visibility = Android.Views.ViewStates.Invisible;
+                    }
+                }
+                else
+                {
+                    lv.Adapter = null;
+                    textView.Visibility = Android.Views.ViewStates.Visible;
+                }
+            };
+            return base.OnCreateOptionsMenu(menu);
+        }
+
 
         private void MLeftDrawer_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {

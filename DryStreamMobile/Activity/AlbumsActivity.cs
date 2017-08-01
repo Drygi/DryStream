@@ -21,6 +21,8 @@ namespace DryStreamMobile.Activity
         private AlbumAdapter albumAdapter;
         private List<Album> albums;
         private Artist artist;
+        private SearchView searchView;
+        private TextView textView;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -33,6 +35,8 @@ namespace DryStreamMobile.Activity
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
 
+            textView = FindViewById<TextView>(Resource.Id.infoTxtAlbums);
+            textView.Visibility = Android.Views.ViewStates.Gone;
             artist = GlobalMemory.Artist;
             albums = await APIHelper.getAlbums(artist.ArtistID);
             albums.ForEach(a => a.Artist = artist);
@@ -43,6 +47,41 @@ namespace DryStreamMobile.Activity
             listView.Adapter = albumAdapter;
             listView.ItemClick += ListView_ItemClick;
         }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            this.MenuInflater.Inflate(Resource.Menu.searchMenu, menu);
+
+            var searchItem = menu.FindItem(Resource.Id.action_search);
+
+            searchView = searchItem.ActionView.JavaCast<Android.Widget.SearchView>();
+
+            searchView.QueryTextChange += (sender, args) =>
+            {
+                if (args.NewText.Trim() != String.Empty)
+                {
+
+                    var _findAlbums = (from a in albums where a.Title.ToUpper().Contains(args.NewText.ToUpper().Trim()) select a).ToList();
+                    if(_findAlbums.Count<1)
+                    {
+                        listView.Adapter = null;
+                        textView.Visibility = Android.Views.ViewStates.Visible;
+                    }
+                    else
+                    {
+                        textView.Visibility = Android.Views.ViewStates.Gone;
+                        listView.Adapter = new AlbumAdapter(this, Resource.Layout.model, _findAlbums);
+                    }
+                }
+                else
+                {
+                    textView.Visibility = Android.Views.ViewStates.Gone;
+                    listView.Adapter = new AlbumAdapter(this, Resource.Layout.model, albums);
+                }
+            };
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)

@@ -155,7 +155,7 @@ namespace DryStreamMobile.Helper
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 // HTTP GET
-                HttpResponseMessage response = await client.GetAsync("api/findEmail/" + email);
+                HttpResponseMessage response = await client.GetAsync("api/MobileEmail/" + email);
                 if (response.IsSuccessStatusCode)
                     return true;
                 else
@@ -201,7 +201,7 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
-        public static async Task<List<Song>> getSongs()
+        public static async Task<List<SongAlbumArtist>> getSongs()
         {
             using (var client = new HttpClient())
             {
@@ -215,7 +215,7 @@ namespace DryStreamMobile.Helper
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
 
-                    return JsonConvert.DeserializeObject<List<Song>>(responseBody);
+                    return JsonConvert.DeserializeObject<List<SongAlbumArtist>>(responseBody);
                 }
             }
 
@@ -303,8 +303,46 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+        public static async Task<List<Artist>> findArtists(string name)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/findArtists/" + name.Trim());
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
 
+                    return JsonConvert.DeserializeObject<List<Artist>>(responseBody);
+                }
+            }
 
+            return null;
+        }
+
+        public static async Task<List<SongAlbumArtist>> findSong(string name)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/FindSongs/" + name.Trim());
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<List<SongAlbumArtist>>(responseBody);
+                }
+            }
+
+            return null;
+        }
     }
 }

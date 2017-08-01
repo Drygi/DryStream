@@ -25,6 +25,23 @@ namespace DryStream.Controllers.MobileControllers
                 return Json(db.Artists);
         }
 
+        // GET: api/FindArtists/{name}
+        [Route("api/FindArtists/{name}"),HttpGet]
+        public IHttpActionResult FindArtists (string name)
+        {
+            try
+            {
+                List<Artist> artists = (from u in db.Artists where u.Name.ToUpper().Contains(name.ToUpper()) select u).ToList();
+                return Json(artists);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
+
+
         // GET: api/Artists/5
         [ResponseType(typeof(Artist))]
         public IHttpActionResult GetArtist(int id)

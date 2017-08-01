@@ -19,7 +19,27 @@ namespace DryStream.Controllers.MobileControllers
         // GET: api/Songs
         public IHttpActionResult GetSongs()
         {
-            return Json(db.Songs.ToList());
+            try
+            {
+                List<SongAlbumArtist> SAAs = new List<SongAlbumArtist>();
+              //  var songs = (from u in db.Songs where u.Name.ToUpper().Contains(name.ToUpper()) select u).ToList();
+                foreach (var item in db.Songs)
+                {
+                    SAAs.Add(
+                        new SongAlbumArtist
+                        {
+                            Song = item,
+                            Album = item.Album,
+                            Artist = item.Album.Artist
+                        });
+                }
+                return Json(SAAs);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
         }
 
         // GET: api/Songs/5
@@ -33,6 +53,32 @@ namespace DryStream.Controllers.MobileControllers
             }
 
             return Json(songs);
+        }
+        // GET: api/FindSongs/{name}
+        [Route("api/FindSongs/{name}"), HttpGet]
+        public IHttpActionResult FindArtists(string name)
+        {
+            try
+            {
+                List<SongAlbumArtist> SAAs = new List<SongAlbumArtist>();
+                var songs = (from u in db.Songs where u.Name.ToUpper().Contains(name.ToUpper()) select u).ToList();
+                foreach (var item in songs)
+                {
+                    SAAs.Add(
+                        new SongAlbumArtist
+                        {
+                            Song = item,
+                            Album = item.Album,
+                            Artist = item.Album.Artist
+                        });
+                }
+                return Json(SAAs);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
         }
 
         //// PUT: api/Songs/5

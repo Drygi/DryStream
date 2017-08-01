@@ -20,7 +20,7 @@ namespace DryStreamMobile.Helper
         {
             get
             {
-                return "http://192.168.100.2:51754";
+                return "http://192.168.100.7:51754";
             }
         }
 

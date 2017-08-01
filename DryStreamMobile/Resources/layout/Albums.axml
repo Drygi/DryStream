@@ -4,12 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222222">
-  <ListView
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:divider="#375a7f"
-      android:dividerHeight="2dp"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:id="@+id/LValbumsPage" />
+  <TextView
+    android:text="Brak wyników..."
+    android:textColor="#dbdbdb"
+    android:singleLine="true"
+    android:textSize="15sp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:gravity="center"
+    android:id="@+id/infoTxtAlbums"
+    android:editable="false" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:divider="#375a7f"
+        android:dividerHeight="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LValbumsPage" />
+
 </LinearLayout>
