@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using Android.Graphics;
 using Plugin.MediaManager.Abstractions;
 using Plugin.Media.Abstractions;
+using DryStreamMobile.Models;
 
 namespace DryStreamMobile
 {
@@ -28,7 +29,9 @@ namespace DryStreamMobile
         SeekBar seekBar;
         TextView title, actualTime, allTime;
         bool isPlayed;
-
+        ArrayAdapter adapter;
+        private FragmentManager FM;
+        private PlaylistsDialog playlistDialog;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -70,21 +73,16 @@ namespace DryStreamMobile
             const int notificationId = 0;
             notificationManager.Notify(notificationId, notification);
         }
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Android.Resource.Id.Home:
-                    Finish();
-                    return true;
 
-                default:
-                    return base.OnOptionsItemSelected(item);
-            }
-        }
 
         private void initControlos()
         {
+
+            List<string> playlists = new List<string>
+            { "Drygi","Drygi2","nowa"};
+
+            adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, playlists);
+            ///
             this.Title = GlobalMemory.actualSong.Album.Artist.Name;
             this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
 
@@ -180,6 +178,48 @@ namespace DryStreamMobile
             seekBar.Progress = 0;
             actualTime.Text = "00:00";
             CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(0));
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            //change main_compat_menu
+            MenuInflater.Inflate(Resource.Menu.menuC, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                     Finish();
+                     return true;
+                case Resource.Id.action_edit:
+                    {
+                        List<Playlist> playList = new List<Playlist>();
+                        playList.Add(new Playlist
+                        {
+                            Name = "Drygi"
+                           , User = GlobalMemory._user
+                            });
+                        FM = this.FragmentManager;
+                        playlistDialog = new PlaylistsDialog(playList);
+                        playlistDialog.Show(FM,"Playlists");
+                      
+                        
+                        //AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                        //alert.SetTitle("Title");
+                      //  alert.SetAdapter(adapter, new Dialog)) ;
+
+                       // Toast.MakeText(this, "You pressed edit action!", ToastLength.Short).Show();
+                        break;
+                    }
+                case Resource.Id.action_save:
+                    Toast.MakeText(this, "You pressed save action!", ToastLength.Short).Show();
+                    break;
+            }
+            return base.OnOptionsItemSelected(item);
         }
 
         private void Next_Click(object sender, EventArgs e)

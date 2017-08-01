@@ -23,5 +23,10 @@ namespace DryStreamMobile.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<PlaylistSong> PlaylistsSongs { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
