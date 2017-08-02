@@ -130,6 +130,7 @@
     <Compile Include="Activity\MainPageActivity.cs" />
     <Compile Include="Activity\PasswordChangeActivity.cs" />
     <Compile Include="Activity\PlayerActivity.cs" />
+    <Compile Include="Activity\PlaylistsActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
     <Compile Include="Activity\SongsActivity.cs" />
     <Compile Include="Adapters\AlbumAdapter.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Helper\GlobalHelper.cs" />
     <Compile Include="Helper\GlobalMemory.cs" />
     <Compile Include="Holders\ArtistHolder.cs" />
+    <Compile Include="Holders\NewPlaylistDialog.cs" />
     <Compile Include="Holders\PlaylistsDialog.cs" />
     <Compile Include="Holders\SongHolder.cs" />
     <Compile Include="MainApplication.cs" />
@@ -197,6 +199,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AddToPlaylistDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\NewPlaylistDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PlaylistsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

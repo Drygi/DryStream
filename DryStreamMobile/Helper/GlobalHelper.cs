@@ -94,9 +94,8 @@ namespace DryStreamMobile.Helper
             switch (id)
             {
                 case 2:
-                    return false;;
-                   // activity.StartActivity((typeof(PlaylistActivity)));
-                   // break;
+                    activity.StartActivity((typeof(PlaylistsActivity)));
+                    return true;
                 case 3:
                     activity.StartActivity((typeof(ArtistsActivity)));
                     return true;

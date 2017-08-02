@@ -19,3 +19,4 @@ pauza wznawianie utworu
 1.14 - dodanie Activity artystów, albumów oraz utworów optymalizacja playera 
 1.15 - dodanie SearchView do wyszukiwania Artystów, piosenek, albumów
 1.16 - dodanie bocznego paska przy piosence do dodawania utworu do playlisty
+1.17 - wyświetlenie playlists, dodawanie playlisty oraz dodawanie utworu do playlisty

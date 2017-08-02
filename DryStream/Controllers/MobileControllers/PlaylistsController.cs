@@ -29,9 +29,10 @@ namespace DryStream.Controllers
         [ResponseType(typeof(Playlist))]
         public IHttpActionResult GetPlaylist(int id)
         {
+            //cos tutaj nie dziallao 
             //pobranie wszystkich playlist danego usera
             List<Playlist> playlists = (from p in db.Playlists where p.UserID == id select p).ToList();
-            if (playlists.Count<0)
+            if (playlists.Count<1)
             {
                 return NotFound();
             }

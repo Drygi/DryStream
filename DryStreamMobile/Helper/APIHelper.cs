@@ -344,5 +344,82 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+        #region API_Playlists
+
+        public async static Task<bool> PostSongToPlaylist(PlaylistSong playlist)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                StringContent content = new StringContent(JsonConvert.SerializeObject(playlist), Encoding.UTF8, "application/json");
+                //HTTP POST
+                HttpResponseMessage response = await client.PostAsync("api/PlaylistsSongs", content);
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public async static Task<bool> PostPlaylist(Playlist playlist)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                StringContent content = new StringContent(JsonConvert.SerializeObject(playlist), Encoding.UTF8, "application/json");
+                //HTTP POST
+                HttpResponseMessage response = await client.PostAsync("api/Playlists", content);
+
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public static async Task<bool> GetPlaylists()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/Playlists/" + GlobalMemory._user.UserID);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    GlobalMemory._user.Playlists = JsonConvert.DeserializeObject<List<Playlist>>(responseBody);
+                    return true;
+                }
+            }
+            return false;
+        }
+        public static async Task<List<PlaylistSong>> GetPlaylistsSong(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/PlaylistsSongs/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<PlaylistSong>>(responseBody);
+                }
+            }
+            return null;
+        }
+#endregion
+
     }
 }

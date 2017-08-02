@@ -26,8 +26,9 @@ namespace DryStream.Controllers.MobileControllers
         [ResponseType(typeof(PlaylistsSong))]
         public IHttpActionResult GetPlaylistsSong(int id)
         {
-            PlaylistsSong playlistsSong = db.PlaylistsSongs.Find(id);
-            if (playlistsSong == null)
+            List<PlaylistsSong> playlistsSong = (from p in db.PlaylistsSongs where p.PlaylistID == id select p).ToList();
+               
+            if (playlistsSong.Count <1)
             {
                 return NotFound();
             }
@@ -35,40 +36,40 @@ namespace DryStream.Controllers.MobileControllers
             return Json(playlistsSong);
         }
 
-        // PUT: api/PlaylistsSongs/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPlaylistsSong(int id, PlaylistsSong playlistsSong)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/PlaylistsSongs/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutPlaylistsSong(int id, PlaylistsSong playlistsSong)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != playlistsSong.PlaylistsSongsID)
-            {
-                return BadRequest();
-            }
+        //    if (id != playlistsSong.PlaylistsSongsID)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(playlistsSong).State = EntityState.Modified;
+        //    db.Entry(playlistsSong).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PlaylistsSongExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PlaylistsSongExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/PlaylistsSongs
         [ResponseType(typeof(PlaylistsSong))]
@@ -78,7 +79,12 @@ namespace DryStream.Controllers.MobileControllers
             {
                 return BadRequest(ModelState);
             }
-
+            var find = (from P in db.PlaylistsSongs where P.PlaylistID == playlistsSong.PlaylistID &&
+                        P.SongID == playlistsSong.SongID select P).ToList();
+            if (find.Count>0)
+            {
+                return Ok();
+            }
             db.PlaylistsSongs.Add(playlistsSong);
             db.SaveChanges();
 

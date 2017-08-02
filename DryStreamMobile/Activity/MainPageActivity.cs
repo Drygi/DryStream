@@ -39,8 +39,9 @@ namespace DryStreamMobile.Activity
             // Create your application here
         }
 
-        private void initControls()
+        private async void initControls()
         {
+
             mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawer);
             mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
             lv = FindViewById<ListView>(Resource.Id.LVmainPage);
@@ -56,7 +57,13 @@ namespace DryStreamMobile.Activity
             ActionBar.SetHomeButtonEnabled(true);
 
             lv.ItemClick += Lv_ItemClick;
-
+            if (await APIHelper.GetPlaylists())
+            {
+                foreach (var item in GlobalMemory._user.Playlists)
+                {
+                    item.PlaylistsSongs = await APIHelper.GetPlaylistsSong(item.PlaylistID);
+                }
+            }
         }
 
         private void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

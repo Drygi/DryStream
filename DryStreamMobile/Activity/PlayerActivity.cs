@@ -18,6 +18,7 @@ using Android.Graphics;
 using Plugin.MediaManager.Abstractions;
 using Plugin.Media.Abstractions;
 using DryStreamMobile.Models;
+using DryStreamMobile.Holders;
 
 namespace DryStreamMobile
 {
@@ -32,6 +33,7 @@ namespace DryStreamMobile
         ArrayAdapter adapter;
         private FragmentManager FM;
         private PlaylistsDialog playlistDialog;
+        
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -76,13 +78,7 @@ namespace DryStreamMobile
 
 
         private void initControlos()
-        {
-
-            List<string> playlists = new List<string>
-            { "Drygi","Drygi2","nowa"};
-
-            adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, playlists);
-            ///
+        {            ///
             this.Title = GlobalMemory.actualSong.Album.Artist.Name;
             this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
 
@@ -187,7 +183,6 @@ namespace DryStreamMobile
             return base.OnCreateOptionsMenu(menu);
         }
 
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -195,26 +190,11 @@ namespace DryStreamMobile
                 case Android.Resource.Id.Home:
                      Finish();
                      return true;
-                case Resource.Id.action_edit:
-                    {
-                        List<Playlist> playList = new List<Playlist>();
-                        playList.Add(new Playlist
-                        {
-                            Name = "Drygi"
-                           , User = GlobalMemory._user
-                            });
+                case Resource.Id.action_addToPlaylist:
                         FM = this.FragmentManager;
-                        playlistDialog = new PlaylistsDialog(playList);
+                        playlistDialog = new PlaylistsDialog();
                         playlistDialog.Show(FM,"Playlists");
-                      
-                        
-                        //AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                        //alert.SetTitle("Title");
-                      //  alert.SetAdapter(adapter, new Dialog)) ;
-
-                       // Toast.MakeText(this, "You pressed edit action!", ToastLength.Short).Show();
                         break;
-                    }
                 case Resource.Id.action_save:
                     Toast.MakeText(this, "You pressed save action!", ToastLength.Short).Show();
                     break;
