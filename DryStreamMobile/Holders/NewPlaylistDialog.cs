@@ -65,7 +65,21 @@ namespace DryStreamMobile.Holders
                 if (await APIHelper.PostPlaylist(playlist))
                 {
                     if (await APIHelper.GetPlaylists())
-                        Toast.MakeText(this.Activity, "Dodano playlistę", ToastLength.Short).Show();
+                    {
+                        var p = GlobalMemory._user.Playlists.ToList();
+                        PlaylistSong PS = new PlaylistSong
+                        {
+                            PlaylistID = p.Last().PlaylistID,
+                            SongID = GlobalMemory.actualSong.SongID
+                        };
+                        if (await APIHelper.PostSongToPlaylist(PS))
+                        {
+                            Toast.MakeText(this.Activity, "Dodano utwór i playlistę", ToastLength.Short).Show();
+                            this.Dismiss();
+                            return;
+                        }
+                        Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Short).Show();
+                    }
                     else
                         Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Short).Show();
                 }
@@ -74,9 +88,6 @@ namespace DryStreamMobile.Holders
                     Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Short).Show();
                 }
             }
-            
-      
-            
             this.Dismiss();
         }
 

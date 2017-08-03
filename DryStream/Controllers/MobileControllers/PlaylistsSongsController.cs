@@ -36,6 +36,37 @@ namespace DryStream.Controllers.MobileControllers
             return Json(playlistsSong);
         }
 
+        // GET: api/SongsFromPlaylists/{id}
+        [Route("api/SongsFromPlaylists/{id}"), HttpGet]
+        public IHttpActionResult getSongsFromPlaylist(int id)
+        {
+            List<SongAlbumArtist> SAAs = new List<SongAlbumArtist>();
+            try
+            {
+                List<Song> songs = (from S in db.PlaylistsSongs where S.PlaylistID == id select S.Song).ToList();
+                foreach (var item in songs)
+                {
+                    SAAs.Add(
+                        new SongAlbumArtist
+                        {
+                            Song = item,
+                            Album = item.Album,
+                            Artist = item.Album.Artist
+                        }
+                        );
+                }
+
+                //   User _user = (from u in db.Users where u.Email == email select u).Single();
+                return Json(SAAs);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
+        }
+
+
         //// PUT: api/PlaylistsSongs/5
         //[ResponseType(typeof(void))]
         //public IHttpActionResult PutPlaylistsSong(int id, PlaylistsSong playlistsSong)

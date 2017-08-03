@@ -18,6 +18,8 @@ namespace DryStreamMobile.Helper
     {
         private Context c;
         private List<Artist> artists;
+        private List<Playlist> playlists;
+        private List<Genre> genres;
         private int resource;
         private LayoutInflater inflater;
 
@@ -26,6 +28,18 @@ namespace DryStreamMobile.Helper
             this.c = context;
             this.resource = resource;
             this.artists = artists;
+        }
+        public ArtistsAdapter(Context context, int resource, List<Playlist> playlists) : base(context, resource, playlists)
+        {
+            this.c = context;
+            this.resource = resource;
+            this.playlists = playlists;
+        }
+        public ArtistsAdapter(Context context, int resource, List<Genre> genres) : base(context, resource, genres)
+        {
+            this.c = context;
+            this.resource = resource;
+            this.genres = genres;
         }
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
@@ -37,10 +51,25 @@ namespace DryStreamMobile.Helper
                 convertView = inflater.Inflate(resource, parent, false);
             }
             //BIND DATA
-            ArtistHolder holder = new ArtistHolder(convertView);
-            holder.TitleTxt.Text = artists[position].Name.Trim();
-            holder.Img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + artists[position].CoverLink.Trim()));
-          
+            if (artists !=null)
+            {
+                ArtistHolder holder = new ArtistHolder(convertView);
+                holder.TitleTxt.Text = artists[position].Name.Trim();
+                holder.Img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + artists[position].CoverLink.Trim()));
+            }
+            if(playlists!=null)
+            {
+                ArtistHolder holder = new ArtistHolder(convertView);
+                holder.TitleTxt.Text = playlists[position].Name.Trim();
+            }
+            if (genres != null)
+            {
+                ArtistHolder holder = new ArtistHolder(convertView);
+                holder.TitleTxt.Text = genres[position].NAME.Trim();
+                holder.Img.SetImageResource(Resource.Drawable.GenresIcon);
+            }
+
+
 
 
             return convertView;

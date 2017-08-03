@@ -131,6 +131,7 @@
     <Compile Include="Activity\PasswordChangeActivity.cs" />
     <Compile Include="Activity\PlayerActivity.cs" />
     <Compile Include="Activity\PlaylistsActivity.cs" />
+    <Compile Include="Activity\PlaylistSongActivity.cs" />
     <Compile Include="Activity\RegisterActivity.cs" />
     <Compile Include="Activity\SongsActivity.cs" />
     <Compile Include="Adapters\AlbumAdapter.cs" />
@@ -207,6 +208,9 @@
     <AndroidResource Include="Resources\layout\PlaylistsPage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\PlaylistSongsPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -260,6 +264,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\menuC.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Playlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\GenresIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

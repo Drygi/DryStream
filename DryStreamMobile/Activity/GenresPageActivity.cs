@@ -33,7 +33,7 @@ namespace DryStreamMobile.Activity
             ActionBar.SetDisplayHomeAsUpEnabled(true);
             listView = FindViewById<ListView>(Resource.Id.genresListView);
 
-                listView.Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, GlobalMemory.Genres);
+                listView.Adapter = new ArtistsAdapter(this, Resource.Layout.artistsModel, GlobalMemory.Genres);
 
             listView.ItemClick += ListView_ItemClick;
 

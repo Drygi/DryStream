@@ -419,7 +419,56 @@ namespace DryStreamMobile.Helper
             }
             return null;
         }
-#endregion
+        public static async Task<bool> DeletePlaylist(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                // HTTP DELETE
+                HttpResponseMessage response = await client.DeleteAsync("api/Playlists/" + id);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        public static async Task<bool> DeleteSongFromPlaylist(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                // HTTP DELETE
+                HttpResponseMessage response = await client.DeleteAsync("api/PlaylistsSongs/" + id);
+                if (response.IsSuccessStatusCode)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public static async Task<List<SongAlbumArtist>> GetSongFromPlaylists(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(GlobalMemory.serverAddressIP);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/SongsFromPlaylists/" + id);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<SongAlbumArtist>>(responseBody);
+                }
+                return null;
+            }
+        }
+        #endregion
 
     }
 }

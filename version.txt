@@ -20,3 +20,4 @@ pauza wznawianie utworu
 1.15 - dodanie SearchView do wyszukiwania Artystów, piosenek, albumów
 1.16 - dodanie bocznego paska przy piosence do dodawania utworu do playlisty
 1.17 - wyświetlenie playlists, dodawanie playlisty oraz dodawanie utworu do playlisty
+1.18 - wyswietlanie danej playlisty, usuwanie konkrtetnego utworu z playlisty, usuwanie calej playlisty 

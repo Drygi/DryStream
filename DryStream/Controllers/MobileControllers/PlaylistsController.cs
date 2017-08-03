@@ -94,11 +94,15 @@ namespace DryStream.Controllers
         public IHttpActionResult DeletePlaylist(int id)
         {
             Playlist playlist = db.Playlists.Find(id);
+
             if (playlist == null)
             {
                 return NotFound();
             }
-
+            foreach (var item in playlist.PlaylistsSongs.ToList())
+            {
+                db.PlaylistsSongs.Remove(item);
+            }
             db.Playlists.Remove(playlist);
             db.SaveChanges();
 

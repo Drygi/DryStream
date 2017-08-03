@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginRight="5dp">
         <ImageView
-            android:src="@drawable/Icon"
+            android:src="@drawable/Playlist"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/artistsModelImgID" />

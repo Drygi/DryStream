@@ -30,9 +30,9 @@ namespace DryStreamMobile
         SeekBar seekBar;
         TextView title, actualTime, allTime;
         bool isPlayed;
-        ArrayAdapter adapter;
         private FragmentManager FM;
         private PlaylistsDialog playlistDialog;
+        private List<Song> songs;
         
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -61,6 +61,7 @@ namespace DryStreamMobile
                 .SetContentTitle(GlobalMemory.actualSong.Name.Trim())
                 .SetContentText(GlobalMemory.actualSong.Album.Artist.Name.Trim())
                 .SetSmallIcon(Resource.Drawable.PlayIcon)
+                .SetAutoCancel(false)
               .SetLargeIcon(BitmapFactory.DecodeResource(Resources,Resource.Drawable.playNotification));
                
 
@@ -120,6 +121,7 @@ namespace DryStreamMobile
 
         private async void startSong()
         {
+
             if (CrossMediaManager.Current.MediaQueue.Current == null || (GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Link) != CrossMediaManager.Current.MediaQueue.Current.Url)
             {
                 await CrossMediaManager.Current.Stop();
@@ -193,7 +195,10 @@ namespace DryStreamMobile
                 case Resource.Id.action_addToPlaylist:
                         FM = this.FragmentManager;
                         playlistDialog = new PlaylistsDialog();
-                        playlistDialog.Show(FM,"Playlists");
+                    RunOnUiThread(() => {
+                        playlistDialog.Show(FM, "Playlists");
+                    });
+                   
                         break;
                 case Resource.Id.action_save:
                     Toast.MakeText(this, "You pressed save action!", ToastLength.Short).Show();

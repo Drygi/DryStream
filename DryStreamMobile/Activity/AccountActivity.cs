@@ -129,7 +129,6 @@ namespace DryStreamMobile
                 alert.Show();
             });
 
-            // Debug.WriteLine("Answer: " + answer);
 
 
         }

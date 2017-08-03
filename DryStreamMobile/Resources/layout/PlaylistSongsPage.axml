@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222222">
+  <ProgressBar 
+      android:id="@+id/PlaylistSongProgressBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="30dp"
+      android:layout_marginRight="30dp"
+      android:layout_marginTop="5dp"
+    />
+    <Button
+        android:id="@+id/playyAllPlaylist"
+        android:text="Odtwórz wszystkie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0ce3ac"
+        android:clickable="true"
+        android:textSize="25sp"
+        android:textColor="#375a7f" />
+    <TextView
+        android:id="@+id/infoEmptyPlaylistSongs"
+        android:text="Brak utworów"
+        android:textColor="#dbdbdb"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:gravity="center"
+        android:editable="false" />
+    <ListView
+        android:id="@+id/listViewPlaylistSongs"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:divider="#0CE3AC"
+        android:dividerHeight="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

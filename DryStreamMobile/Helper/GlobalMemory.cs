@@ -33,6 +33,10 @@ namespace DryStreamMobile.Helper
 
         public static List<Genre> Genres { get; set; }
 
+        public static Playlist ActualPlaylist { get; set; }
+        public static List<Song>  ActualPlaylistSongs { get; set; }
+        
+
 
     }
 }

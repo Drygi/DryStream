@@ -1643,76 +1643,82 @@ namespace DryStreamMobile
 			public const int editTextBorder = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int Icon = 2130837589;
+			public const int GenresIcon = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int nextIcon = 2130837590;
+			public const int Icon = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int notification_action_background = 2130837591;
+			public const int nextIcon = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int notification_bg = 2130837592;
+			public const int notification_action_background = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int notification_bg_low = 2130837593;
+			public const int notification_bg = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int notification_bg_low_normal = 2130837594;
+			public const int notification_bg_low = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int notification_bg_low_pressed = 2130837595;
+			public const int notification_bg_low_normal = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int notification_bg_normal = 2130837596;
+			public const int notification_bg_low_pressed = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int notification_bg_normal_pressed = 2130837597;
+			public const int notification_bg_normal = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int notification_icon_background = 2130837598;
-			
-			// aapt resource value: 0x7f02006b
-			public const int notification_template_icon_bg = 2130837611;
-			
-			// aapt resource value: 0x7f02006c
-			public const int notification_template_icon_low_bg = 2130837612;
+			public const int notification_bg_normal_pressed = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int notification_tile_bg = 2130837599;
+			public const int notification_icon_background = 2130837599;
+			
+			// aapt resource value: 0x7f02006d
+			public const int notification_template_icon_bg = 2130837613;
+			
+			// aapt resource value: 0x7f02006e
+			public const int notification_template_icon_low_bg = 2130837614;
 			
 			// aapt resource value: 0x7f020060
-			public const int notify_panel_notification_icon_bg = 2130837600;
+			public const int notification_tile_bg = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int PauseIcon = 2130837601;
+			public const int notify_panel_notification_icon_bg = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int PlayIcon = 2130837602;
+			public const int PauseIcon = 2130837602;
 			
 			// aapt resource value: 0x7f020063
-			public const int playNotification = 2130837603;
+			public const int PlayIcon = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int plugin_lc_smallicon = 2130837604;
+			public const int Playlist = 2130837604;
 			
 			// aapt resource value: 0x7f020065
-			public const int previousIcon = 2130837605;
+			public const int playNotification = 2130837605;
 			
 			// aapt resource value: 0x7f020066
-			public const int registerIcon = 2130837606;
+			public const int plugin_lc_smallicon = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int searchIcon = 2130837607;
+			public const int previousIcon = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int StopIcon = 2130837608;
+			public const int registerIcon = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int userIcon = 2130837609;
+			public const int searchIcon = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int userIconMini = 2130837610;
+			public const int StopIcon = 2130837610;
+			
+			// aapt resource value: 0x7f02006b
+			public const int userIcon = 2130837611;
+			
+			// aapt resource value: 0x7f02006c
+			public const int userIconMini = 2130837612;
 			
 			static Drawable()
 			{
@@ -1742,11 +1748,11 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f06007a
 			public const int LVmainPage = 2131099770;
 			
-			// aapt resource value: 0x7f0600b6
-			public const int LVsongs_ID = 2131099830;
+			// aapt resource value: 0x7f0600bb
+			public const int LVsongs_ID = 2131099835;
 			
-			// aapt resource value: 0x7f0600ac
-			public const int LiID = 2131099820;
+			// aapt resource value: 0x7f0600b1
+			public const int LiID = 2131099825;
 			
 			// aapt resource value: 0x7f0600a4
 			public const int PlayerActualTime = 2131099812;
@@ -1772,6 +1778,12 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f0600a2
 			public const int PlayerTitleSong = 2131099810;
 			
+			// aapt resource value: 0x7f0600ae
+			public const int PlaylistProgressBar = 2131099822;
+			
+			// aapt resource value: 0x7f0600aa
+			public const int PlaylistSongProgressBar = 2131099818;
+			
 			// aapt resource value: 0x7f060058
 			public const int accountCover = 2131099736;
 			
@@ -1790,8 +1802,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f060086
 			public const int action0 = 2131099782;
 			
-			// aapt resource value: 0x7f0600b7
-			public const int action_addToPlaylist = 2131099831;
+			// aapt resource value: 0x7f0600bc
+			public const int action_addToPlaylist = 2131099836;
 			
 			// aapt resource value: 0x7f060048
 			public const int action_bar = 2131099720;
@@ -1841,11 +1853,11 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f060027
 			public const int action_mode_close_button = 2131099687;
 			
-			// aapt resource value: 0x7f0600b8
-			public const int action_save = 2131099832;
+			// aapt resource value: 0x7f0600bd
+			public const int action_save = 2131099837;
 			
-			// aapt resource value: 0x7f0600b9
-			public const int action_search = 2131099833;
+			// aapt resource value: 0x7f0600be
+			public const int action_search = 2131099838;
 			
 			// aapt resource value: 0x7f060085
 			public const int action_text = 2131099781;
@@ -1934,8 +1946,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f060065
 			public const int emptyLVAddPL = 2131099749;
 			
-			// aapt resource value: 0x7f0600ab
-			public const int emptyPlayliststLV = 2131099819;
+			// aapt resource value: 0x7f0600b0
+			public const int emptyPlayliststLV = 2131099824;
 			
 			// aapt resource value: 0x7f06001c
 			public const int end = 2131099676;
@@ -1973,11 +1985,14 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f06002a
 			public const int image = 2131099690;
 			
-			// aapt resource value: 0x7f0600b2
-			public const int imgButton = 2131099826;
+			// aapt resource value: 0x7f0600b7
+			public const int imgButton = 2131099831;
 			
 			// aapt resource value: 0x7f060090
 			public const int info = 2131099792;
+			
+			// aapt resource value: 0x7f0600ac
+			public const int infoEmptyPlaylistSongs = 2131099820;
 			
 			// aapt resource value: 0x7f060069
 			public const int infoTxtA = 2131099753;
@@ -1988,8 +2003,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f06007b
 			public const int infoTxtMP = 2131099771;
 			
-			// aapt resource value: 0x7f0600b5
-			public const int infoTxtSongs = 2131099829;
+			// aapt resource value: 0x7f0600ba
+			public const int infoTxtSongs = 2131099834;
 			
 			// aapt resource value: 0x7f060000
 			public const int item_touch_helper_previous_elevation = 2131099648;
@@ -2014,6 +2029,9 @@ namespace DryStreamMobile
 			
 			// aapt resource value: 0x7f060064
 			public const int listViewAddTo = 2131099748;
+			
+			// aapt resource value: 0x7f0600ad
+			public const int listViewPlaylistSongs = 2131099821;
 			
 			// aapt resource value: 0x7f06002c
 			public const int list_item = 2131099692;
@@ -2096,8 +2114,11 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f060072
 			public const int passwordText = 2131099762;
 			
-			// aapt resource value: 0x7f0600aa
-			public const int playlistsListView = 2131099818;
+			// aapt resource value: 0x7f0600af
+			public const int playlistsListView = 2131099823;
+			
+			// aapt resource value: 0x7f0600ab
+			public const int playyAllPlaylist = 2131099819;
 			
 			// aapt resource value: 0x7f060006
 			public const int progress_circular = 2131099654;
@@ -2111,23 +2132,23 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f060076
 			public const int registerButton = 2131099766;
 			
-			// aapt resource value: 0x7f0600b3
-			public const int registerClick = 2131099827;
-			
-			// aapt resource value: 0x7f0600af
-			public const int registerEmail = 2131099823;
-			
-			// aapt resource value: 0x7f0600ae
-			public const int registerLogin = 2131099822;
-			
-			// aapt resource value: 0x7f0600b0
-			public const int registerPassword = 2131099824;
-			
-			// aapt resource value: 0x7f0600b1
-			public const int registerPassword2 = 2131099825;
+			// aapt resource value: 0x7f0600b8
+			public const int registerClick = 2131099832;
 			
 			// aapt resource value: 0x7f0600b4
-			public const int registerProgressBar = 2131099828;
+			public const int registerEmail = 2131099828;
+			
+			// aapt resource value: 0x7f0600b3
+			public const int registerLogin = 2131099827;
+			
+			// aapt resource value: 0x7f0600b5
+			public const int registerPassword = 2131099829;
+			
+			// aapt resource value: 0x7f0600b6
+			public const int registerPassword2 = 2131099830;
+			
+			// aapt resource value: 0x7f0600b9
+			public const int registerProgressBar = 2131099833;
 			
 			// aapt resource value: 0x7f060074
 			public const int rememberMeBox = 2131099764;
@@ -2153,8 +2174,8 @@ namespace DryStreamMobile
 			// aapt resource value: 0x7f060034
 			public const int scrollView = 2131099700;
 			
-			// aapt resource value: 0x7f0600ad
-			public const int scrollViewRegister = 2131099821;
+			// aapt resource value: 0x7f0600b2
+			public const int scrollViewRegister = 2131099826;
 			
 			// aapt resource value: 0x7f06004c
 			public const int search_badge = 2131099724;
@@ -2489,25 +2510,28 @@ namespace DryStreamMobile
 			public const int Player = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int PlaylistsPage = 2130903095;
+			public const int PlaylistSongsPage = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int Register = 2130903096;
+			public const int PlaylistsPage = 2130903096;
 			
 			// aapt resource value: 0x7f030039
-			public const int select_dialog_item_material = 2130903097;
+			public const int Register = 2130903097;
 			
 			// aapt resource value: 0x7f03003a
-			public const int select_dialog_multichoice_material = 2130903098;
+			public const int select_dialog_item_material = 2130903098;
 			
 			// aapt resource value: 0x7f03003b
-			public const int select_dialog_singlechoice_material = 2130903099;
+			public const int select_dialog_multichoice_material = 2130903099;
 			
 			// aapt resource value: 0x7f03003c
-			public const int Songs = 2130903100;
+			public const int select_dialog_singlechoice_material = 2130903100;
 			
 			// aapt resource value: 0x7f03003d
-			public const int support_simple_spinner_dropdown_item = 2130903101;
+			public const int Songs = 2130903101;
+			
+			// aapt resource value: 0x7f03003e
+			public const int support_simple_spinner_dropdown_item = 2130903102;
 			
 			static Layout()
 			{

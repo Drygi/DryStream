@@ -53,7 +53,10 @@ namespace DryStreamMobile
             var FM = this.FragmentManager;
             var newPlaylist = new NewPlaylistDialog();
             this.Dismiss();
-            newPlaylist.Show(FM, "newPlaylist");
+            this.Activity.RunOnUiThread(() => {
+                newPlaylist.Show(FM, "newPlaylist");
+            });
+           
 
            // Toast.MakeText(this.Activity, "CLICK", ToastLength.Long);
         }
@@ -67,10 +70,7 @@ namespace DryStreamMobile
                 PlaylistID = p[Convert.ToInt32(e.Position)].PlaylistID,
                 SongID = GlobalMemory.actualSong.SongID
             };
-            
-      
-           bool isTrue= await APIHelper.PostSongToPlaylist(PS);
-            if (isTrue)
+            if (await APIHelper.PostSongToPlaylist(PS))
                 Toast.MakeText(this.Activity, "Dodano do playlisty", ToastLength.Long);
             else
                 Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Long);
