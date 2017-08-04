@@ -4,15 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222222">
-  <ProgressBar
-    android:id="@+id/PlaylistProgressBar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp"
-    android:layout_marginTop="5dp"
-    />
-
+    <ProgressBar
+        android:id="@+id/PlaylistProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp" />
     <ListView
         android:id="@+id/playlistsListView"
         android:minWidth="25px"
@@ -27,8 +25,13 @@
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/emptyPlayliststLV"
-        android:gravity="top"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="Brak playlist" />
+        android:text="Brak playlist"
+        android:textColor="#dbdbdb"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:gravity="center"
+        android:editable="false" /> />
 </LinearLayout>

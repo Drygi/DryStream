@@ -122,7 +122,5 @@ namespace DryStreamMobile.Helper
                     
             }
         }
-
- 
-}
+    }
 }

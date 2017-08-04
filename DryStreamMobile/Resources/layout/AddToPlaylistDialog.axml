@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:id="@+id/linearLayout2">
     <ListView
         android:id="@+id/listViewAddTo"
         android:paddingTop="10dp"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:gravity="top"
         android:divider="#375a7f"
-        android:dividerHeight="1dp" 
-        android:layout_width="318.7dp"
-        android:layout_height="138.7dp" />
-  <TextView 
+        android:dividerHeight="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
         android:id="@+id/emptyLVAddPL"
-        android:gravity="top"
+        android:text="Brak Playlist"
+        android:textColor="#dbdbdb"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
         android:layout_centerInParent="true"
-        android:layout_width="318.7dp"
-        android:layout_height="138.7dp"
-        android:text="Brak playlist"
-    />
+        android:editable="false" />
+<!--
+    android:gravity="top"
+
+
+    android:layout_centerInParent="true"
+    android:layout_width="318.7dp"
+    android:layout_height="138.7dp"
+    android:text="Brak playlist" />
+    -->
     <Button
         android:id="@+id/addToPlaylistButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listViewAddTo"
         android:layout_centerInParent="true"
-        android:text="Nowa playlista" />
-</RelativeLayout>
+        android:text="Nowa playlista"
+        android:layout_marginLeft="0.0dp" />
+</LinearLayout>

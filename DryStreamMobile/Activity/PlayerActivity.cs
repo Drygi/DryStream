@@ -33,6 +33,7 @@ namespace DryStreamMobile
         private FragmentManager FM;
         private PlaylistsDialog playlistDialog;
         private List<Song> songs;
+        private int click;
         
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -78,8 +79,9 @@ namespace DryStreamMobile
         }
 
 
-        private void initControlos()
-        {            ///
+        private async void initControlos()
+        {
+            click = 0;
             this.Title = GlobalMemory.actualSong.Album.Artist.Name;
             this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
 
@@ -107,7 +109,7 @@ namespace DryStreamMobile
                 if (args.FromUser)
                     CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(args.Progress));                
             };
-
+            CrossMediaManager.Current.MediaFinished += Current_MediaFinished;
             CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
             CrossMediaManager.Current.BufferingChanged += Current_BufferingChanged;
             title = FindViewById<TextView>(Resource.Id.PlayerTitleSong);
@@ -117,6 +119,26 @@ namespace DryStreamMobile
             img.SetImageBitmap(GlobalHelper.GetImageBitmapFromUrl(GlobalMemory.serverAddressIP + GlobalMemory.actualSong.Album.CoverLink));
 
             seekBar.Max = Convert.ToInt32(GlobalMemory.actualSong.Duration.TotalSeconds);
+            if (!GlobalMemory.MusicFromPlaylist)
+            {
+                GlobalMemory.ActualPlaylistSongs = await APIHelper.getSongs(GlobalMemory.actualSong.Album.AlbumID);
+                GlobalMemory.ActualPlaylistSongs.ForEach(S => S.Album = GlobalMemory.actualSong.Album);
+                GlobalMemory.ActualPlaylistSongs.ForEach(S => S.Album.Artist = GlobalMemory.actualSong.Album.Artist);
+            }
+        }
+
+        private void Current_MediaFinished(object sender, Plugin.MediaManager.Abstractions.EventArguments.MediaFinishedEventArgs e)
+        {
+            if (GlobalMemory.ActualPlaylistSongs == null)
+            {
+                seekBar.Progress = 0;
+                actualTime.Text = "00:00";
+                CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(0));
+            }
+            else
+            {
+                switchSongs(1);
+            }
         }
 
         private async void startSong()
@@ -144,7 +166,6 @@ namespace DryStreamMobile
             actualTime.Text = $"{e.Position.Minutes:00}:{e.Position.Seconds:00}";
         }
 
-
         private  void StartStop_Click(object sender, EventArgs e)
         {
             if (!isPlayed)
@@ -168,14 +189,24 @@ namespace DryStreamMobile
         }
         private void Previous_Click(object sender, EventArgs e)
         {
-            CrossMediaManager.Current.Pause();
-            isPlayed = false;
-            CrossMediaManager.Current.MediaNotificationManager.StopNotifications();
-            startStop.SetBackgroundResource(Resource.Drawable.PlayIcon);
-            Toast.MakeText(this, "Stop", ToastLength.Short).Show();
-            seekBar.Progress = 0;
-            actualTime.Text = "00:00";
-            CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(0));
+            if (click==0)
+            {
+                CrossMediaManager.Current.Pause();
+                isPlayed = false;
+                CrossMediaManager.Current.MediaNotificationManager.StopNotifications();
+                startStop.SetBackgroundResource(Resource.Drawable.PlayIcon);
+                Toast.MakeText(this, "Stop", ToastLength.Short).Show();
+                seekBar.Progress = 0;
+                actualTime.Text = "00:00";
+                CrossMediaManager.Current.Seek(TimeSpan.FromSeconds(0));
+                click++;
+            }
+            else
+            {
+                switchSongs(-1);
+                click = 0;
+            }
+          
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -198,18 +229,46 @@ namespace DryStreamMobile
                     RunOnUiThread(() => {
                         playlistDialog.Show(FM, "Playlists");
                     });
-                   
-                        break;
-                case Resource.Id.action_save:
-                    Toast.MakeText(this, "You pressed save action!", ToastLength.Short).Show();
-                    break;
+                    return true;
+ 
             }
             return base.OnOptionsItemSelected(item);
         }
 
         private void Next_Click(object sender, EventArgs e)
         {
-           
+            switchSongs(1);
+        }
+        private void switchSongs(int position)
+        {
+            var song = GlobalMemory.actualSong;
+            int counter = 0;
+            foreach (var item in GlobalMemory.ActualPlaylistSongs)
+            {
+                if (item.SongID == song.SongID)
+                {
+                    if (counter+position<0)
+                    {
+                        GlobalMemory.actualSong = GlobalMemory.ActualPlaylistSongs.Last();
+                        this.Finish();
+                        StartActivity(typeof(PlayerActivity));
+                        return;
+                    }
+                    if (counter+position >= GlobalMemory.ActualPlaylistSongs.Count)
+                    {
+                        GlobalMemory.actualSong = GlobalMemory.ActualPlaylistSongs[0];
+                        this.Finish();
+                        StartActivity(typeof(PlayerActivity));
+                        return;
+                    }
+                    GlobalMemory.actualSong = GlobalMemory.ActualPlaylistSongs[counter + position];
+                    this.Finish();
+                    StartActivity(typeof(PlayerActivity));
+                    return;
+                }
+                counter++;
+
+            }
         }
     }
 }

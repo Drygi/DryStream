@@ -64,12 +64,18 @@ namespace DryStreamMobile.Activity
 
         private void PlayAll_Click(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Play all", ToastLength.Short);
+            GlobalMemory.MusicFromPlaylist = true;
+            GlobalMemory.actualSong = GlobalMemory.ActualPlaylistSongs.First();
+            StartActivity(typeof(PlayerActivity));
+            //Toast.MakeText(this, "Play all", ToastLength.Short);
         }
 
         private void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            Toast.MakeText(this, "Play all from this", ToastLength.Short);
+            GlobalMemory.MusicFromPlaylist = true;
+            GlobalMemory.actualSong = GlobalMemory.ActualPlaylistSongs[Convert.ToInt32(e.Position)];
+            StartActivity(typeof(PlayerActivity));
+            // Toast.MakeText(this, "Play all from this", ToastLength.Short);
         }
 
         private void ListView_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)

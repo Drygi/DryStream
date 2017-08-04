@@ -132,8 +132,16 @@ namespace DryStreamMobile
                 }
 
                 GlobalMemory._user = user;
-                StartActivity(typeof(MainPageActivity));
-                this.Finish();
+                if (!GlobalMemory._user.Access)
+                {
+                    this.StartActivity(typeof(AccessActivity));
+                    this.Finish();
+                }
+                else
+                {
+                    this.StartActivity(typeof(MainPageActivity));
+                    this.Finish();
+                }
             }
             else
             {

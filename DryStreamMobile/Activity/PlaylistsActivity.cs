@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using DryStreamMobile.Helper;
 using DryStreamMobile.Models;
+using DryStreamMobile.Holders;
 
 namespace DryStreamMobile.Activity
 {
@@ -59,11 +60,19 @@ namespace DryStreamMobile.Activity
                 progressBar.Visibility = ViewStates.Visible;
                 if (await APIHelper.DeletePlaylist(GlobalMemory._user.Playlists.ToList()[Convert.ToInt32(e.Position)].PlaylistID))
                 {
-                    await APIHelper.GetPlaylists();
-                   
-                    listView.Adapter = new ArtistsAdapter(this, Resource.Layout.artistsModel, GlobalMemory._user.Playlists.ToList());
+                    if(!await APIHelper.GetPlaylists())
+                    {
+                        listView.Adapter = null;
+                        listView.Visibility = ViewStates.Gone;
+                        textView.Visibility = ViewStates.Visible;
+                    }
+                    else
+                    {
+                        listView.Adapter = new ArtistsAdapter(this, Resource.Layout.artistsModel, GlobalMemory._user.Playlists.ToList());
+                    }
                     progressBar.Visibility = ViewStates.Gone;
                     Toast.MakeText(this, "Playlista została usunięta", ToastLength.Short);
+
                 }
                 else
                 {
@@ -89,6 +98,7 @@ namespace DryStreamMobile.Activity
                 Song song = item.Song;
                 song.Album = item.Album;
                 song.Album.Artist = item.Artist;
+                
                 songs.Add(song);
             }
             GlobalMemory.ActualPlaylistSongs = songs;
@@ -97,12 +107,12 @@ namespace DryStreamMobile.Activity
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
                     Finish();
                     return true;
-
                 default:
                     return base.OnOptionsItemSelected(item);
             }

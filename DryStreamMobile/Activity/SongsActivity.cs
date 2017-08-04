@@ -104,8 +104,9 @@ namespace DryStreamMobile.Activity
             Toast.MakeText(this, "LONGclick", ToastLength.Short).Show();
         }
 
-        private void LV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private async void LV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            GlobalMemory.ActualPlaylistSongs = songs;
             GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];
             StartActivity(typeof(PlayerActivity));
         }

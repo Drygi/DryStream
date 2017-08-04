@@ -4,15 +4,15 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <EditText
-        android:layout_width="318.7dp"
-        android:layout_height="50.7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:singleLine="true"
         android:id="@+id/editText"
         android:hint="Nazwa nowej playlisty..."
         android:textSize="25dp"
         android:divider="#375a7f"
         android:textColor="#FFFFFF"
-        android:gravity="top" />
+        android:gravity="center" />
     <Button
         android:text="Dodaj playlistę"
         android:layout_width="wrap_content"

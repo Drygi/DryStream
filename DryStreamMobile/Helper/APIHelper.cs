@@ -181,6 +181,8 @@ namespace DryStreamMobile.Helper
             }
         }
         #endregion
+
+        #region API_Music 
         public static async Task<List<Genre>> getGenres()
         {
             using (var client = new HttpClient())
@@ -262,6 +264,7 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+
         public static async Task<List<Album>> getAlbums(int id)
         {
             using (var client = new HttpClient())
@@ -344,6 +347,7 @@ namespace DryStreamMobile.Helper
 
             return null;
         }
+        #endregion
         #region API_Playlists
 
         public async static Task<bool> PostSongToPlaylist(PlaylistSong playlist)

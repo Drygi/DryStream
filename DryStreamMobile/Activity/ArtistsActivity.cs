@@ -32,6 +32,7 @@ namespace DryStreamMobile.Activity
         }
         private void initControls()
         {
+            GlobalMemory.MusicFromPlaylist = false;
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true); 
             listView = FindViewById<ListView>(Resource.Id.LVartistsPage);

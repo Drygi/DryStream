@@ -73,6 +73,17 @@ namespace DryStream.Controllers
             try
             {
                 User _user = (from u in db.Users where u.Login == user.Login && user.Password == u.Password select u).Single();
+                if (!_user.Access)
+                {
+                    return Json(_user);
+                }
+                if (_user.Validity > DateTime.Now)
+                {
+                    _user.Access = false;
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
                 return Json(_user);
             }
             catch (Exception)

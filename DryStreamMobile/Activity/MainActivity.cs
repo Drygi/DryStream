@@ -39,14 +39,18 @@ namespace DryStreamMobile
                 else
                 {
                     GlobalMemory._user = JsonConvert.DeserializeObject<User>(json);
-                    this.StartActivity(typeof(MainPageActivity));
-                    this.Finish();
+                    if (!GlobalMemory._user.Access)
+                    {
+                        this.StartActivity(typeof(AccessActivity));
+                        this.Finish();
+                    }
+                    else
+                    {
+                        this.StartActivity(typeof(MainPageActivity));
+                        this.Finish();
+                    }
                 }
             }
-            else
-            {
-
-            }       
         }
 
         }

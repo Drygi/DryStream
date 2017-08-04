@@ -71,6 +71,8 @@ namespace DryStreamMobile.Activity
             GlobalMemory.actualSong = SAAs[Convert.ToInt16(e.Id)].Song;
             GlobalMemory.actualSong.Album = SAAs[Convert.ToInt16(e.Id)].Album;
             GlobalMemory.actualSong.Album.Artist = SAAs[Convert.ToInt16(e.Id)].Album.Artist;
+            GlobalMemory.MusicFromPlaylist = false;
+
             StartActivity(typeof(PlayerActivity));
            
         }
