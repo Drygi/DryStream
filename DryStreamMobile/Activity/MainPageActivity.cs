@@ -22,7 +22,7 @@ namespace DryStreamMobile.Activity
     public class MainPageActivity : Android.App.Activity
     {
 
-        List<Song> songs = new List<Song>();
+        List<Song> _songs = new List<Song>();
         private ListView lv;
         private DrawerLayout mDrawerLayout;
         private ArrayAdapter mleftAdapter;
@@ -64,6 +64,16 @@ namespace DryStreamMobile.Activity
                     item.PlaylistsSongs = await APIHelper.GetPlaylistsSong(item.PlaylistID);
                 }
             }
+            lv.ItemLongClick += Lv_ItemLongClick;
+        }
+
+        private void Lv_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            var FM = this.FragmentManager;
+            var playlistDialog = new PlaylistsDialog(_songs[Convert.ToInt32(e.Position)].SongID);
+            RunOnUiThread(() => {
+                playlistDialog.Show(FM, "Playlists");
+            });
         }
 
         private void Lv_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -96,7 +106,8 @@ namespace DryStreamMobile.Activity
                     }
                     else
                     {
-                        List<Song> _songs = new List<Song>();
+                        //List<Song>
+                        _songs = new List<Song>();
                         foreach (var item in SAAs)
                         {
                             item.Song.Album = item.Album;

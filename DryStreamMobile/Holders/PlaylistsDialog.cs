@@ -20,8 +20,14 @@ namespace DryStreamMobile
         private TextView textview;
         private ListView listView;
         private Button button;
+        private int _songID;
         public PlaylistsDialog()
         {
+            this._songID = -1;
+        }
+        public PlaylistsDialog(int id )
+        {
+            this._songID = id;
         }
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -64,17 +70,33 @@ namespace DryStreamMobile
         private async void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var p = GlobalMemory._user.Playlists.ToList();
-            
-            PlaylistSong PS = new PlaylistSong
-            {
-                PlaylistID = p[Convert.ToInt32(e.Position)].PlaylistID,
-                SongID = GlobalMemory.actualSong.SongID
-            };
-            if (await APIHelper.PostSongToPlaylist(PS))
-                Toast.MakeText(this.Activity, "Dodano do playlisty", ToastLength.Long);
-            else
-                Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Long);
 
+            if (_songID==-1)
+            {
+                PlaylistSong PS = new PlaylistSong
+                {
+
+                    PlaylistID = p[Convert.ToInt32(e.Position)].PlaylistID,
+                    SongID = GlobalMemory.actualSong.SongID
+                };
+                if (await APIHelper.PostSongToPlaylist(PS))
+                    Toast.MakeText(this.Activity, "Dodano do playlisty", ToastLength.Long);
+                else
+                    Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Long);
+            }
+            else
+            {
+                PlaylistSong PS = new PlaylistSong
+                {
+
+                    PlaylistID = p[Convert.ToInt32(e.Position)].PlaylistID,
+                    SongID = _songID
+                };
+                if (await APIHelper.PostSongToPlaylist(PS))
+                    Toast.MakeText(this.Activity, "Dodano do playlisty", ToastLength.Long);
+                else
+                    Toast.MakeText(this.Activity, "Coś poszło nie tak", ToastLength.Long);
+            }
             this.Dismiss();
         }
     }

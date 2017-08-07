@@ -23,6 +23,8 @@ pauza wznawianie utworu
 1.18 - wyswietlanie danej playlisty, usuwanie konkrtetnego utworu z playlisty, usuwanie calej playlisty
 1.19 - odtwarzanie calej playlisty, automatyczne przełączanie utworów, ręczne przełączanie utworów, 
 walidacja dostępu do aplikacji
+1.20 - poprawienie drobnych błędów plus wgranie utworów, oraz dodawanie utworu do playlisty
+poprzez longClickItem 
 TO DO 
 podstronę z numerem konta itp do przelewu, żeby wykupić abonament oraz przekierowanie z aplikacji
 do tej strony 

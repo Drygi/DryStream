@@ -30,6 +30,7 @@
         android:paddingTop="5dp"
         android:textColor="#0CE3AC"
         android:typeface="sans"
+        android:paddingRight="50dp"
         android:textSize="20dp"
         android:textStyle="bold"
         android:singleLine="true"
@@ -41,7 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/modelNameID"
         android:textColor="#375a7f"
+        android:singleLine="true"
         android:textSize="16dp"
+        android:paddingRight="50dp"
         android:layout_marginTop="1dp"
         android:layout_toRightOf="@+id/modeLinearLayout"
         android:text="Przykładowy - poniżej" />

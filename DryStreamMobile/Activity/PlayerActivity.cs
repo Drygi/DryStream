@@ -84,7 +84,7 @@ namespace DryStreamMobile
             click = 0;
             this.Title = GlobalMemory.actualSong.Album.Artist.Name;
             this.TitleColor = Android.Graphics.Color.ParseColor("#375a7f");
-
+            
             isPlayed = true;
 
             ActionBar.SetHomeButtonEnabled(true);
@@ -113,6 +113,8 @@ namespace DryStreamMobile
             CrossMediaManager.Current.PlayingChanged += Current_PlayingChanged;
             CrossMediaManager.Current.BufferingChanged += Current_BufferingChanged;
             title = FindViewById<TextView>(Resource.Id.PlayerTitleSong);
+            
+
             title.Text = GlobalMemory.actualSong.Name;
 
             img = FindViewById<ImageView>(Resource.Id.PlayerAlbumCover);

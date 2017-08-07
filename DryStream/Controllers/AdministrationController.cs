@@ -203,7 +203,8 @@ namespace DryStream.Controllers
 
             if (ModelState.IsValid)
             {
-                if (db.Albums.Any(a => a.Title.ToUpper() == album.Title.ToUpper()))
+                List<Album> albums = (from A in db.Albums where A.ArtistID == album.ArtistID select A).ToList();
+                if (albums.Any(a => a.Title.ToUpper() == album.Title.ToUpper()))
                 {
                     ViewBag.Error = "Podany album już istnieje w bazie";
                     album.Artist = (from a in db.Artists where a.ArtistID == album.ArtistID select a).Single();
@@ -328,8 +329,8 @@ namespace DryStream.Controllers
             }
 
             if (
-                db.Songs.Any(a => a.Name.ToUpper() == song.Name.ToUpper() ||
-                db.Songs.Any(s=> s.AlbumPosition == song.AlbumPosition ))
+                ASG.Album.Songs.Any(a => a.Name.ToUpper() == song.Name.ToUpper() ||
+                ASG.Album.Songs.Any(s=> s.AlbumPosition == song.AlbumPosition ))
                 )
             {
                 ViewBag.Error = ("Piosenka o podanym tytule lub pozycji istnieje w bazie");
@@ -358,7 +359,7 @@ namespace DryStream.Controllers
                 //pobrać duration z wstawianego utworu
                 db.Songs.Add(song);
                 db.SaveChanges();
-                ViewBag.Success = "Piosenka " + song.Name + "została pomyślnie dodana do bazy";
+                ViewBag.Success = "Piosenka " + song.Name + " została pomyślnie dodana do bazy";
                
             }
             return View("AddSong", ASG);
@@ -367,14 +368,22 @@ namespace DryStream.Controllers
         {
             Entities db = new Entities();
             var song = (from s in db.Songs where s.SongID == id select s).Single();
-            var fSong = new FileInfo(Path.Combine(Server.MapPath("~" + song.Link)));
+            var fSong = new FileInfo(Path.Combine(Server.MapPath("~" + song.Link.Trim())));
             var ID = song.AlbumID; 
 
             fSong.Delete();
             db.Songs.Remove(song);
+            foreach (var item in db.PlaylistsSongs)
+            {
+                if (item.SongID == song.SongID)
+                {
+                    db.PlaylistsSongs.Remove(item);
+                }
+            }
+            
             db.SaveChanges();
             
-            return View("AlbumSongs",ID);
+            return RedirectToAction("AlbumSongs/"+ID);
         }
 
 

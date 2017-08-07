@@ -21,6 +21,7 @@ namespace DryStreamMobile.Helper
         {
             Img = itemView.FindViewById<ImageView>(Resource.Id.modelImgID);
             TitleTxt = itemView.FindViewById<TextView>(Resource.Id.modelNameID);
+        
             ArtistTxt = itemView.FindViewById<TextView>(Resource.Id.modelDescriptionID);
             durationTxt = itemView.FindViewById<TextView>(Resource.Id.modelRighttxtID);
         }

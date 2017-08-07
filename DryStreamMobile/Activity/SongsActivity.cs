@@ -101,10 +101,14 @@ namespace DryStreamMobile.Activity
 
         private void LV_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
-            Toast.MakeText(this, "LONGclick", ToastLength.Short).Show();
+            var FM = this.FragmentManager;
+            var playlistDialog = new PlaylistsDialog(songs[Convert.ToInt32(e.Position)].SongID);
+            RunOnUiThread(() => {
+                playlistDialog.Show(FM, "Playlists");
+            });
         }
 
-        private async void LV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void LV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             GlobalMemory.ActualPlaylistSongs = songs;
             GlobalMemory.actualSong = songs[Convert.ToInt16(e.Id)];

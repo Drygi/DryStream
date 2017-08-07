@@ -77,7 +77,7 @@ namespace DryStream.Controllers
                 {
                     return Json(_user);
                 }
-                if (_user.Validity > DateTime.Now)
+                if (_user.Validity < DateTime.Now)
                 {
                     _user.Access = false;
                     db.Entry(user).State = EntityState.Modified;

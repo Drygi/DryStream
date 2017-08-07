@@ -3,24 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#222222">
-    <TextView
-        android:id="@+id/PlayerTitleSong"
-        android:text="Tytuł"
+    <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:textSize="30dp"
-        android:textColor="#375a7f"
-        android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/HorizontalSV">
+        <TextView
+            android:id="@+id/PlayerTitleSong"
+            android:text="Tytuł"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="20dp"
+            android:textSize="30dp"
+            android:textColor="#375a7f"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </HorizontalScrollView>
     <ImageView
         android:id="@+id/PlayerAlbumCover"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:paddingTop="30dp"
         android:paddingBottom="20dp"
-        android:layout_below="@+id/PlayerTitleSong"
+        android:layout_below="@+id/HorizontalSV"
         android:layout_centerHorizontal="true"
         android:src="@drawable/icon" />
     <TextView

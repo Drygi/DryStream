@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using static Android.Bluetooth.BluetoothClass;
+using DryStreamMobile.Helper;
 
 namespace DryStreamMobile.Activity
 {
@@ -27,13 +29,33 @@ namespace DryStreamMobile.Activity
 
         private void initControlos()
         {
+            ActionBar.SetHomeButtonEnabled(true);
+            ActionBar.SetDisplayHomeAsUpEnabled(true);
             button = FindViewById<Button>(Resource.Id.noAccesButton);
             button.Click += Button_Click;
         }
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
 
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    GlobalMemory._user = null;
+                    GlobalHelper.switchSavedUser(null);
+                    StartActivity(typeof(LoginActivity));
+                    this.Finish();
+                    
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
         private void Button_Click(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Dodac link do strony",ToastLength.Short);
+            var uri = Android.Net.Uri.Parse(GlobalMemory.serverAddressIP);
+            var intent = new Intent(Intent.ActionView, uri);
+            StartActivity(intent);
+
         }
     }
 }
