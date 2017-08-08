@@ -20,5 +20,15 @@ namespace DryStream.Controllers
 
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult TransferPage()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult PaymentPage()
+        {
+            return View();
+        }
     }
 }

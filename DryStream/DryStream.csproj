@@ -444,6 +444,9 @@
     <Content Include="Views\Administration\AddArtist.cshtml" />
     <Content Include="Views\Administration\AddAlbum.cshtml" />
     <Content Include="Views\Administration\AddSong.cshtml" />
+    <Content Include="Views\Home\TransferPage.cshtml" />
+    <Content Include="Views\Home\PaymentPage.cshtml" />
+    <Content Include="Views\Users\SendEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Cennik";
+}
+
+<h1>Cennik DryStream</h1>
+
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            <h3>
+                Czas
+            </h3>
+        </th>
+        <th>
+            <h3>
+                Cena
+            </h3>
+        </th>
+        <th>
+            <h3>
+               Cena / 30 dni
+            </h3>
+        </th>
+        <th>
+            <h4>
+                
+            </h4>
+        </th>
+
+        <th></th>
+    </tr>
+
+        <tr>
+            <td>
+                <h4>
+                   30 dni
+                </h4>
+            </td>
+            <td>
+                <h4>
+                    30 zł
+                </h4>
+            </td>
+            <td>
+                <h4>
+                    30zł
+                </h4>
+            </td>
+          
+            <td>
+                <h4>
+                    @Html.ActionLink("Kupuję", "PaymentPage") 
+                </h4>
+            </td>
+        </tr>
+    <tr>
+        <td>
+            <h4>
+                180 dni
+            </h4>
+        </td>
+        <td>
+            <h4>
+                150 zł
+            </h4>
+        </td>
+        <td>
+            <h4>
+                25 zł
+            </h4>
+        </td>
+
+        <td>
+            <h4>
+                @Html.ActionLink("Kupuję", "PaymentPage")
+            </h4>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4>
+                360 dni
+            </h4>
+        </td>
+        <td>
+            <h4>
+                240 zł
+            </h4>
+        </td>
+        <td>
+            <h4>
+                20 zł
+            </h4>
+        </td>
+
+        <td>
+            <h4>
+                @Html.ActionLink("Kupuję", "PaymentPage")
+            </h4>
+        </td>
+    </tr>
+   
+</table>
+
+
+

@@ -136,7 +136,9 @@ namespace DryStreamMobile
 
         private void UpdateValidity_Click(object sender, EventArgs e)
         {
-           // setAlert("Dać tu albo hyperlink na serwer albo jakies info");
+            var uri = Android.Net.Uri.Parse(GlobalMemory.serverAddressIP + "/Home/TransferPage");
+            var intent = new Intent(Intent.ActionView, uri);
+            StartActivity(intent);
 
         }
 

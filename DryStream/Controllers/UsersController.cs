@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -82,6 +83,55 @@ namespace DryStream.Controllers
             db.SaveChanges();
 
             return View(_user);
+        }
+
+        [HttpGet]
+        public ActionResult SendEmail(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                Entities db = new Entities();
+                var user = (from u in db.Users where u.UserID == id select u).Single();
+                return View(user);
+            }
+        }
+        [HttpPost]
+        public ActionResult SendEmail(int userID, string messageEmail)
+        {
+            Entities db = new Entities();
+            var user = (from u in db.Users where u.UserID == userID select u).Single();
+
+
+            using (MailMessage msg = new MailMessage())
+            {
+                msg.From = new MailAddress("DryStream.Admnistration@gmail.com");
+                msg.To.Add(user.Email);
+                msg.Body = "Dzień dobry! <br/><br/>" + messageEmail+ "<br /><br />Pozdrawiam <br /> Administracja DryStream";
+                msg.Subject = "DryStream Administracja";
+                msg.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.Host = "smtp.gmail.com";
+                    System.Net.NetworkCredential NetworkCred = new System.Net.NetworkCredential();
+                    NetworkCred.UserName = "DryStream.Admnistration@gmail.com";
+                    NetworkCred.Password = "@Dministration";
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.Send(msg);
+                }
+            }
+
+
+
+            return RedirectToAction("Index");
+
         }
     }
 }

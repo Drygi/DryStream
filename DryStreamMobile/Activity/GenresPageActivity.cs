@@ -39,11 +39,6 @@ namespace DryStreamMobile.Activity
 
         }
 
-        private void ListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
-        {
-            Toast.MakeText(this,e.Id.ToString(), ToastLength.Long).Show();
-        }
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)

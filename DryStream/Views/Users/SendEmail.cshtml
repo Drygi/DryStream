@@ -1,0 +1,29 @@
+﻿@model DryStream.Models.User
+
+@{
+    ViewBag.Title = "SendEmail";
+}
+
+<h1>Wiadomość do użytkownika: @Model.Login</h1>
+<form action="SendEmail" enctype="multipart/form-data" method="post">
+    <div class="form-horizontal">
+        <hr />
+        <div>
+            Adres: @Model.Email
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="userID" id="userID" value="@Model.UserID" runat="server" />
+        </div>
+        <br />
+        <div>
+            <textarea class="form-control" rows="5" id="messageEmail" name="messageEmail"></textarea>
+        </div>
+        <br />
+        <div>
+            <input runat="server" class="btn btn-primary" type="submit" value="Wyślij" />
+        </div>
+    </div>
+</form>
+    <br />
+    <p>
+        @Html.ActionLink("Powrót", "Index")
+    </p>

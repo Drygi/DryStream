@@ -52,7 +52,7 @@ namespace DryStreamMobile.Activity
         }
         private void Button_Click(object sender, EventArgs e)
         {
-            var uri = Android.Net.Uri.Parse(GlobalMemory.serverAddressIP);
+            var uri = Android.Net.Uri.Parse(GlobalMemory.serverAddressIP+ "/Home/TransferPage");
             var intent = new Intent(Intent.ActionView, uri);
             StartActivity(intent);
 
