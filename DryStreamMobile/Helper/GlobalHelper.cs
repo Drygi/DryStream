@@ -84,7 +84,7 @@ namespace DryStreamMobile.Helper
         {
             List<string> list = new List<string>()
             {
-                "Witaj "+ name," ","Playlisty","Artyści","Gatunki","Utwory","","Moje konto","Zmiana hasła","Wyloguj"
+                "Witaj "+ name," ","Playlisty","Artyści","Gatunki","","Moje konto","Zmiana hasła","Wyloguj"
             };
             return list;
         }
@@ -102,17 +102,13 @@ namespace DryStreamMobile.Helper
                 case 4:
                     activity.StartActivity((typeof(GenresPageActivity)));
                     return true;
-                case 5:
-                    return false ;
-                // activity.StartActivity((typeof(SongsActivity)));
-                // break;
-                case 7:
+                case 6:
                     activity.StartActivity(typeof(AccountActivity));
                     return true;
-                case 8:
+                case 7:
                     activity.StartActivity(typeof(PasswordChangeActivity));
                     return true;
-                case 9:
+                case 8:
                     switchSavedUser(null);
                     activity.StartActivity(typeof(LoginActivity));
                     activity.Finish();

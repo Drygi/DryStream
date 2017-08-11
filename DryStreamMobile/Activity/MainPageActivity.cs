@@ -15,6 +15,7 @@ using Android.Widget;
 using DryStreamMobile.Helper;
 using DryStreamMobile.Models;
 using Plugin.MediaManager;
+using Android.Views.InputMethods;
 
 namespace DryStreamMobile.Activity
 {
@@ -96,12 +97,14 @@ namespace DryStreamMobile.Activity
 
             searchView.QueryTextChange += async (sender, args) =>
             {
-                if (args.NewText.Trim() != String.Empty)
+                mDrawerLayout.CloseDrawer(mLeftDrawer);
+                if (args.NewText != String.Empty)
                 {
                     SAAs = await APIHelper.findSong(args.NewText.Trim());
                     if (SAAs.Count<1)
                     {
                         lv.Adapter = null;
+                        _songs = null;
                         textView.Visibility = Android.Views.ViewStates.Visible;
                     }
                     else
@@ -121,6 +124,7 @@ namespace DryStreamMobile.Activity
                 else
                 {
                     lv.Adapter = null;
+                    _songs = null;
                     textView.Visibility = Android.Views.ViewStates.Visible;
                 }
             };
@@ -142,6 +146,7 @@ namespace DryStreamMobile.Activity
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            hideKeyboard();
             if (mDrawerToggle.OnOptionsItemSelected(item))
             { return true;
             }
@@ -154,5 +159,10 @@ namespace DryStreamMobile.Activity
             base.OnConfigurationChanged(newConfig);
             mDrawerToggle.OnConfigurationChanged(newConfig);
         }
+        private void hideKeyboard()
+        {
+            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            imm.HideSoftInputFromWindow(mLeftDrawer.WindowToken, 0);
+        }    
     }
 }

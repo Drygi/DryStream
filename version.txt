@@ -27,3 +27,5 @@ walidacja dostępu do aplikacji
 poprzez longClickItem 
 1.21 - dodanie strony z wyświetlaniem oferty oraz strony z danymi do przelewu,
  oraz dodanie wysyłania emaily do użytkownika
+1.22 - wyszukiwanie po tytułach oraz artystach w menu glownym, poprawienie wygladu zmiany hasla 
+oraz kurywanie bocznego menu po wyszukiwaniu utworu

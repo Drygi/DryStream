@@ -62,7 +62,8 @@ namespace DryStream.Controllers.MobileControllers
             try
             {
                 List<SongAlbumArtist> SAAs = new List<SongAlbumArtist>();
-                var songs = (from u in db.Songs where u.Name.ToUpper().Contains(name.ToUpper()) select u).ToList();
+                var songs = (from u in db.Songs where u.Name.ToUpper().Contains(name.ToUpper()) ||
+                             u.Album.Artist.Name.ToUpper().Contains(name.ToUpper()) select u).ToList();
                 foreach (var item in songs)
                 {
                     SAAs.Add(

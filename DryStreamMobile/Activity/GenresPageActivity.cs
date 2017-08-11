@@ -35,7 +35,7 @@ namespace DryStreamMobile.Activity
 
                 listView.Adapter = new ArtistsAdapter(this, Resource.Layout.artistsModel, GlobalMemory.Genres);
 
-            listView.ItemClick += ListView_ItemClick;
+           
 
         }
 

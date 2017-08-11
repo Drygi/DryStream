@@ -80,6 +80,8 @@ namespace DryStreamMobile
 
             ActionBar.SetHomeButtonEnabled(true);
             ActionBar.SetDisplayHomeAsUpEnabled(true);
+            InputMethodManager imm = (InputMethodManager)GetSystemService(Context.InputMethodService);
+            imm.HideSoftInputFromWindow(email.WindowToken, 0);
 
         }
         public override bool OnOptionsItemSelected(IMenuItem item)

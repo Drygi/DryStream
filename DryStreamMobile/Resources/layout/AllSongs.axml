@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#222222">
+  <TextView 
+    android:text="Brak wyników..."
+    android:textColor="#dbdbdb"
+    android:singleLine="true"
+    android:textSize="15sp"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:gravity="center"
+    android:id="@+id/infTxtAllSongs"
+    android:editable="false"
+    />
+  <ListView 
+    android:id="@+id/LVAllSongsID"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:divider="#0CE3AC"
+    android:dividerHeight="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+  
+</LinearLayout>
