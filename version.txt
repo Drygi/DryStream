@@ -29,3 +29,4 @@ poprzez longClickItem
  oraz dodanie wysyłania emaily do użytkownika
 1.22 - wyszukiwanie po tytułach oraz artystach w menu glownym, poprawienie wygladu zmiany hasla 
 oraz kurywanie bocznego menu po wyszukiwaniu utworu
+1.23 - poprawienie komunikatów przy dodawaniu gatunku, dodanie przycisków powrót

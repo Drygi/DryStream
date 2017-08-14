@@ -26,10 +26,7 @@ namespace DryStream.Controllers
             ViewBag.SortedBy = sorting;
             ViewBag.SortByGenre = sorting == null ? "GenreDESC" : "";
 
-
             var genres = from i in db.Genres select i;
-
-          
 
             if (ModelState.IsValid)
             {
@@ -59,31 +56,32 @@ namespace DryStream.Controllers
         {
             // walidacja nie do końca dzialala
             Entities db = new Entities();
-            //  var genres = from i in db.Genres select i;
-            //int pageSize = 3;
-            // int pageNumber = 1;
-            genre.NAME = genre.NAME.Trim();
+            var genres = from i in db.Genres select i;
+            genres = genres.OrderBy(u => u.NAME);
             if (genre.NAME == null)
             {
                 ViewBag.Error = "Nie podano nazwy";
-                return RedirectToAction("Genres");
+                return View(genres.ToPagedList(1, 3));
             }
+            genre.NAME = genre.NAME.Trim();
             if (db.Genres.Any(g => g.NAME.ToUpper() == genre.NAME.ToUpper()))
             {
                 ViewBag.Error = "Podany gatunek już istnieje w bazie";
-                return RedirectToAction("Genres");
+                return View(genres.ToPagedList(1, 3));
             }
             if (ModelState.IsValid)
             {
                 db.Genres.Add(genre);
                 db.SaveChanges();
-                ViewBag.Succes = "Pomyślnie dodano gatunek " + genre.NAME + " do bazy";
-                return RedirectToAction("Genres");
+                ViewBag.Success = "Pomyślnie dodano gatunek " + genre.NAME + " do bazy";
+                genres = from i in db.Genres select i;
+                genres = genres.OrderBy(u => u.NAME);
+                return View(genres.ToPagedList(1, 3));
             }
             else
             {
                 ViewBag.Error("Coś poszło nie tak");
-                return RedirectToAction("Genres");
+                return View(genres.ToPagedList(1, 3));
             }
         }
         public ActionResult DeleteGenre(int id)
@@ -140,6 +138,11 @@ namespace DryStream.Controllers
         [HttpPost]
         public ActionResult AddArtist(Artist artist, HttpPostedFileBase file)
         {
+            if (artist.Name==null)
+            {
+                ViewBag.Error = ("Nie podano nazwy!");
+                return View("AddArtist", artist);
+            }
             artist.Name=artist.Name.Trim();
             Entities db = new Entities();
             if (db.Artists.Any(a => a.Name.ToUpper() == artist.Name.ToUpper()))
@@ -154,6 +157,7 @@ namespace DryStream.Controllers
             }
             if (ModelState.IsValid)
             {
+                ViewBag.Success = artist.Name + " został pomyślnie dodany do bazy";
                 var fileName = Path.GetFileName(file.FileName);
                 var path = Path.Combine(Server.MapPath("~/Files/Covers/"), fileName);
                 file.SaveAs(path);
@@ -161,11 +165,11 @@ namespace DryStream.Controllers
                 artist.CoverLink = Url.Content(("~/Files/Covers/") + fileName);
                 db.Artists.Add(artist);
                 db.SaveChanges();
-                ViewBag.Succes = artist.Name + " został pomyślnie dodany do bazy";
+               
             }
             else
                 ViewBag.Error = "Coś poszło nie tak";
-;            return View("AddArtist", artist);
+;            return View();
         }
         
         public ActionResult AddAlbum(int ? id)

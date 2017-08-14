@@ -56,9 +56,13 @@ else
                     </tr>
                 }
             </table>
+
         </div>
 
     </div>
+    <p>
+        @Html.ActionLink("Powrót", "Albums/" + Model.First().AlbumID)
+    </p>
 }
 
 
