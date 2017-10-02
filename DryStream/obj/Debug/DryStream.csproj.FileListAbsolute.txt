@@ -125,3 +125,4 @@ C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\Page
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.Mvc.dll
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.xml
 C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\bin\PagedList.Mvc.xml
+C:\Users\mikol\Desktop\SEMESTR VI\Praca Iżynierska\DryStream\DryStream\obj\Debug\DryStream.csproj.CoreCompileInputs.cache

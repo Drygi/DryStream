@@ -280,7 +280,6 @@ namespace DryStream.Controllers
         public ActionResult AlbumSongs(int ? id)
         {
             Entities db = new Entities();
-
             var album = from a in db.Songs where a.AlbumID == id select a;
             return View(album);
         }
@@ -373,10 +372,11 @@ namespace DryStream.Controllers
             Entities db = new Entities();
             var song = (from s in db.Songs where s.SongID == id select s).Single();
             var fSong = new FileInfo(Path.Combine(Server.MapPath("~" + song.Link.Trim())));
-            var ID = song.AlbumID; 
-
+            var ID = song.AlbumID;
             fSong.Delete();
             db.Songs.Remove(song);
+            var songs = (from s in db.Songs where s.AlbumID == song.AlbumID select s).ToList();
+
             foreach (var item in db.PlaylistsSongs)
             {
                 if (item.SongID == song.SongID)
